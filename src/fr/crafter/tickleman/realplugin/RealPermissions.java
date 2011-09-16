@@ -16,8 +16,8 @@ public class RealPermissions
 	public RealPermissions(RealPlugin plugin, String permissionsPluginName)
 	{
 		this.plugin = plugin;
-		this.permissionsPluginName = permissionsPluginName;
-		if (this.permissionsPluginName.equals("Permissions")) {
+		this.permissionsPluginName = permissionsPluginName.toLowerCase();
+		if (this.permissionsPluginName.equals("permissions")) {
 			permissionsPlugin = plugin.getServer().getPluginManager().getPlugin("Permissions");
 		} else {
 			permissionsPlugin = null;
@@ -42,7 +42,7 @@ public class RealPermissions
 				: plugin.playerHasPermission(permissionString);
 		} else if (this.permissionsPluginName.equals("bukkit")) {
 			return player.hasPermission(permissionString);
-		} else if (this.permissionsPluginName.equals("Permissions")) {
+		} else if (this.permissionsPluginName.equals("permissions")) {
 			return ((PermissionHandler)permissionsPlugin).has(player, permissionString);
 		} else {
 			return false;
