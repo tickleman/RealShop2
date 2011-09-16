@@ -1,0 +1,96 @@
+# CLIENT
+You don't have the permission to shop=Vous n'avez pas les permissions d'acceder aux magasins
++owner's shop +name is closed=Le magasin +name de +owner est ferme
+Dropping items when you are in a shop is prohibited=Il est interdit de deposer des objets lorsque vous etes dans un magasin 
+Nothing can be sold here=Rien ne peut etre vendu ici
+Nothing to buy here=Rien ne peut etre achete ici
+Price can't be calculated from recipes for +item=Le prix ne peut etre calcule pour +item
+The shop +name is already in use by player +client=Le magasin +name est utilise par le joueur +client
+You can buy +items=Vous pouvez acheter +items
+You can sell +items=Vous pouvez vendre +items
+Welcome into +owner's shop +name. You've got +money in your pocket=Bienvenue dans le magasin +name de +owner. Vous avez +money en poche
+
+# CLIENT : TRANSACTION
+Cancelled purchase +item x+quantity (+linePrice) +comment=Achat annule +item x+quantity (+linePrice) +comment
+Cancelled sale +item x+quantity (+linePrice) +comment=Vente annulee +item x+quantity (+linePrice) +comment
+Cancelled transaction=Transaction annulee
+No transaction=Aucune transaction
+Purchased +item x+quantity (+linePrice)=Achat +item x+quantity (+linePrice)
+Sold +item x+quantity (+linePrice)=Vente +item x+quantity (+linePrice)
+
+# CLIENT : CANCELLED LINES COMMENTS
+buy not allowed=achat interdit
+damaged item=endommage
+no price=pas de prix
+not in market=pas dans marche
+sell not allowed=vente interdite
+Stolen +item x+quantity item duplicated !=Vol +item x+quantity article duplique !
+
+# SHOP OWNER : TRANSACTION
+[shop +name] +client purchased +item x+quantity (+linePrice)=[magasin +name] +client vous a achete +item x+quantity (+linePrice)
+[shop +name] +client sold +item x+quantity (+linePrice)=[magasin +name] +client vous a vendu +item x+quantity (+linePrice)
+
+# SHOP OWNER
+Now clients can buy +items=Les clients peuvent acheter +items
+Now clients can sell +items=Les clients peuvent vendre +items
+Now clients can not buy +items=Les clients ne peuvent pas acheter +items
+Now clients can not sell +items=Les clients ne peuvent pas vendre +items
+The chest you selected is not a shop=Le coffre selectionne n'est pas un magasin
+The chest-shop you selected belongs to +owner=Le coffre-magasin selectionne appartient a +owner
+The shop +name has been created=Le magasin +name a ete cree
+The shop +name has been deleted=Le magasin +name a ete supprime
+The shop +name is now closed=Le magasin +name est maintenant ferme
+The shop +name is now opened=Le magasin +name est maintenant ouvert
+The shop +name was given to +player=Le magasin +name a ete donne a +player
+Welcome into your shop +name=Bienvenue dans votre magasin +name
+You must select a chest-shop before typing any /rshop command=Vous devez selectionner un coffre-magasin avant de taper une commande /rshop
+You selected +owner's shop +name=Vous avez selectionne le magasin +name de +owner
+You selected your shop +name=Vous avez selectionne votre magasin +name
+You leaved your shop +name=Vous quittez votre magasin +name
+You leaved +owner's shop +name. Have a nice day=Vous quittez le magasin +name de +owner. Bonne journee
+
+# SHOP OWNER : FLAGS SETTINGS
+Damaged item buy/sell flag is=Flag accepte endommages est 
+Infinite buy flag is=Flag achat illimite est
+Infinite sell flag is=Flag vente illimitee est
+true=desactive
+false=active
+null=valeur globale
+Trade market items only flag is=Flag articles du marge seulement est
+
+# SHOP OWNER : PRICES SETTINGS
+Calculated price (from market/recipes) for +item : buy +buy, sell +sell=Prix calcule (marche/recettes) pour +item : achat +buy, vente +sell
+Error while setting player's price for +item=Erreur dans votre prix du joueur pour +item
+No player's price for +item=Pas de prix du joueur pour +item
+Player's price deleted for +item=Prix du joueur supprime pour +item
+Player's price for +item : buy +buy, sell +sell=Prix du joueur pour +item : achat +buy, vente +sell
+You did not set any price=Vous n'avez defini aucun prix
+Your prices list=Vos prix
+
+# OPERATORS
+Calculated price (from recipes) for +item : buy +buy, sell +sell=Prix calcule (recettes) pour +item : achat +buy, vente +sell
+Daily log was dumped into the realshop.log file=Daily log was dumped into the realshop.log file
+Daily prices calculation simulation is into the realshop.log file=Daily prices calculation simulation is into the realshop.log file
+Error while setting market price for +item=Erreur dans votre prix du marche pour +item
+Market price deleted for +item=Prix du marche supprime pour +item
+Market price for +item : buy +buy, sell +sell=Prix du marche pour +item : achat +buy, vente +sell
+No market price for +item=Pas de prix du marche pour +item
+Real daily prices calculation log is into the realshop.log file=Real daily prices calculation log is into the realshop.log file
+Reload RealShop configuration files=Reload RealShop configuration files
+
+# DOCUMENTATION
+Usage: +command=Usage: +command
+/rshop market <itemId>[:<itemDamage>] <sellPrice> <buyPrice>=/rshop market <idArticle>[:<variante>] <prixVente> <prixAchat>
+/rshop price <itemId>[:<itemDamage>] <sellPrice> <buyPrice>=/rshop price <idArticle>[:<variante>] <prixVente> <prixAchat>
+
+# INFORMATION
++owner's shop +name : +opened=Magasin +name de +owner : +opened
+/rshop HELP summary=/rshop HELP sommaire
+accepts damaged items=accepte endommages
+all=tous
+opened=ouvert
+closed=ferme
+infinite buy=achat illimite
+infinite sell=vente illimite
+market items only=marche seulement
+none=aucun
