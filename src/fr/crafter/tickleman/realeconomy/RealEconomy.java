@@ -1,6 +1,6 @@
 package fr.crafter.tickleman.realeconomy;
 
-import com.nijikokun.register.payment.Method;
+import com.LRFLEW.register.payment.Method;
 
 import fr.crafter.tickleman.realplugin.RealPlugin;
 
