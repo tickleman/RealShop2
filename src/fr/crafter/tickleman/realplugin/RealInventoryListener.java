@@ -15,9 +15,17 @@ import org.getspout.spoutapi.event.inventory.InventoryOpenEvent;
 public class RealInventoryListener extends InventoryListener
 {
 
+	/** Which inventory object has clicked the player ? himself, a chest, a furnace, ... ? */
 	private HashMap <Player, Inventory> playerInventory = new HashMap <Player, Inventory>();
 
 	//--------------------------------------------------------------------------------- availableRoom
+	/**
+	 * Return available quantity for the item stack into the inventory
+	 *
+	 * @param inventory the inventory to put the item stack into
+	 * @param itemStack the item stack we want to put into the inventory
+	 * @return integer available quantity, 0 if no room, itemStack.getAmount() if there is enough room
+	 */
 	public int availableRoom(Inventory inventory, ItemStack itemStack)
 	{
 		int toStore = itemStack.getAmount();
@@ -25,11 +33,11 @@ public class RealInventoryListener extends InventoryListener
 			return itemStack.getAmount();
 		} else {
 			for (ItemStack slot : inventory.getContents()) {
-				if (
+				if (	
 					(slot.getTypeId() == itemStack.getTypeId())
-					&& (slot.getMaxStackSize() > slot.getAmount())
+					&& (slot.getType().getMaxStackSize() > slot.getAmount())
 				) {
-					toStore -= (slot.getMaxStackSize() - slot.getAmount());
+					toStore -= (slot.getType().getMaxStackSize() - slot.getAmount());
 					if (toStore <= 0) {
 						return itemStack.getAmount();
 					}
@@ -40,17 +48,29 @@ public class RealInventoryListener extends InventoryListener
 	}
 
 	//------------------------------------------------------------------------ doWhatWillReallyBeDone
-	public ItemStack[] doWhatWillReallyBeDone(InventoryClickEvent event)
+	/**
+	 * Change the event : do only the calculated action
+	 * (not tested, is this really usefull ?)
+	 * 
+	 * @param event
+	 */
+	public RealInventoryMove doWhatWillReallyBeDone(InventoryClickEvent event)
 	{
-		ItemStack[] what = whatWillReallyBeDone(event);
+		RealInventoryMove inventoryMove = whatWillReallyBeDone(event);
 		event.setResult(Result.ALLOW);
-		event.setCursor(what[0]);
-		event.setItem(what[1]);
+		event.setCursor(inventoryMove.getCursor());
+		event.setItem(inventoryMove.getItem());
 		event.setCancelled(true);
-		return what;
+		return inventoryMove;
 	}
 
 	//------------------------------------------------------------------------------- insideInventory
+	/**
+	 * Which inventory is opened on the player's view ?
+	 *
+	 * @param Player player
+	 * @return Inventory
+	 */
 	public Inventory insideInventory(Player player)
 	{
 		return playerInventory.get(player);
@@ -77,6 +97,13 @@ public class RealInventoryListener extends InventoryListener
 	}
 
 	//----------------------------------------------------------------------------- rightClickOnlyOne
+	/**
+	 * If right-click on a stack containing items and cursor is empty :
+	 * take only one item on inventory, instead of 50%
+	 * All other configurations : standard behavior
+	 *
+	 * @param event
+	 */
 	public void rightClickOnlyOne(InventoryClickEvent event)
 	{
 		if (
@@ -85,13 +112,14 @@ public class RealInventoryListener extends InventoryListener
 		) {
 			System.out.println("allow");
 			event.setResult(Result.ALLOW);
-			event.setCursor(event.getItem().clone());
+			event.setCursor(event.getItem()/*.clone()*/);
 			event.getCursor().setAmount(1);
 			if (event.getItem().getAmount() == 1) {
 				event.setItem(null);
 			} else {
 				event.getItem().setAmount(event.getItem().getAmount() - 1);
 			}
+			System.out.println("event.setCancelled");
 			event.setCancelled(true);
 		}
 	}
@@ -108,7 +136,7 @@ public class RealInventoryListener extends InventoryListener
 	 * @param InventoryClickEvent event
 	 * @return ItemStack[2] {cursor, item}
 	 */
-	public ItemStack[] whatWillReallyBeDone(InventoryClickEvent event)
+	public RealInventoryMove whatWillReallyBeDone(InventoryClickEvent event)
 	{
 		ItemStack cursor = ((event.getCursor() == null) ? null : event.getCursor().clone());
 		ItemStack item   = ((event.getItem() == null) ? null : event.getItem().clone());
@@ -131,12 +159,15 @@ public class RealInventoryListener extends InventoryListener
 					cursor = null;
 				}
 			} else if (event.isLeftClick()) {
-				// left click : check if there is enough room into the destination slot
+				// left click into the same item : check if there is enough room into the destination slot
 				if ((item != null) && (cursor != null) && (item.getTypeId() == cursor.getTypeId())) {
-					int room = Math.min(cursor.getAmount(), item.getMaxStackSize() - item.getAmount());
+					System.out.println("! room is " + item.getType().getMaxStackSize() + " - " + item.getAmount());
+					int room = Math.min(cursor.getAmount(), item.getType().getMaxStackSize() - item.getAmount());
 					if (room > 0) {
+						System.out.println("  cursor.setAmount(" + room + ")");
 						cursor.setAmount(room);
 					} else {
+						System.out.println("  cursor = null");
 						cursor = null;
 					}
 					item = null;
@@ -149,15 +180,18 @@ public class RealInventoryListener extends InventoryListener
 				item.setAmount((int)Math.ceil(item.getAmount() / 2.0));
 			} else if ((item != null) && (cursor != null) && (item.getTypeId() == cursor.getTypeId())) {
 				// right click into the same item : check if there is enough room into the destination slot to cursor 1
-				if (item.getMaxStackSize() > item.getAmount()) {
+				System.out.println("! right-click with the same : " + item.getType().getMaxStackSize() + " > " + item.getAmount());
+				if (item.getType().getMaxStackSize() > item.getAmount()) {
+					System.out.println("  cursor.setAmount(1)");
 					cursor.setAmount(1);
 				} else {
+					System.out.println("  cursor = null");
 					cursor = null;
 				}
 				item = null;
 			}
 		}
-		return new ItemStack[] { cursor, item };
+		return new RealInventoryMove(cursor, item);
 	}
 
 }

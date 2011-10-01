@@ -55,7 +55,7 @@ public class RealItemStack extends ItemType
 	//----------------------------------------------------------------------------------- getItemType
 	public ItemType getItemType()
 	{
-		return new ItemType(getTypeId(),getVariant());
+		return new ItemType(getTypeId(), getVariant());
 	}
 
 	//------------------------------------------------------------------------------------- setAmount
@@ -80,6 +80,12 @@ public class RealItemStack extends ItemType
 		if (!typeIdHasDamage(typeId)) {
 			setDamage((short)0);
 		}
+	}
+
+	//----------------------------------------------------------------------------------- toItemStack
+	public ItemStack toItemStack()
+	{
+		return new ItemStack(getTypeId(), getAmount(), getDamage());
 	}
 
 	//-------------------------------------------------------------------------------------- toString

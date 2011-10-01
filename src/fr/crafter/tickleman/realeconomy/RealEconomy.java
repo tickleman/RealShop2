@@ -100,4 +100,11 @@ public class RealEconomy
 		this.paymentMethod = paymentMethod;
 	}
 
+	//-------------------------------------------------------------------------------------- transfer
+	public void transfer(String playerNameFrom, String playerNameTo, double balance)
+	{
+		setBalance(playerNameFrom, getBalance(playerNameFrom) - balance);
+		setBalance(playerNameTo,   getBalance(playerNameTo)   + balance);
+	}
+
 }
