@@ -75,9 +75,11 @@ public class ItemType
 	{
 		String name;
 		if (typeId < 256) {
-			name = Block.byId[typeId].l();
+			Block block = Block.byId[typeId];
+			name = (block == null) ? ("#" + typeId) : block.l();
 		} else {
-			name = Item.byId[typeId].b();
+			Item item = Item.byId[typeId];
+			name = (item == null) ? ("#" + typeId) : item.b();
 		}
 		name = name.substring(name.indexOf(".") + 1);
 		System.out.println("ItemType.getName() : name for " + typeId + " = " + name);
