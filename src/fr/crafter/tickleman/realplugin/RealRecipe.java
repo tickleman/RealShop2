@@ -2,7 +2,6 @@ package fr.crafter.tickleman.realplugin;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import net.minecraft.server.CraftingManager;
@@ -59,13 +58,10 @@ public class RealRecipe
 	public static Set<RealRecipe> getItemRecipes(ItemType itemType)
 	{
 		Set<RealRecipe> itemRecipes = new HashSet<RealRecipe>();
-		@SuppressWarnings("unchecked")
-		List<CraftingRecipe> recipes = CraftingManager.getInstance().b();
-		for (int i = 0; i < recipes.size(); i++) {
-			CraftingRecipe recipe = recipes.get(i);
-			RealItemStack resultItemStack = new RealItemStack(recipe.b());
+		for (Object recipe : CraftingManager.getInstance().b()) {
+			RealItemStack resultItemStack = new RealItemStack(((CraftingRecipe)recipe).b());
 			if (itemType.isSameItem(resultItemStack)) {
-				itemRecipes.add(new RealRecipe(recipe, resultItemStack));
+				itemRecipes.add(new RealRecipe((CraftingRecipe)recipe, resultItemStack));
 			}
 		}
 		return itemRecipes;
@@ -79,7 +75,7 @@ public class RealRecipe
 		for (RealItemStack itemStack : recipeItems) {
 			result += "+" + itemStack.toString();
 		}
-		return result.substring(1) + "=" + resultItem.toString();
+		return resultItem.toString() + "=" + result.substring(1);
 	}
 
 }

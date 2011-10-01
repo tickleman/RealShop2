@@ -12,6 +12,7 @@ public class DailyLog
 
 	private HashMap<String, Integer> moves = new HashMap<String, Integer>();
 
+	@SuppressWarnings("unused")
 	private final RealShop2Plugin plugin;
 
 	//-------------------------------------------------------------------------------------- DailyLog

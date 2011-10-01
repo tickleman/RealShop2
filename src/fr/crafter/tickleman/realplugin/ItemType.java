@@ -81,7 +81,11 @@ public class ItemType
 			Item item = Item.byId[typeId];
 			name = (item == null) ? ("#" + typeId) : item.b();
 		}
-		name = name.substring(name.indexOf(".") + 1);
+		if ((name == null) || (name.length() == 0)) {
+			name = "#" + typeId;
+		} else if (name.contains(".")) {
+			name = name.substring(name.indexOf(".") + 1);
+		}
 		return name;
 	}
 
@@ -117,8 +121,7 @@ public class ItemType
 	//------------------------------------------------------------------------------------ isSameItem
 	public boolean isSameItem(ItemType itemType)
 	{
-		return (itemType.getTypeId() == this.getTypeId())
-			&& (itemType.getVariant() == this.getVariant());
+		return (itemType.getTypeId() == getTypeId()) && (itemType.getVariant() == getVariant());
 	}
 
 	//------------------------------------------------------------------------------ setTypeIdVariant
@@ -132,7 +135,7 @@ public class ItemType
 	public void setVariant(short variant)
 	{
 		if (typeIdHasVariant(typeId)) {
-			this.variant = variant;
+			this.variant = ((variant < 0) ? 0 : variant);
 		} else {
 			this.variant = 0;
 		}
@@ -149,7 +152,7 @@ public class ItemType
 	{
 		return
 			// those codes have variant : durability is an item variant instead of damage
-			(typeId == Material.WOOD.getId())
+			(typeId == Material.LOG.getId())
 			|| (typeId == Material.LEAVES.getId())
 			|| (typeId == Material.MONSTER_EGGS.getId())
 			|| (typeId == Material.WOOL.getId())
@@ -166,10 +169,8 @@ public class ItemType
 		if (typeIdHasVariant(typeId)) {
 			return 0;
 		} else if (typeId < 256) {
-			Block b = Block.byId[typeId];
 			return (short)Block.byId[typeId].c();
 		} else {
-			Item i = Item.byId[typeId];
 			return (short)Item.byId[typeId].e();
 		}
 	}
@@ -178,7 +179,7 @@ public class ItemType
 	@Override
 	public String toString()
 	{
-		return getTypeId() + ((getVariant() > 0) ? ":" + getVariant() : "");
+		return getTypeId() + ((getVariant() != 0) ? ":" + getVariant() : "");
 	}
 
 }
