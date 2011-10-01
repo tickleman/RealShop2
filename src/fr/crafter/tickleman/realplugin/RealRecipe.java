@@ -34,7 +34,6 @@ public class RealRecipe
 	 */
 	public RealRecipe(CraftingRecipe recipe, RealItemStack resultItem)
 	{
-		System.out.println("REALRECIPE for " + resultItem.toString());
 		this.resultItem = resultItem;
 		Field recipeField = null;
 		for (Field field : recipe.getClass().getDeclaredFields()) {
@@ -47,7 +46,6 @@ public class RealRecipe
 		try {
 			for (ItemStack itemStack : (ItemStack[])recipeField.get(recipe)) {
 				this.recipeItems.add(new RealItemStack(itemStack));
-				System.out.println(": add item to recipe " + new RealItemStack(itemStack).toString());
 			}
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
@@ -68,7 +66,6 @@ public class RealRecipe
 			RealItemStack resultItemStack = new RealItemStack(recipe.b());
 			if (itemType.isSameItem(resultItemStack)) {
 				itemRecipes.add(new RealRecipe(recipe, resultItemStack));
-				System.out.println("found recipe for " + resultItemStack.toString());
 			}
 		}
 		return itemRecipes;

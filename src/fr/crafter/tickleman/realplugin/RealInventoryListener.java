@@ -110,7 +110,6 @@ public class RealInventoryListener extends InventoryListener
 			(event.getCursor() == null) && (event.getItem() != null)
 			&& !event.isLeftClick() && !event.isShiftClick()
 		) {
-			System.out.println("allow");
 			event.setResult(Result.ALLOW);
 			event.setCursor(event.getItem()/*.clone()*/);
 			event.getCursor().setAmount(1);
@@ -119,7 +118,6 @@ public class RealInventoryListener extends InventoryListener
 			} else {
 				event.getItem().setAmount(event.getItem().getAmount() - 1);
 			}
-			System.out.println("event.setCancelled");
 			event.setCancelled(true);
 		}
 	}
@@ -140,7 +138,6 @@ public class RealInventoryListener extends InventoryListener
 	{
 		ItemStack cursor = ((event.getCursor() == null) ? null : event.getCursor().clone());
 		ItemStack item   = ((event.getItem() == null) ? null : event.getItem().clone());
-		System.out.println("whatWillReallyBeDone : inventory " + event.getInventory().getName());
 		if (event.getSlot() > -999) {
 			if (event.isShiftClick()) {
 				// shift click : check if there is enough room into the destination inventory
@@ -161,13 +158,10 @@ public class RealInventoryListener extends InventoryListener
 			} else if (event.isLeftClick()) {
 				// left click into the same item : check if there is enough room into the destination slot
 				if ((item != null) && (cursor != null) && (item.getTypeId() == cursor.getTypeId())) {
-					System.out.println("! room is " + item.getType().getMaxStackSize() + " - " + item.getAmount());
 					int room = Math.min(cursor.getAmount(), item.getType().getMaxStackSize() - item.getAmount());
 					if (room > 0) {
-						System.out.println("  cursor.setAmount(" + room + ")");
 						cursor.setAmount(room);
 					} else {
-						System.out.println("  cursor = null");
 						cursor = null;
 					}
 					item = null;
@@ -180,12 +174,9 @@ public class RealInventoryListener extends InventoryListener
 				item.setAmount((int)Math.ceil(item.getAmount() / 2.0));
 			} else if ((item != null) && (cursor != null) && (item.getTypeId() == cursor.getTypeId())) {
 				// right click into the same item : check if there is enough room into the destination slot to cursor 1
-				System.out.println("! right-click with the same : " + item.getType().getMaxStackSize() + " > " + item.getAmount());
 				if (item.getType().getMaxStackSize() > item.getAmount()) {
-					System.out.println("  cursor.setAmount(1)");
 					cursor.setAmount(1);
 				} else {
-					System.out.println("  cursor = null");
 					cursor = null;
 				}
 				item = null;

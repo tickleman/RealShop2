@@ -28,7 +28,6 @@ public class TransactionAction
 		if (canPay(player, shop, itemStack, null)) {
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {
-				System.out.println("buy " + itemStack.toString() + " = " + price.getBuyPrice(itemStack.getAmount()));
 				plugin.getEconomy().transfer(
 					player.getName(),
 					shop.getPlayerName(),
@@ -60,17 +59,13 @@ public class TransactionAction
 	 */
 	public boolean canPay(Player player, Shop shop, ItemStack buyStack, ItemStack sellStack)
 	{
-		if (buyStack != null) System.out.println("canPay buy " + new RealItemStack(buyStack).toString());
-		if (sellStack != null) System.out.println("canPay sell " + new RealItemStack(sellStack).toString());
 		Price buyPrice = (buyStack == null) ? null : calculatePrice(shop, buyStack);
 		Price sellPrice = (sellStack == null) ? null : calculatePrice(shop, sellStack);
 		double diffAmount = ((sellPrice == null) ? 0 : sellPrice.getSellPrice(sellStack.getAmount()))
 			- ((buyPrice == null) ? 0 : buyPrice.getBuyPrice(buyStack.getAmount()));
 		if (diffAmount > 0) {
-			System.out.println("  return " + plugin.getEconomy().getBalance(shop.getPlayerName()) + " >= " + diffAmount);
 			return plugin.getEconomy().getBalance(shop.getPlayerName()) >= diffAmount;
 		} else {
-			System.out.println("  return " + plugin.getEconomy().getBalance(player.getName()) + " >= " + (-diffAmount));
 			return plugin.getEconomy().getBalance(player.getName()) >= -diffAmount;
 		}
 	}
@@ -81,7 +76,6 @@ public class TransactionAction
 		if (canPay(player, shop, null, itemStack)) {
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {
-				System.out.println("sell " + itemStack.toString() + " = " + price.getSellPrice(itemStack.getAmount()));
 				plugin.getEconomy().transfer(
 					shop.getPlayerName(),
 					player.getName(),

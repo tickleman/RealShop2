@@ -82,7 +82,6 @@ public class ItemType
 			name = (item == null) ? ("#" + typeId) : item.b();
 		}
 		name = name.substring(name.indexOf(".") + 1);
-		System.out.println("ItemType.getName() : name for " + typeId + " = " + name);
 		return name;
 	}
 
@@ -168,11 +167,9 @@ public class ItemType
 			return 0;
 		} else if (typeId < 256) {
 			Block b = Block.byId[typeId];
-			System.out.println("block max damage = " + b.c() + ", " + b.e());
 			return (short)Block.byId[typeId].c();
 		} else {
 			Item i = Item.byId[typeId];
-			System.out.println("item max damage = " + i.e());
 			return (short)Item.byId[typeId].e();
 		}
 	}

@@ -113,10 +113,6 @@ public class ItemPriceList
 	 * Calculate Price using crafting recipes
 	 * - returns null if no price for any component
 	 * - recurse if necessary
-	 * recipe format : typeId[*mulQty][/divQty][+...][=resQty]
-	 * recipe samples :
-	 * - stick (typeId=280) : 5*2=4 : 2 wooden planks gives you 4 sticks
-	 * - diamond hoe (typeId=293) : 280*2+264*2 : 2 sticks and 2 diamonds give you 1 diamond hoe
 	 */
 	public Price fromRecipe(ItemType itemType, ItemPriceList marketFile)
 	{
