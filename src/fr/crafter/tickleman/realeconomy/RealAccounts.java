@@ -76,7 +76,10 @@ public class RealAccounts
 	//------------------------------------------------------------------------------------ getBalance
 	public Double setBalance(String playerName, Double balance)
 	{
-		return accounts.put(playerName, balance);
+		balance = Math.round(balance * 100d) / 100d;
+		Double result = accounts.put(playerName, balance);
+		save();
+		return result;
 	}
 
 }
