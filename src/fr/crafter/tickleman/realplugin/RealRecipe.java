@@ -2,6 +2,7 @@ package fr.crafter.tickleman.realplugin;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.minecraft.server.CraftingManager;
@@ -36,19 +37,39 @@ public class RealRecipe
 		this.resultItem = resultItem;
 		Field recipeField = null;
 		for (Field field : recipe.getClass().getDeclaredFields()) {
-			if (field.getType().getCanonicalName().contains("ItemStack[]")) {
+			if (
+				field.getType().getCanonicalName().contains(".ItemStack[]")
+				|| field.getType().getCanonicalName().contains(".List")
+			) {
 				recipeField = field;
 				break;
 			}
 		}
 		recipeField.setAccessible(true);
 		try {
-			for (ItemStack itemStack : (ItemStack[])recipeField.get(recipe)) {
-				this.recipeItems.add(new RealItemStack(itemStack));
+			if (recipeField.getType().getCanonicalName().contains(".ItemStack[]")) {
+				// ItemStack[]
+				for (ItemStack itemStack : (ItemStack[])recipeField.get(recipe)) {
+					if (itemStack != null) {
+						this.recipeItems.add(new RealItemStack(itemStack));
+					}
+				}
+			} else {
+				// List
+				@SuppressWarnings("unchecked")
+				List<ItemStack> itemStackList = (List<ItemStack>)recipeField.get(recipe);
+				for (int i = 0; i < itemStackList.size(); i ++) {
+					ItemStack itemStack = itemStackList.get(i);
+					if (itemStack != null) {
+						this.recipeItems.add(new RealItemStack(itemStack));
+					}
+				}
 			}
-		} catch (IllegalAccessException e) {
+		} catch (Exception e) {
+			System.out.println("[ERROR] on " + resultItem.toString() + " recipe " + recipe.getClass() + " field " + recipeField.getType().getCanonicalName());
 			e.printStackTrace();
 		}
+		System.out.println("recipe " + toString());
 	}
 
 	//-------------------------------------------------------------------------------- getItemRecipes

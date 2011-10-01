@@ -1,7 +1,5 @@
 package fr.crafter.tickleman.realshop2;
 
-import net.minecraft.server.Item;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,10 +9,8 @@ import org.bukkit.plugin.PluginManager;
 
 import fr.crafter.tickleman.realeconomy.RealEconomy;
 import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
-import fr.crafter.tickleman.realplugin.ItemType;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
-import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
@@ -112,7 +108,6 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onEnable()
 	{
-		RealRecipe.getItemRecipes(new ItemType(Item.WATER_BUCKET));
 		super.onEnable();
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);

@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realplugin.RealItemStack;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
@@ -32,6 +33,11 @@ public class TransactionAction
 					player.getName(),
 					shop.getPlayerName(),
 					price.getBuyPrice(itemStack.getAmount())
+				);
+				sendMessage(
+					player, shop, itemStack,
+					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
+					"purchase", "purchased"
 				);
 				return itemStack.getAmount();
 			}
@@ -81,10 +87,51 @@ public class TransactionAction
 					player.getName(),
 					price.getSellPrice(itemStack.getAmount())
 				);
+				sendMessage(
+					player, shop, itemStack,
+					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
+					"sale", "sold"
+				);
 				return itemStack.getAmount();
 			}
 		}
 		return 0;
+	}
+
+	//----------------------------------------------------------------------------------- sendMessage
+	private void sendMessage(
+		Player player, Shop shop, ItemStack itemStack,
+		double price, double amount,
+		String side, String shopSide
+	) {
+		ItemType itemType = new ItemType(itemStack);
+		player.sendMessage(
+			RealColor.text
+			+ plugin.tr(side + " +item x+quantity (+linePrice)")
+			.replace("+client", RealColor.player + player.getName() + RealColor.text)
+			.replace("+item", RealColor.item + itemType.getName() + RealColor.text)
+			.replace("+linePrice", RealColor.price + amount + RealColor.text)
+			.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
+			.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
+			.replace("+price", RealColor.price + price + RealColor.text)
+			.replace("+quantity", RealColor.quantity + itemStack.getAmount() + RealColor.text)
+			.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
+		);
+		Player shopPlayer = plugin.getServer().getPlayer(shop.getPlayerName());
+		if (shopPlayer != null) {
+			shopPlayer.sendMessage(
+				RealColor.text
+				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice)")
+				.replace("+client", RealColor.player + player.getName() + RealColor.text)
+				.replace("+item", RealColor.item + itemType.getName() + RealColor.text)
+				.replace("+linePrice", RealColor.price + amount + RealColor.text)
+				.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
+				.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
+				.replace("+price", RealColor.price + price + RealColor.text)
+				.replace("+quantity", RealColor.quantity + itemStack.getAmount() + RealColor.text)
+				.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
+			);
+		}
 	}
 
 }
