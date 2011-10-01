@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realplugin;
 
+import net.minecraft.server.Block;
 import net.minecraft.server.Item;
 
 import org.bukkit.Material;
@@ -74,10 +75,11 @@ public class ItemType
 	{
 		String name;
 		if (typeId < 256) {
-			name = Material.getMaterial(typeId).getClass().getName().toLowerCase();
+			name = Block.byId[typeId].l();
 		} else {
-			name = Item.byId[typeId].getClass().getName().toLowerCase();
+			name = Item.byId[typeId].b();
 		}
+		name = name.substring(name.indexOf(".") + 1);
 		System.out.println("ItemType.getName() : name for " + typeId + " = " + name);
 		return name;
 	}
