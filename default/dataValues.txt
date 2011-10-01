@@ -1,4 +1,4 @@
-#id;name;recipe
+id;name;recipe
 0;Air
 1;Stone;4+263/8
 2;Grass;3
@@ -60,10 +60,14 @@
 43:1;Double Sandstone Slab;44:1*2
 43:2;Double Wooden Slab;44:2*2
 43:3;Double Cobblestone Slab;44:3*2
+43:4;Double Brick Slab;44:4*2
+43:5;Double Stone Brick Slab;44:5*2
 44;Stone Slab;1*3=3
 44:1;Sandstone Slab;24*3=3
 44:2;Wooden Slab;5*3=3
 44:3;Cobblestone Slab;4*3=3
+44:4;Brick Slab;45*3=3
+44:5;Stone Brick Slab;98*3=3
 45;Brick;336*4
 46;TNT;289*5+12*4
 47;Bookshelf;5*6+340*3
@@ -114,7 +118,9 @@
 92;Cake
 93;Redstone repeater off
 94;Redstone repeater on
-96;Trapdoor;5*6/2
+96;Trapdoor;5*6=2
+98;Stone Brick;1*4=4
+102;Plate Glass;20*6=16
 256;Iron Shovel;280*2+265
 257;Iron Pickaxe;280*2+265*3
 258;Iron Axe;280+265*3
