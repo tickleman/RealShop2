@@ -11,6 +11,7 @@ import org.bukkit.plugin.PluginManager;
 import fr.crafter.tickleman.realeconomy.RealEconomy;
 import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
 import fr.crafter.tickleman.realplugin.DataValues;
+import fr.crafter.tickleman.realplugin.ItemType;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realplugin.RealRecipes;
@@ -119,7 +120,7 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onEnable()
 	{
-		RealRecipes.getItemRecipes(Material.AIR);
+		RealRecipes.getItemRecipes(new ItemType(Material.STEP, (short)4));
 		super.onEnable();
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);

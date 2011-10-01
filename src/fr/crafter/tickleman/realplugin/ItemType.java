@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realplugin;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 //#################################################################################### RealItemType
@@ -25,9 +26,21 @@ public class ItemType
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
+	public ItemType(net.minecraft.server.ItemStack itemStack)
+	{
+		this(itemStack.id, (short)itemStack.damage);
+	}
+
+	//-------------------------------------------------------------------------------------- ItemType
 	public ItemType(int typeId)
 	{
-		setTypeIdVariant(typeId, (short)0);
+		this(typeId, (short)0);
+	}
+
+	//-------------------------------------------------------------------------------------- ItemType
+	public ItemType(Material material, short variant)
+	{
+		this(material.getId(), variant);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
@@ -63,6 +76,13 @@ public class ItemType
 	public void setTypeId(int typeId)
 	{
 		setTypeIdVariant(typeId, variant);
+	}
+
+	//------------------------------------------------------------------------------------ isSameItem
+	public boolean isSameItem(ItemType itemType)
+	{
+		return (itemType.getTypeId() == this.getTypeId())
+			&& (itemType.getVariant() == this.getVariant());
 	}
 
 	//------------------------------------------------------------------------------ setTypeIdVariant
