@@ -1,5 +1,7 @@
 package fr.crafter.tickleman.realplugin;
 
+import net.minecraft.server.Item;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -31,10 +33,22 @@ public class ItemType
 		this(itemStack.id, (short)itemStack.damage);
 	}
 
-	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(int typeId)
+	//------------------------------------------------------------------------------------------ Item
+	public ItemType(net.minecraft.server.Item item)
 	{
-		this(typeId, (short)0);
+		this(item.id, (short)0);
+	}
+
+	//------------------------------------------------------------------------------------------ Item
+	public ItemType(net.minecraft.server.Item item, short variant)
+	{
+		this(item.id, variant);
+	}
+
+	//-------------------------------------------------------------------------------------- ItemType
+	public ItemType(Material material)
+	{
+		this(material.getId(), (short)0);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
@@ -44,9 +58,28 @@ public class ItemType
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
+	public ItemType(int typeId)
+	{
+		this(typeId, (short)0);
+	}
+
+	//-------------------------------------------------------------------------------------- ItemType
 	public ItemType(int typeId, short variant)
 	{
 		setTypeIdVariant(typeId, variant);
+	}
+
+	//--------------------------------------------------------------------------------------- getName
+	public String getName()
+	{
+		String name;
+		if (typeId < 256) {
+			name = Material.getMaterial(typeId).getClass().getName().toLowerCase();
+		} else {
+			name = Item.byId[typeId].getClass().getName().toLowerCase();
+		}
+		System.out.println("ItemType.getName() : name for " + typeId + " = " + name);
+		return name;
 	}
 
 	//------------------------------------------------------------------------------------- getTypeId
@@ -113,14 +146,14 @@ public class ItemType
 	{
 		return
 			// those codes have variant : durability is an item variant instead of damage
-			(typeId == 17 ) // wood
-			|| (typeId == 18 ) // leaves
-			|| (typeId == 35 ) // wool
-			|| (typeId == 43 ) // double slab
-			|| (typeId == 44 ) // slab
-			|| (typeId == 263) // coal
-			|| (typeId == 351) // dye
-			|| (typeId == 352) // bone
+			(typeId == Material.WOOD.getId())
+			|| (typeId == Material.LEAVES.getId())
+			|| (typeId == Material.MONSTER_EGGS.getId())
+			|| (typeId == Material.WOOL.getId())
+			|| (typeId == Material.DOUBLE_STEP.getId())
+			|| (typeId == Material.STEP.getId())
+			|| (typeId == Material.COAL.getId())
+			|| (typeId == Item.INK_SACK.id)
 		;
 	}
 

@@ -203,7 +203,7 @@ public class ShopAction
 		player.sendMessage(
 			RealColor.message + plugin.tr("Now clients can " + what + " +items")
 			.replace("+items",
-				RealColor.item + itemTypeList.toNamesString(plugin.getDataValues()) + RealColor.message
+				RealColor.item + "TODO" + RealColor.message
 			)
 		);
 	}
@@ -349,7 +349,7 @@ public class ShopAction
 					if (!list.equals("")) {
 						list += RealColor.message + ", ";
 					}
-					list += RealColor.item + plugin.getDataValues().getName(itemType)
+					list += RealColor.item + itemType.getName()
 						+ RealColor.message + ": " + RealColor.price + price.getSellPrice();
 					if (count-- < 0) {
 						if (!list.equals("")) {
@@ -383,7 +383,7 @@ public class ShopAction
 						if (!list.equals("")) {
 							list += RealColor.message + ", ";
 						}
-						list += RealColor.item + plugin.getDataValues().getName(itemType)
+						list += RealColor.item + itemType.getName()
 							+ RealColor.message + ": " + RealColor.price + price.getBuyPrice();
 						if (count-- < 0) {
 							if (!list.equals("")) {

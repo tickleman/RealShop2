@@ -35,21 +35,4 @@ public class RealShopConfig extends Config
 		return (RealShop2Plugin)super.getPlugin();
 	}
 
-	//------------------------------------------------------------------------------------------ load
-	@Override
-	public RealShopConfig load()
-	{
-		super.load();
-		if (
-			!permissionsPlugin.equals("none")
-			&& !permissionsPlugin.equals("Permissions")
-		) {
-			getPlugin().getLog().warning(
-				"unknown permissionsPlugin " + permissionsPlugin + " was set to none instead", true
-			);
-			permissionsPlugin = "none";
-		}
-		return this;
-	}
-
 }

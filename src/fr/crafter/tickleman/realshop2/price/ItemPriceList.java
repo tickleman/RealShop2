@@ -5,11 +5,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Set;
 
-import fr.crafter.tickleman.realplugin.DataValues;
 import fr.crafter.tickleman.realplugin.FileTools;
 import fr.crafter.tickleman.realplugin.ItemType;
 import fr.crafter.tickleman.realplugin.RealItemStack;
+import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 
 //################################################################################### ItemPriceList
@@ -119,76 +120,54 @@ public class ItemPriceList
 	 */
 	public Price fromRecipe(ItemType itemType, ItemPriceList marketFile)
 	{
-		String recipe = plugin.getDataValues().getRecipe(itemType);
-		if (recipe.equals("")) {
+		Set<RealRecipe> recipes = RealRecipe.getItemRecipes(itemType);
+		if (recipes.size() == 0) {
 			return null;
 		} else {
-			Price price = new Price();
-			// recurse security
-			recurseSecurity++;
-			if (recurseSecurity > 20) {
-				plugin.getLog().severe("Recurse security error : " + itemType.toString());
-				return null;
-			} else if (recurseSecurity > 15) {
-				plugin.getLog().warning("Recurse security warning : " + itemType.toString());
-			}
-			// resQty : result quantity
-			double resQty = (double)1;
-			if (recipe.indexOf("=") > 0) {
-				try { resQty = Double.parseDouble(recipe.split("\\=")[1]); } catch (Exception e) {}
-				recipe = recipe.substring(0, recipe.indexOf("="));
-			}
-			// sum of components
-			String[] sum = recipe.split("\\+");
-			for (int sumIdx = 0; sumIdx < sum.length; sumIdx++) {
-				String comp = sum[sumIdx];
-				// mulQty : multiplier
-				int mulQty = 1;
-				if (comp.indexOf("*") > 0) {
-					try { mulQty = Integer.parseInt(comp.split("\\*")[1]); } catch (Exception e) {}
-					comp = comp.substring(0, comp.indexOf("*"));
+			Price cheapest = null;
+			for (RealRecipe recipe : recipes) {
+				Price price = new Price();
+				// recurse security
+				recurseSecurity++;
+				if (recurseSecurity > 20) {
+					plugin.getLog().severe("Recurse security error : " + itemType.toString());
+					return null;
+				} else if (recurseSecurity > 15) {
+					plugin.getLog().warning("Recurse security warning : " + itemType.toString());
 				}
-				// divQty : divider
-				int divQty = 1;
-				if (comp.indexOf("/") > 0) {
-					try { divQty = Integer.parseInt(comp.split("\\/")[1]); } catch (Exception e) {}
-					comp = comp.substring(0, comp.indexOf("/"));
+				// resQty : result quantity
+				double resQty = recipe.getResultItem().getAmount();
+				// sum of components
+				for (RealItemStack itemStack : recipe.getRecipeItems()) {
+					Price compPrice = getPrice(itemStack.getItemType(), (short)0, marketFile);
+					if (compPrice == null) {
+						price = null;
+						break;
+					} else {
+						price.setBuyPrice(price.getBuyPrice() + Math.ceil(
+							(double)100 * compPrice.getBuyPrice() * itemStack.getAmount()
+						) / (double)100);
+						price.setSellPrice(price.getSellPrice() + Math.floor(
+							(double)100 * compPrice.getSellPrice() * itemStack.getAmount()
+						) / (double)100);
+					}
 				}
-				// compId : component type Id
-				String compId = "0";
-				try { compId = comp; } catch (Exception e) {}
-				int compTypeId = 0;
-				short compVariant = 0;
-				try { compTypeId = Integer.parseInt(compId.split(":")[0]); } catch (Exception e) {}
-				try { compVariant = compId.contains(":") ? Short.parseShort(compId.split(":")[1]) : 0; } catch (Exception e) {}
-				ItemType compType = new ItemType(compTypeId, compVariant);
-				// calculate price
-				Price compPrice = getPrice(compType, (short)0, marketFile);
-				if (compPrice == null) {
-					price = null;
-					break;
-				} else {
-					price.setBuyPrice(price.getBuyPrice() + Math.ceil(
-						(double)100 * compPrice.getBuyPrice() * (double)mulQty / (double)divQty
+				if (price != null) {
+					// round final price
+					price.setBuyPrice(Math.ceil(
+						price.getBuyPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
 					) / (double)100);
-					price.setSellPrice(price.getSellPrice() + Math.floor(
-						(double)100 * compPrice.getSellPrice() * (double)mulQty / (double)divQty
+					price.setSellPrice(Math.floor(
+						price.getSellPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
 					) / (double)100);
+					// get the cheapest price
+					if ((cheapest == null) || (price.getBuyPrice() < cheapest.getBuyPrice())) {
+						cheapest = price;
+					}
 				}
+				recurseSecurity--;
 			}
-			if (price != null) {
-				// round final price
-				price.setBuyPrice(
-					Math.ceil(price.getBuyPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio)
-					/ (double)100
-				);
-				price.setSellPrice(
-					Math.floor(price.getSellPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio)
-					/ (double)100
-				);
-			}
-			recurseSecurity--;
-			return price;
+			return cheapest;
 		}
 	}
 
@@ -321,7 +300,7 @@ public class ItemPriceList
 					typeIdVariant + ";"
 					+ price.getBuyPrice() + ";"
 					+ price.getSellPrice() + ";"
-					+ plugin.getDataValues().getName(itemType)
+					+ itemType.getName()
 					+ "\n"
 				);
 			}
@@ -332,9 +311,9 @@ public class ItemPriceList
 		}
 		try { writer.close(); } catch (Exception e) {}
 		// Save all current values (including calculated prices) into currentValues.txt
+		/*
 		if (fileName.contains("/market.txt")) {
 			try {
-				DataValues dataValues = plugin.getDataValues();
 				writer = new BufferedWriter(
 					new FileWriter(plugin.getDataFolder().getPath() + "/currentValues.txt")
 				);
@@ -347,13 +326,13 @@ public class ItemPriceList
 							typeIdVariant + ";"
 							+ price.getBuyPrice() + ";"
 							+ price.getSellPrice() + ";"
-							+ plugin.getDataValues().getName(itemType)
+							+ itemType.getName()
 							+ "\n"
 						);
 					} else {
 						writer.write(
 							typeIdVariant + ";0;0;"
-							+ plugin.getDataValues().getName(itemType)
+							+ itemType.getName()
 							+ "\n"
 						);
 					}
@@ -367,6 +346,7 @@ public class ItemPriceList
 			}
 			try { writer.close(); } catch (Exception e) {}
 		}
+		*/
 	}
 
 	//-------------------------------------------------------------------------------------- toString

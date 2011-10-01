@@ -56,7 +56,7 @@ public class DailyLog
 			ItemType itemType = ItemType.parseItemType(typeIdVariant);
 			int amount = moves.get(itemType);
 			log.info(
-				"- " + itemType.toString() + "(" + plugin.getDataValues().getName(itemType) + ") x" + amount
+				"- " + itemType.toString() + "(" + itemType.getName() + ") x" + amount
 			);
 		}
 	}

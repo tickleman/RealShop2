@@ -1,6 +1,7 @@
 package fr.crafter.tickleman.realshop2;
 
-import org.bukkit.Material;
+import net.minecraft.server.Item;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,11 +11,10 @@ import org.bukkit.plugin.PluginManager;
 
 import fr.crafter.tickleman.realeconomy.RealEconomy;
 import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
-import fr.crafter.tickleman.realplugin.DataValues;
 import fr.crafter.tickleman.realplugin.ItemType;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
-import fr.crafter.tickleman.realplugin.RealRecipes;
+import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
@@ -24,7 +24,6 @@ import fr.crafter.tickleman.realshop2.shop.ShopList;
 public class RealShop2Plugin extends RealPlugin
 {
 
-	private DataValues      dataValues;
 	private ItemPriceList   marketPrices;
 	private RealEconomy     economy;
 	private PlayerChestList playerChestList;
@@ -44,12 +43,6 @@ public class RealShop2Plugin extends RealPlugin
 	public RealShopConfig getConfig()
 	{
 		return (RealShopConfig)super.getConfig();
-	}
-
-	//--------------------------------------------------------------------------------- getDataValues
-	public DataValues getDataValues()
-	{
-		return dataValues;
 	}
 
 	//------------------------------------------------------------------------------------ getEconomy
@@ -110,7 +103,6 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onDisable()
 	{
-		dataValues.clear();
 		marketPrices.clear();
 		shopList.clear();
 		super.onDisable();
@@ -120,7 +112,7 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onEnable()
 	{
-		RealRecipes.getItemRecipes(new ItemType(Material.STEP, (short)4));
+		RealRecipe.getItemRecipes(new ItemType(Item.WATER_BUCKET));
 		super.onEnable();
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);
@@ -137,7 +129,6 @@ public class RealShop2Plugin extends RealPlugin
 		pm.registerEvent(Event.Type.PLUGIN_DISABLE,  serverListener,    Priority.Normal,        this);
 		pm.registerEvent(Event.Type.PLUGIN_ENABLE,   serverListener,    Priority.Normal,        this);
 		// load files
-		dataValues   = new DataValues(this).load();
 		marketPrices = new ItemPriceList(this, "market").load();
 		shopList     = new ShopList(this).load();
 		this.economy = new RealEconomy(this);
@@ -206,7 +197,6 @@ public class RealShop2Plugin extends RealPlugin
 		player.sendMessage(
 			RealColor.message + tr("Reload RealShop configuration files")
 		);
-		getDataValues().load();
 		getMarketPrices().load();
 		getShopList().load();
 		player.sendMessage(

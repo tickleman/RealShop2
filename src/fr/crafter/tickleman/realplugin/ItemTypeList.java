@@ -102,14 +102,14 @@ public class ItemTypeList
 	}
 
 	//-------------------------------------------------------------------------------------- toString
-	public String toNamesString(DataValues dataValues)
+	public String toNamesString()
 	{
 		String result = "";
 		for (String typeIdVariant : content.keySet()) {
 			if (!result.isEmpty()) {
 				result += ", ";
 			}
-			result += dataValues.getName(content.get(typeIdVariant));
+			result += content.get(typeIdVariant).getName();
 		}
 		return result;
 	}
