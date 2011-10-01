@@ -166,13 +166,14 @@ public class ItemType
 	{
 		if (typeIdHasVariant(typeId)) {
 			return 0;
+		} else if (typeId < 256) {
+			Block b = Block.byId[typeId];
+			System.out.println("block max damage = " + b.c() + ", " + b.e());
+			return (short)Block.byId[typeId].c();
 		} else {
-			switch (typeId) {
-				case 270: return 60;
-				case 273: return 132;
-				// TODO : each item that can be damaged may have it's one maxDamage value. Get them !
-				default:  return 100;
-			}
+			Item i = Item.byId[typeId];
+			System.out.println("item max damage = " + i.e());
+			return (short)Item.byId[typeId].e();
 		}
 	}
 

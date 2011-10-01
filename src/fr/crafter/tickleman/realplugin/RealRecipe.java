@@ -33,16 +33,25 @@ public class RealRecipe
 	 * Generate a easily usable recipe, based on Minecraft's server recipe
 	 */
 	public RealRecipe(CraftingRecipe recipe, RealItemStack resultItem)
-		throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{
-		Field recipeItems = recipe.getClass().getDeclaredField("b");
-		recipeItems.setAccessible(true);
-		@SuppressWarnings("unchecked")
-		List<ItemStack> sourceRecipeItems = (List<ItemStack>)recipeItems.get(recipe);
-		for (int i = 0; i < sourceRecipeItems.size(); i ++) {
-			this.recipeItems.add(new RealItemStack(sourceRecipeItems.get(i)));
-		}
+		System.out.println("REALRECIPE for " + resultItem.toString());
 		this.resultItem = resultItem;
+		Field recipeField = null;
+		for (Field field : recipe.getClass().getDeclaredFields()) {
+			if (field.getType().getCanonicalName().contains("ItemStack[]")) {
+				recipeField = field;
+				break;
+			}
+		}
+		recipeField.setAccessible(true);
+		try {
+			for (ItemStack itemStack : (ItemStack[])recipeField.get(recipe)) {
+				this.recipeItems.add(new RealItemStack(itemStack));
+				System.out.println(": add item to recipe " + new RealItemStack(itemStack).toString());
+			}
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	//-------------------------------------------------------------------------------- getItemRecipes
@@ -58,11 +67,7 @@ public class RealRecipe
 			CraftingRecipe recipe = recipes.get(i);
 			RealItemStack resultItemStack = new RealItemStack(recipe.b());
 			if (itemType.isSameItem(resultItemStack)) {
-				try {
-					itemRecipes.add(new RealRecipe(recipe, resultItemStack));
-				} catch (Exception e) {
-					System.out.println("Exception on itemRecipes.add() into RealRecipe::Set()");
-				}
+				itemRecipes.add(new RealRecipe(recipe, resultItemStack));
 				System.out.println("found recipe for " + resultItemStack.toString());
 			}
 		}
