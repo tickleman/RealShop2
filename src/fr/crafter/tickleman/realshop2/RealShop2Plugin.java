@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realshop2;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
 import fr.crafter.tickleman.realplugin.DataValues;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
+import fr.crafter.tickleman.realplugin.RealRecipes;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
@@ -117,6 +119,7 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onEnable()
 	{
+		RealRecipes.getItemRecipes(Material.AIR);
 		super.onEnable();
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);
