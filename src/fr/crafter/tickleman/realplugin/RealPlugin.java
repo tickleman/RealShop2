@@ -36,17 +36,45 @@ public class RealPlugin extends JavaPlugin
 		return perms.hasPermission(player, permissionString);
 	}
 
-	//--------------------------------------------------------------------------------- hasPermission
-	public boolean hasPermission(Player player)
+	//--------------------------------------------------------------------------- hasGlobalPermission
+	public boolean hasGlobalPermission(Player player)
 	{
 		return perms.hasPermission(player, getDescription().getName().toLowerCase());
+	}
+
+	//--------------------------------------------------------------------------- hasGlobalPermission
+	public boolean hasGlobalPermission(Player player, String permissionString)
+	{
+		return perms.hasPermission(player, permissionString);
 	}
 
 	//--------------------------------------------------------------------------------- hasPermission
 	public boolean hasPermission(Player player, String permissionString)
 	{
+		System.out.println(
+			"Check player for permission "
+			+ getDescription().getName().toLowerCase() + "." + permissionString.toLowerCase() + " = "
+			+ perms.hasPermission(
+				player, getDescription().getName().toLowerCase() + "." + permissionString.toLowerCase()
+			)
+		);
 		return perms.hasPermission(
 			player, getDescription().getName().toLowerCase() + "." + permissionString.toLowerCase()
+		);
+	}
+
+	//--------------------------------------------------------------------------------- hasPermission
+	public boolean hasPermission(Player player, String permissionPrefix, String permissionString)
+	{
+		System.out.println(
+			"Check player for permission "
+			+ permissionPrefix.toLowerCase() + "." + permissionString.toLowerCase() + " = "
+			+ perms.hasPermission(
+				player, permissionPrefix.toLowerCase() + "." + permissionString.toLowerCase()
+			)
+		);
+		return perms.hasPermission(
+			player, permissionPrefix.toLowerCase() + "." + permissionString.toLowerCase()
 		);
 	}
 

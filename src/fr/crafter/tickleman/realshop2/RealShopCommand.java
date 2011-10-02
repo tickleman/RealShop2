@@ -30,7 +30,7 @@ public class RealShopCommand
 	{
 		if (sender instanceof Player) {
 			Player player = (Player)sender;
-			if (plugin.hasPermission(player)) {
+			if (plugin.hasGlobalPermission(player)) {
 				String[] params = {
 					(args.length > 0) ? solveAlias1(args[0]) : "",
 					(args.length > 1) ? solveAlias2(args[1]) : "",

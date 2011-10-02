@@ -34,9 +34,11 @@ public class RealPermissions
 	public boolean hasPermission(Player player, String permissionString)
 	{
 		if (this.permissionsPluginName.equals("none")) {
-			permissionString = permissionString.contains(".")
-				? permissionString.replace(plugin.getDescription().getName().toLowerCase() + ".", "")
-				: "";
+			if (permissionString.contains(".")) {
+				permissionString = permissionString.replace(
+					plugin.getDescription().getName().toLowerCase() + ".", ""
+				);
+			}
 			return player.isOp()
 				? plugin.opHasPermission(permissionString)
 				: plugin.playerHasPermission(permissionString);

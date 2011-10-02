@@ -136,6 +136,11 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public boolean opHasPermission(String permissionString)
 	{
+		if (permissionString.equals("")) {
+			System.out.println("RealShop2.opHasPermission exception : empty permission");
+			@SuppressWarnings("unused")
+			int i = 0 / 0;
+		}
 		return true;
 	}
 
@@ -144,10 +149,16 @@ public class RealShop2Plugin extends RealPlugin
 	 * if permission system is "none", player :
 	 * - if shopOpOnly == true :  can shop only
 	 * - if shopOpOnly == false : can shop and manage shops
+	 * @throws Exception 
 	 */
 	@Override
 	public boolean playerHasPermission(String permissionString)
 	{
+		if (permissionString.equals("")) {
+			System.out.println("RealShop2.playerHasPermission exception : empty permission");
+			@SuppressWarnings("unused")
+			int i = 0 / 0;
+		}
 		// RealEconomy "mny" commands
 		if (permissionString.contains("mny.")) {
 			return permissionString.equals("mny")
