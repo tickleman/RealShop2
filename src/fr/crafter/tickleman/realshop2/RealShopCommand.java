@@ -111,6 +111,7 @@ public class RealShopCommand
 	//----------------------------------------------------------------------------------- shopCommand
 	private void shopCommand(Player player, String[] params)
 	{
+System.out.println("shopCommand 0=" + params[0] + " 1=" + params[1]);
 		ShopAction shopAction = new ShopAction(plugin);
 		RealChest chest       = plugin.getPlayerChestList().selectedChest(player);
 		Shop shop             = plugin.getPlayerShopList().selectedShop(player);
@@ -126,15 +127,17 @@ public class RealShopCommand
 			player.sendMessage(
 				RealColor.cancel + plugin.tr("The chest you selected is not a shop")
 			);
-		} else if (params[0].equals("info")) {
-			shopAction.shopInfo(player, shop);
-		} else if (!player.getName().equals(shop.getPlayerName())) {
+		} else if (
+			!player.getName().equals(shop.getPlayerName()) && !plugin.hasPermission(player, "op")
+		) {
 			player.sendMessage(
 				RealColor.cancel
 				+ plugin.tr("The chest-shop you selected belongs to +owner")
 				.replace("+name", RealColor.shop + shop.getName() + RealColor.cancel)
 				.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.cancel)
 			);
+		} else if (params[0].equals("info")) {
+			shopAction.shopInfo(player, shop);
 		} else if (params[0].equals("delete")) {
 			shopAction.deleteShop(player, shop);
 		} else if (params[0].equals("open")) {
