@@ -37,7 +37,7 @@ public class TransactionAction
 				sendMessage(
 					player, shop, itemStack,
 					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
-					"purchase", "purchased"
+					"Purchase", "purchased"
 				);
 				return itemStack.getAmount();
 			}
@@ -90,7 +90,7 @@ public class TransactionAction
 				sendMessage(
 					player, shop, itemStack,
 					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
-					"sale", "sold"
+					"Sale", "sold"
 				);
 				return itemStack.getAmount();
 			}
@@ -109,7 +109,7 @@ public class TransactionAction
 			RealColor.text
 			+ plugin.tr(side + " +item x+quantity (+linePrice)")
 			.replace("+client", RealColor.player + player.getName() + RealColor.text)
-			.replace("+item", RealColor.item + itemType.getName() + RealColor.text)
+			.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
 			.replace("+linePrice", RealColor.price + amount + RealColor.text)
 			.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 			.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
@@ -123,7 +123,7 @@ public class TransactionAction
 				RealColor.text
 				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice)")
 				.replace("+client", RealColor.player + player.getName() + RealColor.text)
-				.replace("+item", RealColor.item + itemType.getName() + RealColor.text)
+				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
 				.replace("+linePrice", RealColor.price + amount + RealColor.text)
 				.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 				.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)

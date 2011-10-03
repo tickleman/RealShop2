@@ -278,7 +278,7 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Infinite buy flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getInfiniteBuy(plugin.getConfig().shopInfiniteBuy) ? "on" : "off")
+			+ plugin.tr(shop.getInfiniteBuy() ? "on" : "off")
 		);
 	}
 
@@ -291,7 +291,7 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Infinite sell flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getInfiniteSell(plugin.getConfig().shopInfiniteSell) ? "on" : "off")
+			+ plugin.tr(shop.getInfiniteSell() ? "on" : "off")
 		);
 	}
 
@@ -320,8 +320,8 @@ public class ShopAction
 		);
 		player.sendMessage(
 			RealColor.message
-			+ (shop.getInfiniteBuy(plugin.getConfig().shopInfiniteBuy) ? "+" : "-") + plugin.tr("infinite buy") + " "
-			+ (shop.getInfiniteSell(plugin.getConfig().shopInfiniteSell) ? "+" : "-") + plugin.tr("infinite sell") + " "
+			+ (shop.getInfiniteBuy() ? "+" : "-") + plugin.tr("infinite buy") + " "
+			+ (shop.getInfiniteSell() ? "+" : "-") + plugin.tr("infinite sell") + " "
 		);
 		player.sendMessage(
 			RealColor.message
@@ -349,7 +349,7 @@ public class ShopAction
 					if (!list.equals("")) {
 						list += RealColor.message + ", ";
 					}
-					list += RealColor.item + itemType.getName()
+					list += RealColor.item + plugin.tr(itemType.getName())
 						+ RealColor.message + ": " + RealColor.price + price.getSellPrice();
 					if (count-- < 0) {
 						if (!list.equals("")) {
@@ -383,7 +383,7 @@ public class ShopAction
 						if (!list.equals("")) {
 							list += RealColor.message + ", ";
 						}
-						list += RealColor.item + itemType.getName()
+						list += RealColor.item + plugin.tr(itemType.getName())
 							+ RealColor.message + ": " + RealColor.price + price.getBuyPrice();
 						if (count-- < 0) {
 							if (!list.equals("")) {

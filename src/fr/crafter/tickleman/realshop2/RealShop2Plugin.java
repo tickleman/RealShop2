@@ -85,10 +85,10 @@ public class RealShop2Plugin extends RealPlugin
 		String command = cmd.getName().toLowerCase();
 		if (command.equals("rs") || command.equals("rshop")) {
 			return new RealShopCommand(this).executeCommand(sender, args);
-		} else if (
-			command.equals("mny")
-			&& (getConfig().economyPlugin.equals("none") || getConfig().economyPlugin.equals("RealEconomy"))
-		) {
+		} else if (command.equals("mny") && (
+			getEconomy().getEconomyPlugin().equals("none")
+			|| getEconomy().getEconomyPlugin().equals("RealEconomy")
+		)) {
 			return new RealEconomyCommand(this, getEconomy()).executeCommand(sender, args);
 		} else {
 			return false;

@@ -75,16 +75,26 @@ public class ItemType
 	{
 		String name;
 		if (typeId < 256) {
+			// block name
 			Block block = Block.byId[typeId];
 			name = (block == null) ? ("#" + typeId) : block.l();
 		} else {
+			// item name
 			Item item = Item.byId[typeId];
 			name = (item == null) ? ("#" + typeId) : item.b();
 		}
 		if ((name == null) || (name.length() == 0)) {
+			// #id for unknown blocks/items
 			name = "#" + typeId;
 		} else if (name.contains(".")) {
+			// remove "*." from "*.name"
 			name = name.substring(name.indexOf(".") + 1);
+		}
+		// change "dyePowder" into "dye powder"
+		for (int i = 0; i < name.length(); i ++) {
+			if ((name.charAt(i) >= 'A') && (name.charAt(i) <= 'Z')) {
+				name = name.substring(0, i) + " " + (char)(name.charAt(i) - 'A' + 'a') + name.substring(i + 1);
+			}
 		}
 		return name;
 	}

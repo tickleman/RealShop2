@@ -35,13 +35,13 @@ public class RealShopInventoryListener extends RealInventoryListener
 			boolean clickIntoChest = event.getInventory().getName().toLowerCase().contains("chest");
 			TransactionAction transactionAction = new TransactionAction(plugin);
 			if (clickIntoChest) {
-				if (event.isShiftClick() && shop.getInfiniteBuy(plugin.getConfig().shopInfiniteBuy)) {
+				if (event.isShiftClick() && shop.getInfiniteBuy()) {
 					// infinite buy : you can't shift-click that sorry (too much complicated to code)
 					event.setCancelled(true);
 				} else if (
 					(
-						shop.getInfiniteBuy(plugin.getConfig().shopInfiniteBuy)
-						|| shop.getInfiniteBuy(plugin.getConfig().shopInfiniteSell)
+						shop.getInfiniteBuy()
+						|| shop.getInfiniteBuy()
 					) && (event.getCursor() != null) && (event.getItem() != null)
 				) {
 					// infinite buy : you can't click with something on cursor and item slot (too much complicated to code)
@@ -52,7 +52,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 						if (move.getCursor() != null) {
 							transactionAction.sell(player, shop, move.getCursor());
 							// infinite sell : empty cursor and nothing changes into inventory slot
-							if (shop.getInfiniteSell(plugin.getConfig().shopInfiniteSell)) {
+							if (shop.getInfiniteSell()) {
 								event.setResult(Result.ALLOW);
 								event.setCursor(null);
 							}
@@ -60,7 +60,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 						if (move.getItem() != null) {
 							transactionAction.buy(player, shop, move.getItem());
 							// infinite buy : put inventory slot into cursor and does not empty inventory slot
-							if (shop.getInfiniteBuy(plugin.getConfig().shopInfiniteBuy)) {
+							if (shop.getInfiniteBuy()) {
 								event.setResult(Result.ALLOW);
 								event.setCursor(move.getItem().clone());
 								event.setCancelled(true);
@@ -71,7 +71,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 					}
 				}
 			} else if (event.isShiftClick() && (move.getItem() != null)) {
-				if (shop.getInfiniteSell(plugin.getConfig().shopInfiniteSell)) {
+				if (shop.getInfiniteSell()) {
 					// infinite sell : you can't shift-click sorry (too much complicated to code)
 					event.setCancelled(true);
 				} else if (transactionAction.sell(player, shop, move.getItem()) == 0) {

@@ -68,6 +68,9 @@ public class Translation
 	// ------------------------------------------------------------------------------------------- tr
 	public String tr(String text)
 	{
+		if ((text.length() > 0) && (text.charAt(0) == '#')) {
+			text = text.substring(1);
+		}
 		String translated = translations.get(text);
 		if ((translated == null) || (translated.equals(""))) {
 			return text;

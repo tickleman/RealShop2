@@ -69,7 +69,7 @@ public class RealRecipe
 			System.out.println("[ERROR] on " + resultItem.toString() + " recipe " + recipe.getClass() + " field " + recipeField.getType().getCanonicalName());
 			e.printStackTrace();
 		}
-		System.out.println("recipe " + toString());
+		//System.out.println("recipe " + toString());
 	}
 
 	//-------------------------------------------------------------------------------- getItemRecipes

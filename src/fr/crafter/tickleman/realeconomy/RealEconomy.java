@@ -80,6 +80,12 @@ public class RealEconomy
 		return config.currency;
 	}
 
+	//------------------------------------------------------------------------------ getEconomyPlugin
+	public String getEconomyPlugin()
+	{
+		return economyPlugin;
+	}
+
 	//------------------------------------------------------------------------------------ setBalance
 	public void setBalance(String playerName, double balance)
 	{
@@ -97,6 +103,7 @@ public class RealEconomy
 	//------------------------------------------------------------------------------ setPaymentMethod
 	public void setPaymentMethod(Method paymentMethod)
 	{
+		economyPlugin = "Register";
 		this.paymentMethod = paymentMethod;
 	}
 

@@ -10,14 +10,11 @@ public class RealShopConfig extends Config
 	public double  amountRatio = 5000.0;
 	public double  buySellRatio = .95;
 	public boolean dailyPricesCalculation = false;
-	public String  economyPlugin = "none";
 	public double  maxDailyRatio = 1.95;
 	public double  maxItemPrice = 99999.0;
 	public double  minDailyRatio = .05;
 	public double  minItemPrice = .1;
 	public boolean shopDamagedItems = false;
-	public boolean shopInfiniteBuy = false;
-	public boolean shopInfiniteSell = false;
 	public boolean shopMarketItemsOnly = false;
 	public boolean shopOpOnly = false;
 	public double  workForceRatio = 1.1;

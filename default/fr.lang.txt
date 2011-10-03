@@ -94,3 +94,14 @@ infinite buy=achat illimite
 infinite sell=vente illimite
 market items only=marche seulement
 none=aucun
+
+# ITEMS
+269=pelle bois
+chest=coffre
+dirt=terre
+door wood=porte bois
+dye powder=colorant
+log=bois brut
+mushroom=champignon
+record=disque
+torch=torche
