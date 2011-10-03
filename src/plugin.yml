@@ -2,12 +2,29 @@ name: RealShop2
 main: fr.crafter.tickleman.realshop2.RealShop2Plugin
 version: 2.01
 website: http://plugins.crafter.fr/tickleman/RealShop2/
-authors:
-  - tickleman
+author: tickleman
+depend: [Spout]
+softdepend: [BOSEconomy, iConomy]
 commands:
   mny:
     description: RealEconomy money commands
-  rs:
-    description: RealShop2 chest-shop command
+    permission: mny
+    usage: Use /mny help to list available commands
   rshop:
-    description: RealShop2 chest-shop command
+    aliases: rs
+    description: RealShop2 chest-shop commands
+    permission: realshop2
+    usage: Use /rshop help to list available commands
+permissions:
+  mny:
+    description: Gives access to all mny commands
+    default: true
+  realshop2:
+    description: Gives access to all realshop commands
+    default: op
+  realshop2.display:
+    description: Display default shop information
+    default: true
+  realshop2.shop:
+    description: Player can shop
+    default: op

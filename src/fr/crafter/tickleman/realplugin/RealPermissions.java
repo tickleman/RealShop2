@@ -43,7 +43,9 @@ public class RealPermissions
 				? plugin.opHasPermission(permissionString)
 				: plugin.playerHasPermission(permissionString);
 		} else if (this.permissionsPluginName.equals("bukkit")) {
-			return player.hasPermission(permissionString);
+			boolean perm = player.hasPermission(permissionString);
+			System.out.println("bukkit permission " + permissionString + " = " + perm);
+			return perm;
 		} else if (this.permissionsPluginName.equals("permissions")) {
 			return ((PermissionHandler)permissionsPlugin).has(player, permissionString);
 		} else {
