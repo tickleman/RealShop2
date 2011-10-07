@@ -7,10 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RealPlugin extends JavaPlugin
 {
 
-	protected Config      config = null;
-	private   Translation lang   = null;
+	protected Config          config = null;
+	private   Translation     lang   = null;
 	private   RealLog         log    = null;
-	private   RealPermissions       perms  = null;
+	private   RealPermissions perms  = null;
 
 	//------------------------------------------------------------------------------------- getConfig
 	/**
@@ -30,38 +30,16 @@ public class RealPlugin extends JavaPlugin
 		return log;
 	}
 
-	//----------------------------------------------------------------------------- hasFullPermission
-	public boolean hasFullPermission(Player player, String permissionString)
+	//-------------------------------------------------------------------------------- getPermissions
+	public RealPermissions getPermissions()
 	{
-		return perms.hasPermission(player, permissionString);
-	}
-
-	//--------------------------------------------------------------------------- hasGlobalPermission
-	public boolean hasGlobalPermission(Player player)
-	{
-		return perms.hasPermission(player, getDescription().getName().toLowerCase());
-	}
-
-	//--------------------------------------------------------------------------- hasGlobalPermission
-	public boolean hasGlobalPermission(Player player, String permissionString)
-	{
-		return perms.hasPermission(player, permissionString);
+		return perms;
 	}
 
 	//--------------------------------------------------------------------------------- hasPermission
 	public boolean hasPermission(Player player, String permissionString)
 	{
-		return perms.hasPermission(
-			player, getDescription().getName().toLowerCase() + "." + permissionString.toLowerCase()
-		);
-	}
-
-	//--------------------------------------------------------------------------------- hasPermission
-	public boolean hasPermission(Player player, String permissionPrefix, String permissionString)
-	{
-		return perms.hasPermission(
-			player, permissionPrefix.toLowerCase() + "." + permissionString.toLowerCase()
-		);
+		return perms.hasPermission(player, permissionString.toLowerCase());
 	}
 
 	//------------------------------------------------------------------------------------ loadConfig

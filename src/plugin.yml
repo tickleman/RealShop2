@@ -4,27 +4,13 @@ version: 2.01
 website: http://plugins.crafter.fr/tickleman/RealShop2/
 author: tickleman
 depend: [Spout]
-softdepend: [BOSEconomy, iConomy]
+softdepend: [BOSEconomy, iConomy, Permissions]
 commands:
-  mny:
+  money:
+    aliases: [mny]
     description: RealEconomy money commands
-    permission: mny
     usage: Use /mny help to list available commands
-  rshop:
-    aliases: rs
+  realshop:
+    aliases: [rs, rshop]
     description: RealShop2 chest-shop commands
-    permission: realshop2
-    usage: Use /rshop help to list available commands
-permissions:
-  mny:
-    description: Gives access to all mny commands
-    default: true
-  realshop2:
-    description: Gives access to all realshop commands
-    default: op
-  realshop2.display:
-    description: Display default shop information
-    default: true
-  realshop2.shop:
-    description: Player can shop
-    default: op
+    usage: Use /realshop help to list available commands

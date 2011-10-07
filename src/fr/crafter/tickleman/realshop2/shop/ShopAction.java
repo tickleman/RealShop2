@@ -104,7 +104,7 @@ public class ShopAction
 	//------------------------------------------------------------------------------------- enterShop
 	public boolean enterShop(Player player, Shop shop)
 	{
-		if (!plugin.hasPermission(player, "shop")) {
+		if (!plugin.hasPermission(player, "realshop.shop")) {
 			// players must have "realshop.shop" permission to enter a shop
 			player.sendMessage(
 				RealColor.cancel

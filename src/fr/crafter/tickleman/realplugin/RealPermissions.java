@@ -1,27 +1,24 @@
 package fr.crafter.tickleman.realplugin;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
 
 //########################################################################################### Perms
 public class RealPermissions
 {
 
 	private RealPlugin plugin;
-	private Object permissionsPlugin;
 	private String permissionsPluginName;
+	private PermissionHandler permissionsHandler;
 
 	//----------------------------------------------------------------------------------------- Perms
 	public RealPermissions(RealPlugin plugin, String permissionsPluginName)
 	{
 		this.plugin = plugin;
 		this.permissionsPluginName = permissionsPluginName.toLowerCase();
-		if (this.permissionsPluginName.equals("permissions")) {
-			permissionsPlugin = plugin.getServer().getPluginManager().getPlugin("Permissions");
-		} else {
-			permissionsPlugin = null;
-		}
 	}
 
 	//---------------------------------------------------------------------- getPermissionsPluginName
@@ -33,7 +30,7 @@ public class RealPermissions
 	//--------------------------------------------------------------------------------- hasPermission
 	public boolean hasPermission(Player player, String permissionString)
 	{
-		if (this.permissionsPluginName.equals("none")) {
+		if (permissionsPluginName.equals("none")) {
 			if (permissionString.contains(".")) {
 				permissionString = permissionString.replace(
 					plugin.getDescription().getName().toLowerCase() + ".", ""
@@ -42,14 +39,25 @@ public class RealPermissions
 			return player.isOp()
 				? plugin.opHasPermission(permissionString)
 				: plugin.playerHasPermission(permissionString);
-		} else if (this.permissionsPluginName.equals("bukkit")) {
+		} else if (permissionsPluginName.equals("bukkit")) {
 			boolean perm = player.hasPermission(permissionString);
-			System.out.println("bukkit permission " + permissionString + " = " + perm);
 			return perm;
-		} else if (this.permissionsPluginName.equals("permissions")) {
-			return ((PermissionHandler)permissionsPlugin).has(player, permissionString);
+		} else if (permissionsPluginName.equals("permissions")) {
+			boolean perm = permissionsHandler.has(player, permissionString);
+			return perm;
 		} else {
 			return false;
+		}
+	}
+
+	//------------------------------------------------------------------------ initPermissionsHandler
+	public void initPermissionsHandler()
+	{
+		if (permissionsPluginName.equals("permissions")) {
+			Plugin permissions = plugin.getServer().getPluginManager().getPlugin("Permissions");
+			if (permissions != null) {
+				permissionsHandler = ((Permissions)permissions).getHandler();
+			}
 		}
 	}
 

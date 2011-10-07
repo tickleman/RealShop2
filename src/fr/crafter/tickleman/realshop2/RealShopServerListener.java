@@ -51,6 +51,8 @@ public class RealShopServerListener extends ServerListener
 				);
 			}
 		}
+		// Add Permissions
+		plugin.getPermissions().initPermissionsHandler();
 	}
 
 }

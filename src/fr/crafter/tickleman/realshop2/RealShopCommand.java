@@ -30,20 +30,18 @@ public class RealShopCommand
 	{
 		if (sender instanceof Player) {
 			Player player = (Player)sender;
-			if (plugin.hasGlobalPermission(player)) {
-				String[] params = {
-					(args.length > 0) ? solveAlias1(args[0]) : "",
-					(args.length > 1) ? solveAlias2(args[1]) : "",
-					(args.length > 2) ? args[2] : "",
-					(args.length > 3) ? args[3] : "",
-					(args.length > 4) ? args[4] : "",
-				};
-				if (plugin.hasPermission(player, params[0])) {
-					Boolean  ok = generalCommand(player, params);
-					if (!ok) ok = marketPriceCommand(player, params);
-					if (!ok) ok = playerPriceCommand(player, params);
-					if (!ok) shopCommand(player, params);
-				}
+			String[] params = {
+				(args.length > 0) ? solveAlias1(args[0]) : "",
+				(args.length > 1) ? solveAlias2(args[1]) : "",
+				(args.length > 2) ? args[2] : "",
+				(args.length > 3) ? args[3] : "",
+				(args.length > 4) ? args[4] : "",
+			};
+			if (plugin.hasPermission(player, "realshop." + params[0])) {
+				Boolean  ok = generalCommand(player, params);
+				if (!ok) ok = marketPriceCommand(player, params);
+				if (!ok) ok = playerPriceCommand(player, params);
+				if (!ok) shopCommand(player, params);
 			}
 		}
 		return true;
@@ -83,7 +81,7 @@ public class RealShopCommand
 			if (params[1] == "") params[1] = "info";
 			if (
 				params[1].equals("info") || params[1].equals("del")
-				|| plugin.hasPermission(player, permissionString + "." + params[1])
+				|| plugin.hasPermission(player, "realshop." + permissionString + "." + params[1])
 			) {
 				if (params[1].equals("info")) {
 					priceAction.info(player, VarTools.parseInt(params[2], 1));
@@ -128,7 +126,7 @@ System.out.println("shopCommand 0=" + params[0] + " 1=" + params[1]);
 				RealColor.cancel + plugin.tr("The chest you selected is not a shop")
 			);
 		} else if (
-			!player.getName().equals(shop.getPlayerName()) && !plugin.hasPermission(player, "op")
+			!player.getName().equals(shop.getPlayerName()) && !plugin.hasPermission(player, "realshop.op")
 		) {
 			player.sendMessage(
 				RealColor.cancel

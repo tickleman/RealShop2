@@ -83,9 +83,9 @@ public class RealShop2Plugin extends RealPlugin
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
 		String command = cmd.getName().toLowerCase();
-		if (command.equals("rs") || command.equals("rshop")) {
+		if (command.equals("rs") || command.equals("rshop") || command.equals("realshop")) {
 			return new RealShopCommand(this).executeCommand(sender, args);
-		} else if (command.equals("mny") && (
+		} else if ((command.equals("mny") || command.equals("money")) && (
 			getEconomy().getEconomyPlugin().equals("none")
 			|| getEconomy().getEconomyPlugin().equals("RealEconomy")
 		)) {
@@ -150,39 +150,39 @@ public class RealShop2Plugin extends RealPlugin
 	public boolean playerHasPermission(String permissionString)
 	{
 		// RealEconomy "mny" commands
-		if (permissionString.contains("mny.")) {
-			return permissionString.equals("mny")
-				|| permissionString.equals("mny.burn")
-				|| permissionString.equals("mny.display")
-				|| permissionString.equals("mny.give")
-				|| permissionString.equals("mny.help");
+		if (permissionString.substring(0, 11).equals("realeconomy")) {
+			return permissionString.equals("realeconomy")
+				|| permissionString.equals("realeconomy.burn")
+				|| permissionString.equals("realeconomy.display")
+				|| permissionString.equals("realeconomy.give")
+				|| permissionString.equals("realeconomy.help");
 		}
 		// realshop "rs" / "rshop" commands
 		if (getConfig().shopOpOnly) {
-			return permissionString.equals("")
-				|| permissionString.equals("shop")
-				|| permissionString.equals("info");
+			return permissionString.equals("realshop")
+				|| permissionString.equals("realshop.shop")
+				|| permissionString.equals("realshop.info");
 		} else {
-			return permissionString.equals("")
-				|| permissionString.equals("shop")
-				|| permissionString.equals("help")
-				|| permissionString.equals("info")
-				|| permissionString.equals("create")
-				|| permissionString.equals("delete")
-				|| permissionString.equals("give")
-				|| permissionString.equals("open")
-				|| permissionString.equals("close")
-				|| permissionString.equals("buy")
-				|| permissionString.equals("sell")
-				|| permissionString.equals("xbuy")
-				|| permissionString.equals("xsell")
-				|| permissionString.equals("marketitemsonly")
-				|| permissionString.equals("damageditems")
-				|| permissionString.equals("price")
-				|| permissionString.equals("price.info")
-				|| permissionString.equals("price.display")
-				|| permissionString.equals("price.set")
-				|| permissionString.equals("price.del");
+			return permissionString.equals("realshop")
+				|| permissionString.equals("realshop.shop")
+				|| permissionString.equals("realshop.help")
+				|| permissionString.equals("realshop.info")
+				|| permissionString.equals("realshop.create")
+				|| permissionString.equals("realshop.delete")
+				|| permissionString.equals("realshop.give")
+				|| permissionString.equals("realshop.open")
+				|| permissionString.equals("realshop.close")
+				|| permissionString.equals("realshop.buy")
+				|| permissionString.equals("realshop.sell")
+				|| permissionString.equals("realshop.xbuy")
+				|| permissionString.equals("realshop.xsell")
+				|| permissionString.equals("realshop.marketitemsonly")
+				|| permissionString.equals("realshop.damageditems")
+				|| permissionString.equals("realshop.price")
+				|| permissionString.equals("realshop.price.info")
+				|| permissionString.equals("realshop.price.display")
+				|| permissionString.equals("realshop.price.set")
+				|| permissionString.equals("realshop.price.del");
 		}
 	}
 
