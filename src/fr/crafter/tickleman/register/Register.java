@@ -1,11 +1,11 @@
-package com.LRFLEW.register;
+package fr.crafter.tickleman.register;
 
 import java.util.logging.Level;
 
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.LRFLEW.register.payment.Methods;
+import fr.crafter.tickleman.register.payment.Methods;
 
 public class Register extends JavaPlugin {
 

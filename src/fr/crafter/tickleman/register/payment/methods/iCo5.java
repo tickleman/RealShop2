@@ -1,11 +1,12 @@
-package com.LRFLEW.register.payment.methods;
+package fr.crafter.tickleman.register.payment.methods;
 
-import com.LRFLEW.register.payment.Method;
 import com.iConomy.iConomy;
 import com.iConomy.system.Account;
 import com.iConomy.system.BankAccount;
 import com.iConomy.system.Holdings;
 import com.iConomy.util.Constants;
+
+import fr.crafter.tickleman.register.payment.Method;
 
 
 import org.bukkit.plugin.Plugin;

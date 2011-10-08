@@ -1,8 +1,8 @@
 package fr.crafter.tickleman.realeconomy;
 
-import com.LRFLEW.register.payment.Method;
 
 import fr.crafter.tickleman.realplugin.RealPlugin;
+import fr.crafter.tickleman.register.payment.Method;
 
 //##################################################################################### RealEconomy
 public class RealEconomy

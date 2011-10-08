@@ -1,10 +1,11 @@
-package com.LRFLEW.register.payment.methods;
+package fr.crafter.tickleman.register.payment.methods;
 
-import com.LRFLEW.register.payment.Method;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.api.Economy;
 import com.earth2me.essentials.api.NoLoanPermittedException;
 import com.earth2me.essentials.api.UserDoesNotExistException;
+
+import fr.crafter.tickleman.register.payment.Method;
 
 
 import org.bukkit.plugin.Plugin;

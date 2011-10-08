@@ -4,8 +4,8 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.event.server.ServerListener;
 
-import com.LRFLEW.register.payment.Method;
-import com.LRFLEW.register.payment.Methods;
+import fr.crafter.tickleman.register.payment.Method;
+import fr.crafter.tickleman.register.payment.Methods;
 
 //########################################################################## RealShopServerListener
 public class RealShopServerListener extends ServerListener

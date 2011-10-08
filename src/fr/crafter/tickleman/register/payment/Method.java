@@ -1,4 +1,4 @@
-package com.LRFLEW.register.payment;
+package fr.crafter.tickleman.register.payment;
 
 import org.bukkit.plugin.Plugin;
 

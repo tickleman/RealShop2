@@ -1,8 +1,9 @@
-package com.LRFLEW.register.payment.methods;
+package fr.crafter.tickleman.register.payment.methods;
 
-import com.LRFLEW.register.payment.Method;
 import com.nijiko.coelho.iConomy.iConomy;
 import com.nijiko.coelho.iConomy.system.Account;
+
+import fr.crafter.tickleman.register.payment.Method;
 
 
 import org.bukkit.plugin.Plugin;

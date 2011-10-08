@@ -1,4 +1,4 @@
-package com.LRFLEW.register.payment;
+package fr.crafter.tickleman.register.payment;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,13 +39,13 @@ public class Methods {
 	 * Implement all methods along with their respective name & class.
 	 */
 	private static void _init() {
-		addMethod("iConomy", new com.LRFLEW.register.payment.methods.iCo6());
-		addMethod("iConomy", new com.LRFLEW.register.payment.methods.iCo5());
-		addMethod("iConomy", new com.LRFLEW.register.payment.methods.iCo4());
-		addMethod("BOSEconomy", new com.LRFLEW.register.payment.methods.BOSE6());
-		addMethod("BOSEconomy", new com.LRFLEW.register.payment.methods.BOSE7());
-		addMethod("Essentials", new com.LRFLEW.register.payment.methods.EE17());
-		addMethod("Currency", new com.LRFLEW.register.payment.methods.MCUR());
+		addMethod("iConomy", new fr.crafter.tickleman.register.payment.methods.iCo6());
+		addMethod("iConomy", new fr.crafter.tickleman.register.payment.methods.iCo5());
+		addMethod("iConomy", new fr.crafter.tickleman.register.payment.methods.iCo4());
+		addMethod("BOSEconomy", new fr.crafter.tickleman.register.payment.methods.BOSE6());
+		addMethod("BOSEconomy", new fr.crafter.tickleman.register.payment.methods.BOSE7());
+		addMethod("Essentials", new fr.crafter.tickleman.register.payment.methods.EE17());
+		addMethod("Currency", new fr.crafter.tickleman.register.payment.methods.MCUR());
 		Dependencies.add("MultiCurrency");
 	}
 	
