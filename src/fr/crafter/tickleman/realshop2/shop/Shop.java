@@ -123,7 +123,7 @@ public class Shop
 	//-------------------------------------------------------------------------------- getInfiniteBuy
 	public Boolean getInfiniteBuy()
 	{
-		return infiniteBuy;
+		return (infiniteBuy == null) ? false : infiniteBuy;
 	}
 
 	//-------------------------------------------------------------------------------- getInfiniteBuy
@@ -135,7 +135,7 @@ public class Shop
 	//------------------------------------------------------------------------------- getInfiniteSell
 	public Boolean getInfiniteSell()
 	{
-		return infiniteSell;
+		return (infiniteSell == null) ? false : infiniteSell;
 	}
 
 	//------------------------------------------------------------------------------- getInfiniteSell

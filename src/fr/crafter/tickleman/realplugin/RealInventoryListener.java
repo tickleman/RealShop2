@@ -28,6 +28,7 @@ public class RealInventoryListener extends InventoryListener
 	 */
 	public int availableRoom(Inventory inventory, ItemStack itemStack)
 	{
+		System.out.println("availableRoom for " + inventory + ", " + itemStack);
 		int toStore = itemStack.getAmount();
 		if (inventory.firstEmpty() > -1) {
 			return itemStack.getAmount();

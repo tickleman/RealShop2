@@ -118,7 +118,8 @@ public class ItemPriceList
 	 * - returns null if no price for any component
 	 * - recurse if necessary
 	 */
-	private Price fromRecipe(ItemType itemType, ItemPriceList marketFile) {
+	private Price fromRecipe(ItemType itemType, ItemPriceList marketFile)
+	{
 		if (!recurseItemTypes.contains(itemType.toString())) {
 			Set<RealRecipe> recipes = RealRecipe.getItemRecipes(itemType);
 			if (recipes.size() > 0) {
