@@ -1,60 +1,73 @@
 #item:dm ;  buy ; sell ; name
-   2    ;  100 ;    0 ; grass
-   3    ;    1 ;    1 ; dirt
-   4    ;    1 ;    1 ; cobblestone
-   6    ;    5 ;    4 ; sapling
-   7    ;  999 ;    0 ; bedrock
-   9    ;    1 ;    1 ; water
-  11    ;   10 ;   10 ; lava
-  12    ;    1 ;    1 ; sand
-  13    ;    1 ;    1 ; gravel
-  14    ;  300 ;  270 ; gold ore
-  15    ;   50 ;   45 ; iron ore
-  17    ;    2 ;    1 ; wood
-  17:1  ;    2 ;    1 ; redwood
-  17:2  ;    2 ;    1 ; birch
-  18    ;   30 ;    0 ; leaves
-  18:1  ;   30 ;    0 ; redwood tree's leaves
-  18:2  ;   30 ;    0 ; birch tree's leaves
-  19    ;   30 ;   27 ; sponge
-  35    ;   10 ;    9 ; wool
-  37    ;    5 ;    4 ; yellow flower
-  38    ;    5 ;    4 ; red flower
-  39    ;   10 ;    9 ; brown mushroom
-  40    ;   10 ;    9 ; red mushroom
-  48    ;   50 ;   45 ; moss stone
-  49    ;  150 ;  135 ; obsidian
-  52    ;   50 ;   45 ; mob spawner
-  79    ;    5 ;    1 ; ice
-  81    ;    5 ;    1 ; cactus
-  86    ;   10 ;    9 ; pumpkin
-  87    ;  500 ;  450 ; netherrack
-  88    ;  500 ;  450 ; soul sand
- 260    ;  500 ;  450 ; red apple
- 263    ;   15 ;   14 ; coal
- 263:1  ;   15 ;   14 ; charcoal
- 264    ;  500 ;  450 ; diamond
- 287    ;    2 ;    1 ; string
- 288    ;    5 ;    4 ; feather
- 289    ;    5 ;    4 ; sulphur
- 295    ;    3 ;    1 ; seeds
- 296    ;    5 ;    3 ; wheat
- 318    ;    5 ;    4 ; flint
- 319    ;    5 ;    4 ; raw porkshop
- 329    ;   10 ;    9 ; saddle
- 331    ;   10 ;    9 ; redstone
- 332    ;    1 ;    1 ; snowball
- 334    ;    5 ;    4 ; leather
- 335    ;    5 ;    1 ; milk
- 337    ;  150 ;  135 ; clay balls
- 338    ;    5 ;    2 ; sugar cane
- 341    ;   10 ;    9 ; slimeball
- 344    ;    5 ;    1 ; egg
- 348    ;   50 ;   45 ; glowstone dust
- 349    ;    5 ;    2 ; raw fish
- 351    ;    5 ;    2 ; ink sac
- 351:3  ;  100 ;   90 ; cocoa beans
- 351:4  ;  550 ;  495 ; lapis lazuli
- 352    ;   10 ;    9 ; bone 
-2256    ; 1000 ;  900 ; yellow disc
-2257    ; 1000 ;  900 ; green disc
+   2     ;  100 ;    0 ; grass
+   3     ;    1 ;    1 ; dirt
+   4     ;    1 ;    1 ; cobblestone
+   6     ;    5 ;    4 ; sapling
+   6:1   ;    5 ;    4 ; redwood tree sapling
+   6:2   ;    5 ;    4 ; birch tree sapling
+   7     ;  999 ;    0 ; bedrock
+   9     ;    1 ;    1 ; water
+  11     ;   10 ;   10 ; lava
+  12     ;    1 ;    1 ; sand
+  13     ;    1 ;    1 ; gravel
+  14     ;  300 ;  270 ; gold ore
+  15     ;   50 ;   45 ; iron ore
+  17     ;    2 ;    1 ; wood
+  17:1   ;    2 ;    1 ; redwood
+  17:2   ;    2 ;    1 ; birch
+  18     ;   30 ;    0 ; leaves
+  18:1   ;   30 ;    0 ; redwood tree leaves
+  18:2   ;   30 ;    0 ; birch tree leaves
+  19     ;   30 ;   27 ; sponge
+  30     ;    1 ;    1 ; spider web
+  35     ;   10 ;    9 ; wool
+  37     ;    5 ;    4 ; yellow flower
+  38     ;    5 ;    4 ; red flower
+  39     ;   10 ;    9 ; brown mushroom
+  40     ;   10 ;    9 ; red mushroom
+  48     ;   50 ;   45 ; moss stone
+  49     ;  150 ;  135 ; obsidian
+  52     ;   50 ;   45 ; mob spawner
+  79     ;    5 ;    1 ; ice
+  81     ;    5 ;    1 ; cactus
+  86     ;   10 ;    9 ; pumpkin
+  87     ;  500 ;  450 ; netherrack
+  88     ;  500 ;  450 ; soul sand
+ 103     ;   10 ;    9 ; melon
+ 260     ;  500 ;  450 ; red apple
+ 263     ;   15 ;   14 ; coal
+ 263:1   ;   15 ;   14 ; charcoal
+ 264     ;  500 ;  450 ; diamond
+ 287     ;    2 ;    1 ; string
+ 288     ;    5 ;    4 ; feather
+ 289     ;    5 ;    4 ; sulphur
+ 295     ;    3 ;    1 ; seeds
+ 296     ;    5 ;    3 ; wheat
+ 318     ;    5 ;    4 ; flint
+ 319     ;    5 ;    4 ; raw porkshop
+ 329     ;   10 ;    9 ; saddle
+ 331     ;   10 ;    9 ; redstone
+ 332     ;    1 ;    1 ; snowball
+ 334     ;    5 ;    4 ; leather
+ 335     ;    5 ;    1 ; milk bucklet
+ 337     ;  150 ;  135 ; clay balls
+ 338     ;    5 ;    2 ; sugar cane
+ 341     ;   10 ;    9 ; slimeball
+ 344     ;    5 ;    1 ; egg
+ 348     ;   50 ;   45 ; glowstone dust
+ 349     ;    5 ;    2 ; raw fish
+ 351     ;    5 ;    2 ; ink sac
+ 351:3   ;  100 ;   90 ; cocoa beans
+ 351:4   ;  550 ;  495 ; lapis lazuli
+ 352     ;   10 ;    9 ; bone 
+ 360     ;    5 ;    3 ; melon seed
+ 363     ;    5 ;    4 ; raw beef
+ 365     ;    5 ;    4 ; raw chicken
+ 367     ;    0 ;    0 ; rotten feed
+ 368     ;   10 ;    9 ; ender pearl
+ 369     ;   15 ;   12 ; blaze rod
+ 370     ;    0 ;    0 ; ghast tear
+ 371     ;    0 ;    0 ; gold nugget
+ 372     ;   14 ;   12 ; nether wart
+2256     ; 1000 ;  900 ; yellow disc
+2257     ; 1000 ;  900 ; green disc
