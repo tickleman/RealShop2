@@ -51,7 +51,7 @@ public class RealInventoryListener extends InventoryListener
 	/**
 	 * Change the event : do only the calculated action
 	 * (not tested, is this really usefull ?)
-	 * 
+	 *
 	 * @param event
 	 */
 	public RealInventoryMove doWhatWillReallyBeDone(InventoryClickEvent event)

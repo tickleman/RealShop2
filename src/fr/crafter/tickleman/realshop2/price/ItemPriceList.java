@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import fr.crafter.tickleman.realplugin.FileTools;
@@ -28,6 +29,9 @@ public class ItemPriceList
 
 	/** anti-recurse security flag for recipes */
 	private int recurseSecurity = 0;
+
+	/** anti-recurse item type string list */
+	private HashSet<String> recurseItemTypes = new HashSet<String>();
 
 	//--------------------------------------------------------------------------------- ItemPriceList
 	public ItemPriceList(final RealShop2Plugin plugin, final String fileName)
@@ -114,57 +118,59 @@ public class ItemPriceList
 	 * - returns null if no price for any component
 	 * - recurse if necessary
 	 */
-	public Price fromRecipe(ItemType itemType, ItemPriceList marketFile)
-	{
-		Set<RealRecipe> recipes = RealRecipe.getItemRecipes(itemType);
-		if (recipes.size() == 0) {
-			return null;
-		} else {
-			Price cheapest = null;
-			for (RealRecipe recipe : recipes) {
-				Price price = new Price();
-				// recurse security
-				recurseSecurity++;
-				if (recurseSecurity > 20) {
-					plugin.getLog().severe("Recurse security error : " + itemType.toString());
-					return null;
-				} else if (recurseSecurity > 15) {
-					plugin.getLog().warning("Recurse security warning : " + itemType.toString());
-				}
-				// resQty : result quantity
-				double resQty = recipe.getResultItem().getAmount();
-				// sum of components
-				for (RealItemStack itemStack : recipe.getRecipeItems()) {
-					Price compPrice = getPrice(itemStack.getItemType(), (short)0, marketFile);
-					if (compPrice == null) {
-						price = null;
-						break;
-					} else {
-						price.setBuyPrice(price.getBuyPrice() + Math.ceil(
-							(double)100 * compPrice.getBuyPrice() * itemStack.getAmount()
-						) / (double)100);
-						price.setSellPrice(price.getSellPrice() + Math.floor(
-							(double)100 * compPrice.getSellPrice() * itemStack.getAmount()
-						) / (double)100);
+	private Price fromRecipe(ItemType itemType, ItemPriceList marketFile) {
+		if (!recurseItemTypes.contains(itemType.toString())) {
+			Set<RealRecipe> recipes = RealRecipe.getItemRecipes(itemType);
+			if (recipes.size() > 0) {
+				recurseItemTypes.add(itemType.toString());
+				Price cheapest = null;
+				for (RealRecipe recipe : recipes) {
+					Price price = new Price();
+					// recurse security
+					recurseSecurity++;
+					if (recurseSecurity > 20) {
+						plugin.getLog().severe("Recurse security error : " + itemType.toString());
+						return null;
+					} else if (recurseSecurity > 15) {
+						plugin.getLog().warning("Recurse security warning : " + itemType.toString());
 					}
-				}
-				if (price != null) {
-					// round final price
-					price.setBuyPrice(Math.ceil(
-						price.getBuyPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
-					) / (double)100);
-					price.setSellPrice(Math.floor(
-						price.getSellPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
-					) / (double)100);
-					// get the cheapest price
-					if ((cheapest == null) || (price.getBuyPrice() < cheapest.getBuyPrice())) {
-						cheapest = price;
+					// resQty : result quantity
+					double resQty = recipe.getResultItem().getAmount();
+					// sum of components
+					for (RealItemStack itemStack : recipe.getRecipeItems()) {
+						Price compPrice = getPrice(itemStack.getItemType(), (short)0, marketFile);
+						if (compPrice == null) {
+							price = null;
+							break;
+						} else {
+							price.setBuyPrice(price.getBuyPrice() + Math.ceil(
+								(double)100 * compPrice.getBuyPrice() * itemStack.getAmount()
+							) / (double)100);
+							price.setSellPrice(price.getSellPrice() + Math.floor(
+								(double)100 * compPrice.getSellPrice() * itemStack.getAmount()
+							) / (double)100);
+						}
 					}
+					if (price != null) {
+						// round final price
+						price.setBuyPrice(Math.ceil(
+							price.getBuyPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
+						) / (double)100);
+						price.setSellPrice(Math.floor(
+							price.getSellPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
+						) / (double)100);
+						// get the cheapest price
+						if ((cheapest == null) || (price.getBuyPrice() < cheapest.getBuyPrice())) {
+							cheapest = price;
+						}
+					}
+					recurseSecurity--;
 				}
-				recurseSecurity--;
+				recurseItemTypes.remove(itemType);
+				return cheapest;
 			}
-			return cheapest;
 		}
+		return null;
 	}
 
 	//-------------------------------------------------------------------------------------- getPrice

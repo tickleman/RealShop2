@@ -7,6 +7,8 @@ import java.util.Set;
 
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.CraftingRecipe;
+import net.minecraft.server.FurnaceRecipes;
+import net.minecraft.server.Item;
 import net.minecraft.server.ItemStack;
 
 //##################################################################################### RealRecipes
@@ -30,11 +32,12 @@ public class RealRecipe
 
 	//------------------------------------------------------------------------------------ RealRecipe
 	/**
-	 * Generate a easily usable recipe, based on Minecraft's server recipe
+	 * Generate a easily usable recipe, based on Minecraft's crafting recipe
 	 */
 	public RealRecipe(CraftingRecipe recipe, RealItemStack resultItem)
 	{
 		this.resultItem = resultItem;
+		// recipeField
 		Field recipeField = null;
 		for (Field field : recipe.getClass().getDeclaredFields()) {
 			if (
@@ -51,7 +54,7 @@ public class RealRecipe
 				// ItemStack[]
 				for (ItemStack itemStack : (ItemStack[])recipeField.get(recipe)) {
 					if (itemStack != null) {
-						this.recipeItems.add(new RealItemStack(itemStack));
+						recipeItems.add(new RealItemStack(itemStack));
 					}
 				}
 			} else {
@@ -61,7 +64,7 @@ public class RealRecipe
 				for (int i = 0; i < itemStackList.size(); i ++) {
 					ItemStack itemStack = itemStackList.get(i);
 					if (itemStack != null) {
-						this.recipeItems.add(new RealItemStack(itemStack));
+						recipeItems.add(new RealItemStack(itemStack));
 					}
 				}
 			}
@@ -69,7 +72,17 @@ public class RealRecipe
 			System.out.println("[ERROR] on " + resultItem.toString() + " recipe " + recipe.getClass() + " field " + recipeField.getType().getCanonicalName());
 			e.printStackTrace();
 		}
-		//System.out.println("recipe " + toString());
+	}
+
+	//------------------------------------------------------------------------------------ RealRecipe
+	/**
+	 * Generate a easily usable recipe, based on Minecraft's item-to-item recipe
+	 */
+	public RealRecipe(RealItemStack recipeItemStack, RealItemStack resultItem)
+	{
+		this.resultItem = resultItem;
+		this.recipeItems.add(new RealItemStack(Item.COAL.id));
+		this.recipeItems.add(recipeItemStack);
 	}
 
 	//-------------------------------------------------------------------------------- getItemRecipes
@@ -82,7 +95,18 @@ public class RealRecipe
 		for (Object recipe : CraftingManager.getInstance().b()) {
 			RealItemStack resultItemStack = new RealItemStack(((CraftingRecipe)recipe).b());
 			if (itemType.isSameItem(resultItemStack)) {
+				System.out.println("craftingRecipe " + new RealRecipe((CraftingRecipe)recipe, resultItemStack));
 				itemRecipes.add(new RealRecipe((CraftingRecipe)recipe, resultItemStack));
+			}
+		}
+		for (Object itemTypeId : FurnaceRecipes.getInstance().b().keySet()) {
+			RealItemStack recipeItemStack = new RealItemStack((Integer)itemTypeId);
+			RealItemStack resultItemStack = new RealItemStack(
+				(ItemStack)FurnaceRecipes.getInstance().b().get(itemTypeId)
+			);
+			if (itemType.isSameItem(resultItemStack)) {
+				System.out.println("furnaceRecipe " + new RealRecipe(recipeItemStack, resultItemStack).toString());
+				itemRecipes.add(new RealRecipe(recipeItemStack, resultItemStack));
 			}
 		}
 		return itemRecipes;

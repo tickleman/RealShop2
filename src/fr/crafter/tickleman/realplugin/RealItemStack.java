@@ -33,6 +33,13 @@ public class RealItemStack extends ItemType
 	}
 
 	//--------------------------------------------------------------------------------- RealItemStack
+	public RealItemStack(int itemTypeId)
+	{
+		super(itemTypeId);
+		setAmount(1);
+	}
+
+	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(int typeId, int amount, short durability_variant)
 	{
 		super(typeId, durability_variant);
