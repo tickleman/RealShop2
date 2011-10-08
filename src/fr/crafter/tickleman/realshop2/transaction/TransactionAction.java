@@ -30,14 +30,12 @@ public class TransactionAction
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {
 				plugin.getEconomy().transfer(
-					player.getName(),
-					shop.getPlayerName(),
-					price.getBuyPrice(itemStack.getAmount())
+					player.getName(), shop.getPlayerName(), price.getBuyPrice(itemStack.getAmount())
 				);
 				sendMessage(
 					player, shop, itemStack,
 					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
-					"Purchase", "purchased"
+					"Purchased", "purchased"
 				);
 				return itemStack.getAmount();
 			}
@@ -56,7 +54,8 @@ public class TransactionAction
 	{
 		ItemType itemType = itemStack.getItemType();
 		ItemPriceList prices = new ItemPriceList(plugin, shop.getPlayerName());
-		return prices.getPrice(itemType, itemStack.getDamage(), plugin.getMarketPrices());
+		Price price = prices.getPrice(itemType, itemStack.getDamage(), plugin.getMarketPrices());
+		return price;
 	}
 
 	//---------------------------------------------------------------------------------------- canPay
@@ -67,11 +66,21 @@ public class TransactionAction
 	{
 		Price buyPrice = (buyStack == null) ? null : calculatePrice(shop, buyStack);
 		Price sellPrice = (sellStack == null) ? null : calculatePrice(shop, sellStack);
-		double diffAmount = ((sellPrice == null) ? 0 : sellPrice.getSellPrice(sellStack.getAmount()))
+		if (
+			((buyStack != null) && (buyStack.getAmount() > 0) && (buyPrice == null))
+			|| ((sellStack != null) && (sellStack.getAmount() > 0) && (sellPrice == null))
+		) {
+			// can't pay if any item has a null price ("price not found")
+			return false;
+		}
+		double diffAmount
+			= ((sellPrice == null) ? 0 : sellPrice.getSellPrice(sellStack.getAmount()))
 			- ((buyPrice == null) ? 0 : buyPrice.getBuyPrice(buyStack.getAmount()));
 		if (diffAmount > 0) {
+			// sell more than buy : can pay if shop's owner has enough money
 			return plugin.getEconomy().getBalance(shop.getPlayerName()) >= diffAmount;
 		} else {
+			// buy more than sell : can pay if client player has enough money
 			return plugin.getEconomy().getBalance(player.getName()) >= -diffAmount;
 		}
 	}
@@ -83,14 +92,12 @@ public class TransactionAction
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {
 				plugin.getEconomy().transfer(
-					shop.getPlayerName(),
-					player.getName(),
-					price.getSellPrice(itemStack.getAmount())
+					shop.getPlayerName(), player.getName(), price.getSellPrice(itemStack.getAmount())
 				);
 				sendMessage(
 					player, shop, itemStack,
 					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
-					"Sale", "sold"
+					"Sold", "sold"
 				);
 				return itemStack.getAmount();
 			}

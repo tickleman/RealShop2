@@ -95,7 +95,6 @@ public class RealRecipe
 		for (Object recipe : CraftingManager.getInstance().b()) {
 			RealItemStack resultItemStack = new RealItemStack(((CraftingRecipe)recipe).b());
 			if (itemType.isSameItem(resultItemStack)) {
-				System.out.println("craftingRecipe " + new RealRecipe((CraftingRecipe)recipe, resultItemStack));
 				itemRecipes.add(new RealRecipe((CraftingRecipe)recipe, resultItemStack));
 			}
 		}
@@ -105,7 +104,6 @@ public class RealRecipe
 				(ItemStack)FurnaceRecipes.getInstance().b().get(itemTypeId)
 			);
 			if (itemType.isSameItem(resultItemStack)) {
-				System.out.println("furnaceRecipe " + new RealRecipe(recipeItemStack, resultItemStack).toString());
 				itemRecipes.add(new RealRecipe(recipeItemStack, resultItemStack));
 			}
 		}

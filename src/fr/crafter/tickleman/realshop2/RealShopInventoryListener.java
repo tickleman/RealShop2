@@ -50,23 +50,26 @@ public class RealShopInventoryListener extends RealInventoryListener
 					// click into chest : sell moved cursor stack, buy moved item stack
 					if (transactionAction.canPay(player, shop, move.getItem(), move.getCursor())) {
 						if (move.getCursor() != null) {
-							transactionAction.sell(player, shop, move.getCursor());
-							// infinite sell : empty cursor and nothing changes into inventory slot
-							if (shop.getInfiniteSell()) {
-								event.setResult(Result.ALLOW);
-								event.setCursor(null);
+							if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
+								// infinite sell : empty cursor and nothing changes into inventory slot
+								if (shop.getInfiniteSell()) {
+									event.setResult(Result.ALLOW);
+									event.setCursor(null);
+								}
 							}
 						}
 						if (move.getItem() != null) {
-							transactionAction.buy(player, shop, move.getItem());
-							// infinite buy : put inventory slot into cursor and does not empty inventory slot
-							if (shop.getInfiniteBuy()) {
-								event.setResult(Result.ALLOW);
-								event.setCursor(move.getItem().clone());
-								event.setCancelled(true);
+							if (transactionAction.buy(player, shop, move.getItem()) > 0) {
+								// infinite buy : put inventory slot into cursor and does not empty inventory slot
+								if (shop.getInfiniteBuy()) {
+									event.setResult(Result.ALLOW);
+									event.setCursor(move.getItem().clone());
+									event.setCancelled(true);
+								}
 							}
 						}
 					} else {
+						// can't pay (can't sell + buy)
 						event.setCancelled(true);
 					}
 				}

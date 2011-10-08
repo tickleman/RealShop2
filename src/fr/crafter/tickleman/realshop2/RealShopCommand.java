@@ -109,7 +109,6 @@ public class RealShopCommand
 	//----------------------------------------------------------------------------------- shopCommand
 	private void shopCommand(Player player, String[] params)
 	{
-System.out.println("shopCommand 0=" + params[0] + " 1=" + params[1]);
 		ShopAction shopAction = new ShopAction(plugin);
 		RealChest chest       = plugin.getPlayerChestList().selectedChest(player);
 		Shop shop             = plugin.getPlayerShopList().selectedShop(player);

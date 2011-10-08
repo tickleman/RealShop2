@@ -167,7 +167,7 @@ public class ItemPriceList
 					}
 					recurseSecurity--;
 				}
-				recurseItemTypes.remove(itemType);
+				recurseItemTypes.remove(itemType.toString());
 				return cheapest;
 			}
 		}
