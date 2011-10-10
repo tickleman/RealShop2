@@ -19,7 +19,7 @@ public class RealShopConfig extends Config
 	public boolean shopOpOnly = false;
 	public double  workForceRatio = 1.1;
 
-	//---------------------------------------------------------------------------------------- Config
+	//-------------------------------------------------------------------------------- RealShopConfig
 	public RealShopConfig(final RealShop2Plugin plugin)
 	{
 		super(plugin);

@@ -3,7 +3,7 @@ package fr.crafter.tickleman.realplugin;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//########################################################################################## Plugin
+//###################################################################################### RealPlugin
 public class RealPlugin extends JavaPlugin
 {
 
