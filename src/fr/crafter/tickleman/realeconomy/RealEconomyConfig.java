@@ -1,10 +1,10 @@
 package fr.crafter.tickleman.realeconomy;
 
-import fr.crafter.tickleman.realplugin.Config;
+import fr.crafter.tickleman.realplugin.RealConfig;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 
 //################################################################################## RealShopConfig
-public class RealEconomyConfig extends Config
+public class RealEconomyConfig extends RealConfig
 {
 
 	public String currency       = "Coin";
@@ -13,7 +13,7 @@ public class RealEconomyConfig extends Config
 	//----------------------------------------------------------------------------- RealEconomyConfig
 	public RealEconomyConfig(final RealPlugin plugin)
 	{
-		super(plugin, "economy", plugin.getConfig());
+		super(plugin, "economy", plugin.getRealConfig());
 	}
 
 }

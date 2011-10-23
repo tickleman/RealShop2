@@ -34,11 +34,11 @@ public class RealShop2Plugin extends RealPlugin
 		playerShopList  = new PlayerShopList(this);
 	}
 
-	//------------------------------------------------------------------------------------- getConfig
+	//--------------------------------------------------------------------------------- getRealConfig
 	@Override
-	public RealShopConfig getConfig()
+	public RealShopConfig getRealConfig()
 	{
-		return (RealShopConfig)super.getConfig();
+		return (RealShopConfig)super.getRealConfig();
 	}
 
 	//------------------------------------------------------------------------------------ getEconomy
@@ -158,7 +158,7 @@ public class RealShop2Plugin extends RealPlugin
 				|| permissionString.equals("realeconomy.help");
 		}
 		// realshop "rs" / "rshop" commands
-		if (getConfig().shopOpOnly) {
+		if (getRealConfig().shopOpOnly) {
 			return permissionString.equals("realshop")
 				|| permissionString.equals("realshop.shop")
 				|| permissionString.equals("realshop.info");

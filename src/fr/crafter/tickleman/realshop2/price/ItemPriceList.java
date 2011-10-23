@@ -155,10 +155,10 @@ public class ItemPriceList
 					if (price != null) {
 						// round final price
 						price.setBuyPrice(Math.ceil(
-							price.getBuyPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
+							price.getBuyPrice() / resQty * (double)100 * plugin.getRealConfig().workForceRatio
 						) / (double)100);
 						price.setSellPrice(Math.floor(
-							price.getSellPrice() / resQty * (double)100 * plugin.getConfig().workForceRatio
+							price.getSellPrice() / resQty * (double)100 * plugin.getRealConfig().workForceRatio
 						) / (double)100);
 						// get the cheapest price
 						if ((cheapest == null) || (price.getBuyPrice() < cheapest.getBuyPrice())) {

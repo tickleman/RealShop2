@@ -24,7 +24,7 @@ public class RealShopHelp
 	public void showHelp(Player player, String page)
 	{
 		// choose help file
-		String fileName = plugin.getDataFolder() + "/" + plugin.getConfig().language + ".help.txt";
+		String fileName = plugin.getDataFolder() + "/" + plugin.getRealConfig().language + ".help.txt";
 		if (!FileTools.fileExists(fileName)) {
 			FileTools.extractDefaultFile(plugin, fileName);
 			if (!FileTools.fileExists(fileName)) {

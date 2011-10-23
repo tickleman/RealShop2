@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //###################################################################################### RealConfig
-public class Config
+public class RealConfig
 {
 
 	private final String fileName;
@@ -26,20 +26,20 @@ public class Config
 	private Set<Field> volatileFields = new HashSet<Field>();
 
 	//---------------------------------------------------------------------------------------- Config
-	public Config(final JavaPlugin plugin)
+	public RealConfig(final JavaPlugin plugin)
 	{
 		this(plugin, "config");
 	}
 
 	//---------------------------------------------------------------------------------------- Config
-	public Config(final JavaPlugin plugin, String fileName)
+	public RealConfig(final JavaPlugin plugin, String fileName)
 	{
 		this.plugin = plugin;
 		this.fileName = getPlugin().getDataFolder().getPath() + "/" + fileName + ".txt";
 	}
 
 	//---------------------------------------------------------------------------------------- Config
-	public Config(final JavaPlugin plugin, String fileName, Config mainConfig)
+	public RealConfig(final JavaPlugin plugin, String fileName, RealConfig mainConfig)
 	{
 		this(plugin, fileName);
 		copyFrom(mainConfig);
@@ -47,7 +47,7 @@ public class Config
 	}
 
 	//----------------------------------------------------------------------------------------- clone
-	private void copyFrom(Config config)
+	private void copyFrom(RealConfig config)
 	{
 		for (Field field : getClass().getFields()) {
 			try {
@@ -64,7 +64,7 @@ public class Config
 	}
 
 	//------------------------------------------------------------------------------------------ load
-	public Config load()
+	public RealConfig load()
 	{
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));

@@ -31,7 +31,7 @@ public class ItemType
 	//-------------------------------------------------------------------------------------- ItemType
 	public ItemType(net.minecraft.server.ItemStack itemStack)
 	{
-		this(itemStack.id, (short)itemStack.damage);
+		this(itemStack.id, (short)itemStack.getData());
 	}
 
 	//------------------------------------------------------------------------------------------ Item
@@ -181,7 +181,7 @@ public class ItemType
 		} else if (typeId < 256) {
 			return (short)Block.byId[typeId].c();
 		} else {
-			return (short)Item.byId[typeId].e();
+			return (short)Item.byId[typeId].getMaxDurability();
 		}
 	}
 

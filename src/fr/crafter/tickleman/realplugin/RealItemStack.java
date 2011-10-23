@@ -29,7 +29,7 @@ public class RealItemStack extends ItemType
 	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(net.minecraft.server.ItemStack itemStack)
 	{
-		this(itemStack.id, itemStack.count, (short)itemStack.damage);
+		this(itemStack.id, itemStack.count, (short)itemStack.getData());
 	}
 
 	//--------------------------------------------------------------------------------- RealItemStack

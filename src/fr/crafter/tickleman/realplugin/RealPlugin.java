@@ -7,16 +7,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class RealPlugin extends JavaPlugin
 {
 
-	protected Config          config = null;
+	protected RealConfig      config = null;
 	private   Translation     lang   = null;
 	private   RealLog         log    = null;
 	private   RealPermissions perms  = null;
 
-	//------------------------------------------------------------------------------------- getConfig
+	//--------------------------------------------------------------------------------- getRealConfig
 	/**
 	 * Plugin developer must override this to get it's own configuration object
 	 */
-	public Config getConfig()
+	public RealConfig getRealConfig()
 	{
 		if (config == null) {
 			loadConfig();
@@ -48,7 +48,7 @@ public class RealPlugin extends JavaPlugin
 	 */
 	protected void loadConfig()
 	{
-		config = new Config(this).load();
+		config = new RealConfig(this).load();
 	}
 
 	//------------------------------------------------------------------------------------- onDisable
@@ -106,9 +106,9 @@ public class RealPlugin extends JavaPlugin
 	public void reload()
 	{
 		loadConfig();
-		log   = new RealLog(this, getConfig().debug, getConfig().pluginLog);
-		perms = new RealPermissions(this, getConfig().permissionsPlugin);
-		lang  = new Translation(this, getConfig().language).load();
+		log   = new RealLog(this, getRealConfig().debug, getRealConfig().pluginLog);
+		perms = new RealPermissions(this, getRealConfig().permissionsPlugin);
+		lang  = new Translation(this, getRealConfig().language).load();
 	}
 
 	//-------------------------------------------------------------------------------------------- tr

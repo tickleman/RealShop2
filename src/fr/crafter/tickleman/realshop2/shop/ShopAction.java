@@ -265,7 +265,7 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Damaged item buy/sell flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getDamagedItems(plugin.getConfig().shopDamagedItems) ? "on" : "off")
+			+ plugin.tr(shop.getDamagedItems(plugin.getRealConfig().shopDamagedItems) ? "on" : "off")
 		);
 	}
 
@@ -304,7 +304,9 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Trade market items only flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getMarketItemsOnly(plugin.getConfig().shopMarketItemsOnly) ? "on" : "off")
+			+ plugin.tr(
+				shop.getMarketItemsOnly(plugin.getRealConfig().shopMarketItemsOnly) ? "on" : "off"
+			)
 		);
 	}
 
@@ -325,8 +327,10 @@ public class ShopAction
 		);
 		player.sendMessage(
 			RealColor.message
-			+ (shop.getMarketItemsOnly(plugin.getConfig().shopMarketItemsOnly) ? "+" : "-") + plugin.tr("market items only") + " "
-			+ (shop.getDamagedItems(plugin.getConfig().shopDamagedItems) ? "+" : "-") + plugin.tr("accepts damaged items")
+			+ (shop.getMarketItemsOnly(plugin.getRealConfig().shopMarketItemsOnly) ? "+" : "-")
+			+ plugin.tr("market items only") + " "
+			+ (shop.getDamagedItems(plugin.getRealConfig().shopDamagedItems) ? "+" : "-")
+			+ plugin.tr("accepts damaged items")
 		);
 	}
 

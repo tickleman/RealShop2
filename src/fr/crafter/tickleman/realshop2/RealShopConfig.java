@@ -1,9 +1,9 @@
 package fr.crafter.tickleman.realshop2;
 
-import fr.crafter.tickleman.realplugin.Config;
+import fr.crafter.tickleman.realplugin.RealConfig;
 
 //################################################################################## RealShopConfig
-public class RealShopConfig extends Config
+public class RealShopConfig extends RealConfig
 {
 
 	/** Default configuration values (if not in file) */
