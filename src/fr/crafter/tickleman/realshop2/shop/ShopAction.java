@@ -58,11 +58,11 @@ public class ShopAction
 		shop.itemSellOnly(new ItemType(0));
 		plugin.getShopList().put(shop);
 		plugin.getShopList().save();
-		plugin.getPlayerShopList().enterShop(player, shop);
 		player.sendMessage(
 			RealColor.message + plugin.tr("The shop +name has been created")
 			.replace("+name", RealColor.shop + shop.getName() + RealColor.message)
 		);
+		selectShop(player, shop);
 		return shop;
 	}
 
@@ -73,11 +73,11 @@ public class ShopAction
 		plugin.getPlayerShopList().unselectShop(player);
 		plugin.getShopList().delete(shop);
 		plugin.getShopList().save();
-		enterChestBlock(player, shop.getLocation().getBlock());
 		player.sendMessage(
 			RealColor.message + plugin.tr("The shop +name has been deleted")
 			.replace("+name", RealColor.shop + shop.getName() + RealColor.message)
 		);
+		enterChestBlock(player, shop.getLocation().getBlock());
 	}
 
 	//------------------------------------------------------------------------------- enterChestBlock
@@ -137,7 +137,7 @@ public class ShopAction
 						player.sendMessage(
 							RealColor.message
 							+ plugin.tr("Welcome into +owner's shop +name. You've got +money in your pocket")
-							// .replace("+money", RealColor.price + plugin.money().getAccount().getBalance(player.getName(), true) + RealColor.message)
+							.replace("+money", RealColor.price + plugin.getEconomy().getBalance(player.getName(), true) + RealColor.message)
 							.replace("+name", RealColor.shop + shop.getName() + RealColor.message)
 							.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.message)
 						);
