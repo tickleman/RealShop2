@@ -11,7 +11,6 @@ import fr.crafter.tickleman.realeconomy.RealEconomy;
 import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
-import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
