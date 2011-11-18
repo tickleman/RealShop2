@@ -11,6 +11,7 @@ import fr.crafter.tickleman.realeconomy.RealEconomy;
 import fr.crafter.tickleman.realeconomy.RealEconomyCommand;
 import fr.crafter.tickleman.realplugin.RealPlugin;
 import fr.crafter.tickleman.realplugin.RealColor;
+import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
@@ -127,6 +128,8 @@ public class RealShop2Plugin extends RealPlugin
 		marketPrices = new ItemPriceList(this, "market").load();
 		shopList     = new ShopList(this).load();
 		this.economy = new RealEconomy(this);
+		// check this out
+		//System.out.println("ALL RECIPES :\n" + RealRecipe.dumpAllRecipes());
 	}
 
 	//------------------------------------------------------------------------------- opHasPermission

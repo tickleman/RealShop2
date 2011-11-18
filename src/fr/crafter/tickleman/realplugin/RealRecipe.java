@@ -69,7 +69,10 @@ public class RealRecipe
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("[ERROR] on " + resultItem.toString() + " recipe " + recipe.getClass() + " field " + recipeField.getType().getCanonicalName());
+			System.out.println(
+				"[ERROR] on " + resultItem.toString() + " recipe " + recipe.getClass()
+				+ " field " + recipeField.getType().getCanonicalName()
+			);
 			e.printStackTrace();
 		}
 	}
@@ -83,6 +86,22 @@ public class RealRecipe
 		this.resultItem = resultItem;
 		this.recipeItems.add(new RealItemStack(Item.COAL.id));
 		this.recipeItems.add(recipeItemStack);
+	}
+
+	//-------------------------------------------------------------------------------- dumpAllRecipes
+	public static String dumpAllRecipes()
+	{
+		String dump = "";
+		for (int i = 1; i <= 2266; i++) {
+			if (Item.byId[i] != null) {
+				for (RealRecipe recipe : getItemRecipes(new ItemType(Item.byId[i]))) {
+					dump += i + " : " + recipe.toNamedString() + "\n";
+				}
+			}
+			if (i == 121) i = 255;
+			if (i == 383) i = 2255;
+		}
+		return dump;
 	}
 
 	//-------------------------------------------------------------------------------- getItemRecipes
@@ -108,6 +127,16 @@ public class RealRecipe
 			}
 		}
 		return itemRecipes;
+	}
+
+	//--------------------------------------------------------------------------------- toNamedString
+	public String toNamedString()
+	{
+		String result = "";
+		for (RealItemStack itemStack : recipeItems) {
+			result += " + " + itemStack.toNamedString();
+		}
+		return resultItem.toNamedString() + " = " + result.substring(1);
 	}
 
 	//-------------------------------------------------------------------------------------- toString
