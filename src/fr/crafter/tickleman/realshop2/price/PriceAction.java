@@ -55,8 +55,8 @@ public class PriceAction
 					RealColor.message
 					+ plugin.tr("Calculated price (from market/recipes) for +item : buy +buy, sell +sell")
 					.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
-					.replace("+buy", "" + RealColor.price + price.getBuyPrice() + RealColor.message)
-					.replace("+sell", "" + RealColor.price + price.getSellPrice() + RealColor.message)
+					.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
+					.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 				);
 			}
 		} else {
@@ -64,8 +64,8 @@ public class PriceAction
 				RealColor.message
 				+ plugin.tr(getPriceType() + " price for +item : buy +buy, sell +sell")
 				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
-				.replace("+buy", "" + RealColor.price + price.getBuyPrice() + RealColor.message)
-				.replace("+sell", "" + RealColor.price + price.getSellPrice() + RealColor.message)
+				.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
+				.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 			);
 		}
 	}
@@ -119,8 +119,8 @@ public class PriceAction
 				RealColor.message
 				+ plugin.tr(getPriceType() + " price for +item : buy +buy, sell +sell")
 				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
-				.replace("+buy", "" + RealColor.price + price.getBuyPrice() + RealColor.message)
-				.replace("+sell", "" + RealColor.price + price.getSellPrice() + RealColor.message)
+				.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
+				.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 			);
 		} catch (Exception e) {
 			player.sendMessage(
