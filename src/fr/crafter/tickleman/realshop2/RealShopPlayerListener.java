@@ -42,7 +42,7 @@ public class RealShopPlayerListener extends PlayerListener
 		}
 	}
 
-	//------------------------------------------------------------------------------ onPlayerInteract
+	//--------------------------------------------------------------------------------- onPlayerLogin
 	@Override
 	public void onPlayerLogin(PlayerLoginEvent event)
 	{
