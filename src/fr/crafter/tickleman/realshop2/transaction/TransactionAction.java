@@ -117,11 +117,11 @@ public class TransactionAction
 			+ plugin.tr(side + " +item x+quantity (+linePrice)")
 			.replace("+client", RealColor.player + player.getName() + RealColor.text)
 			.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
-			.replace("+linePrice", RealColor.price.toString() + amount + RealColor.text)
+			.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
 			.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 			.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
-			.replace("+price", RealColor.price.toString() + price + RealColor.text)
-			.replace("+quantity", RealColor.quantity.toString() + itemStack.getAmount() + RealColor.text)
+			.replace("+price", "" + RealColor.price + price + RealColor.text)
+			.replace("+quantity", "" + RealColor.quantity + itemStack.getAmount() + RealColor.text)
 			.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
 		);
 		Player shopPlayer = plugin.getServer().getPlayer(shop.getPlayerName());
@@ -131,11 +131,11 @@ public class TransactionAction
 				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice)")
 				.replace("+client", RealColor.player + player.getName() + RealColor.text)
 				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
-				.replace("+linePrice", RealColor.price.toString() + amount + RealColor.text)
+				.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
 				.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 				.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
-				.replace("+price", RealColor.price.toString() + price + RealColor.text)
-				.replace("+quantity", RealColor.quantity.toString() + itemStack.getAmount() + RealColor.text)
+				.replace("+price", "" + RealColor.price + price + RealColor.text)
+				.replace("+quantity", "" + RealColor.quantity + itemStack.getAmount() + RealColor.text)
 				.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
 			);
 		}

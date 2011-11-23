@@ -101,11 +101,19 @@ public class RealItemStack extends ItemType
 		return new ItemStack(getTypeId(), getAmount(), getDamage());
 	}
 
+	//--------------------------------------------------------------------------------- toNamedString
+	public String toNamedString()
+	{
+		return super.toNamedString() + " x " + getAmount()
+				+ ((getDamage() > 0) ? " (" + getDamage() + ")" : "");
+	}
+
 	//-------------------------------------------------------------------------------------- toString
 	@Override
 	public String toString()
 	{
-		return super.toString() + "x" + getAmount() + ((getDamage() > 0) ? "(" + getDamage() + ")" : "");
+		return super.toString() + "x" + getAmount()
+			+ ((getDamage() > 0) ? "(" + getDamage() + ")" : "");
 	}
 
 }

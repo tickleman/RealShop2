@@ -151,6 +151,19 @@ public class ItemType
 		}
 	}
 
+	//--------------------------------------------------------------------------------- toNamedString
+	public String toNamedString()
+	{
+		return getName() + ((getVariant() != 0) ? " : " + getVariant() : "");
+	}
+
+	//-------------------------------------------------------------------------------------- toString
+	@Override
+	public String toString()
+	{
+		return getTypeId() + ((getVariant() != 0) ? " : " + getVariant() : "");
+	}
+
 	//------------------------------------------------------------------------------- typeIdHasDamage
 	public static Boolean typeIdHasDamage(int typeId)
 	{
@@ -183,13 +196,6 @@ public class ItemType
 		} else {
 			return (short)Item.byId[typeId].getMaxDurability();
 		}
-	}
-
-	//-------------------------------------------------------------------------------------- toString
-	@Override
-	public String toString()
-	{
-		return getTypeId() + ((getVariant() != 0) ? ":" + getVariant() : "");
 	}
 
 }
