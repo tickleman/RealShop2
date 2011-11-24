@@ -29,7 +29,8 @@ public class RealItemStack extends ItemType
 	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(net.minecraft.server.ItemStack itemStack)
 	{
-		this(itemStack.id, itemStack.count, (short)itemStack.getData());
+		// patch : replace 9 with 1 (when take blocks from recipe it gives me 9x9 instead of 9x1 !!!)
+		this(itemStack.id, itemStack.count == 9 ? 1 : itemStack.count, (short)itemStack.getData());
 	}
 
 	//--------------------------------------------------------------------------------- RealItemStack

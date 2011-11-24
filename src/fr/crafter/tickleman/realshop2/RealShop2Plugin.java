@@ -128,7 +128,8 @@ public class RealShop2Plugin extends RealPlugin
 		shopList     = new ShopList(this).load();
 		this.economy = new RealEconomy(this);
 		// check this out
-		//System.out.println("ALL RECIPES :\n" + RealRecipe.dumpAllRecipes());
+		//System.out.println("ALL RECIPES :");
+		//RealRecipe.dumpAllRecipes();
 	}
 
 	//------------------------------------------------------------------------------- opHasPermission
