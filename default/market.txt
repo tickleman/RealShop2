@@ -27,6 +27,7 @@
   40     ;   10 ;    9 ; red mushroom
   48     ;   50 ;   45 ; moss stone
   49     ;  150 ;  135 ; obsidian
+  51     ;   30 ;   25 ; fire
   52     ;   50 ;   45 ; mob spawner
   79     ;    5 ;    1 ; ice
   81     ;    5 ;    1 ; cactus
@@ -61,6 +62,7 @@
  351:4   ;  550 ;  495 ; lapis lazuli
  352     ;   10 ;    9 ; bone 
  360     ;    5 ;    3 ; melon seed
+ 361     ;  500 ;  450 ; pumpkin seed
  363     ;    5 ;    4 ; raw beef
  365     ;    5 ;    4 ; raw chicken
  367     ;    0 ;    0 ; rotten feed
@@ -69,5 +71,15 @@
  370     ;    0 ;    0 ; ghast tear
  371     ;    0 ;    0 ; gold nugget
  372     ;   14 ;   12 ; nether wart
-2256     ; 1000 ;  900 ; yellow disc
-2257     ; 1000 ;  900 ; green disc
+ 375     ;    5 ;    4 ; spider eye
+2256     ; 1000 ;  900 ; 13 disc
+2257     ; 1000 ;  900 ; cat disc
+2258     ; 1000 ;  900 ; blocks disc
+2259     ; 1000 ;  900 ; chirp disc
+2260     ; 1000 ;  900 ; far disc
+2261     ; 1000 ;  900 ; mall disc
+2262     ; 1000 ;  900 ; melloni disc
+2263     ; 1000 ;  900 ; stal disc
+2264     ; 1000 ;  900 ; strad disc
+2265     ; 1000 ;  900 ; ward disc
+2266     ; 1000 ;  900 ; 11 disc
