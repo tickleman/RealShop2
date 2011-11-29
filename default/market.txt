@@ -15,9 +15,9 @@
   17     ;    2 ;    1 ; wood
   17:1   ;    2 ;    1 ; redwood
   17:2   ;    2 ;    1 ; birch
-  18     ;   30 ;    0 ; leaves
-  18:1   ;   30 ;    0 ; redwood tree leaves
-  18:2   ;   30 ;    0 ; birch tree leaves
+  18     ;   30 ;   27 ; leaves
+  18:1   ;   30 ;   27 ; redwood tree leaves
+  18:2   ;   30 ;   27 ; birch tree leaves
   19     ;   30 ;   27 ; sponge
   30     ;    1 ;    1 ; spider web
   35     ;   10 ;    9 ; wool
@@ -68,8 +68,7 @@
  367     ;    0 ;    0 ; rotten feed
  368     ;   10 ;    9 ; ender pearl
  369     ;   15 ;   12 ; blaze rod
- 370     ;    0 ;    0 ; ghast tear
- 371     ;    0 ;    0 ; gold nugget
+ 370     ;  500 ;  450 ; ghast tear
  372     ;   14 ;   12 ; nether wart
  375     ;    5 ;    4 ; spider eye
 2256     ; 1000 ;  900 ; 13 disc
