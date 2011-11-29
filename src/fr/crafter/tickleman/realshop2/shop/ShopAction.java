@@ -93,10 +93,11 @@ public class ShopAction
 		Shop shop = plugin.getShopList().shopAt(block);
 		plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 		if (shop != null) {
+			plugin.getLog().debug("enterShop(" + player.getName() + ")");
 			return enterShop(player, shop);
 		} else {
+			plugin.getLog().debug("selectChest(" + player.getName() + ")");
 			plugin.getPlayerShopList().unselectShop(player);
-			plugin.getPlayerChestList().unselectChest(player);
 			return true;
 		}
 	}
