@@ -280,7 +280,7 @@ public class Shop
 				),
 				line[7]
 			);
-			if (line[4] != "" && line[5] != "" && line[6] != "") {
+			if (!line[4].equals("") && !line[5].equals("") && !line[6].equals("")) {
 				shop.location2 = new Location(
 					shop.location1.getWorld(),
 					Double.parseDouble(line[4]),
@@ -300,6 +300,9 @@ public class Shop
 			shop.setDamagedItems(VarTools.parseBoolean(line[17]));
 			return shop;
 		} catch (Exception e) {
+			System.out.println("[SEVERE] [RealShop2] parseShop error " + buffer);
+			System.out.println("[SEVERE] [RealShop2] " + e.getMessage());
+			e.printStackTrace(System.out);
 			return null;
 		}
 	}

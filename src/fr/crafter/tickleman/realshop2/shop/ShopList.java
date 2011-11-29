@@ -64,6 +64,7 @@ public class ShopList
 	//------------------------------------------------------------------------------------------ load
 	public ShopList load()
 	{
+		plugin.getLog().debug("ShopList.load()");
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(fileName));

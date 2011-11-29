@@ -78,7 +78,7 @@ public class RealShopCommand
 		String priceType, PriceAction priceAction
 	) {
 		if (params[0].equals(permissionString)) {
-			if (params[1] == "") params[1] = "info";
+			if (params[1].equals("")) params[1] = "info";
 			if (
 				params[1].equals("info") || params[1].equals("del")
 				|| plugin.hasPermission(player, "realshop." + permissionString + "." + params[1])

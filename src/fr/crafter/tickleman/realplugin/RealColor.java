@@ -14,7 +14,7 @@ public class RealColor
 	public static String player   = ChatColor.GOLD.toString();
 	public static String price    = ChatColor.YELLOW.toString();
 	public static String quantity = ChatColor.WHITE.toString();
-	public static String shop     = ChatColor.RED.toString();
+	public static String shop     = ChatColor.DARK_PURPLE.toString();
 	public static String text     = ChatColor.GRAY.toString();
 
 }

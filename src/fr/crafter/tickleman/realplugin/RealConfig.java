@@ -85,11 +85,11 @@ public class RealConfig
 						} else {
 							String fieldClass = field.getType().getName();
 							try {
-								if ((fieldClass == "boolean") || (fieldClass == "java.lang.Boolean")) {
+								if ((fieldClass.equals("boolean")) || (fieldClass.equals("java.lang.Boolean"))) {
 									field.set(this, VarTools.parseBoolean(value));
-								} else if ((fieldClass == "double") || (fieldClass == "java.lang.Double")) {
+								} else if ((fieldClass.equals("double")) || (fieldClass.equals("java.lang.Double"))) {
 									field.set(this, Double.parseDouble(value));
-								} else if ((fieldClass == "int") || (fieldClass == "java.lang.Integer")) {
+								} else if ((fieldClass.equals("int")) || (fieldClass.equals("java.lang.Integer"))) {
 									field.set(this, Integer.parseInt(value));
 								} else {
 									field.set(this, value);

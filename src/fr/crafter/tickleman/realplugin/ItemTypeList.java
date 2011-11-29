@@ -56,7 +56,7 @@ public class ItemTypeList
 	public static ItemTypeList parseItemTypeList(String list)
 	{
 		ItemTypeList itemTypeList = new ItemTypeList();
-		for (String typeIdVariant : list.split(";")) {
+		for (String typeIdVariant : list.split(",")) {
 			if (typeIdVariant.length() > 0) {
 				itemTypeList.put(ItemType.parseItemType(typeIdVariant));
 			}
