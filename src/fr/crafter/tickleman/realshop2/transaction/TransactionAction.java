@@ -26,6 +26,7 @@ public class TransactionAction
 	//------------------------------------------------------------------------------------------- buy
 	public int buy(Player player, Shop shop, ItemStack itemStack)
 	{
+		plugin.getLog().debug("buy " + RealItemStack.create(itemStack).toString());
 		if (canPay(player, shop, itemStack, null)) {
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {
@@ -70,6 +71,12 @@ public class TransactionAction
 			((buyStack != null) && (buyStack.getAmount() > 0) && (buyPrice == null))
 			|| ((sellStack != null) && (sellStack.getAmount() > 0) && (sellPrice == null))
 		) {
+			if ((buyStack != null) && (buyStack.getAmount() > 0) && (buyPrice == null)) {
+				plugin.getLog().debug("canPay price not found for buy " + RealItemStack.create(buyStack));
+			}
+			if ((buyStack != null) && (buyStack.getAmount() > 0) && (buyPrice == null)) {
+				plugin.getLog().debug("canPay sell price not found for sell " + RealItemStack.create(sellStack));
+			}
 			// can't pay if any item has a null price ("price not found")
 			return false;
 		}
@@ -77,9 +84,15 @@ public class TransactionAction
 			= ((sellPrice == null) ? 0 : sellPrice.getSellPrice(sellStack.getAmount()))
 			- ((buyPrice == null) ? 0 : buyPrice.getBuyPrice(buyStack.getAmount()));
 		if (diffAmount > 0) {
+			plugin.getLog().debug(
+				"canPay check if " + plugin.getEconomy().getBalance(shop.getPlayerName()) + " >= " + diffAmount
+			);
 			// sell more than buy : can pay if shop's owner has enough money
 			return plugin.getEconomy().getBalance(shop.getPlayerName()) >= diffAmount;
 		} else {
+			plugin.getLog().debug(
+				"canPay check if " + plugin.getEconomy().getBalance(player.getName()) + " >= " + (-diffAmount)
+			);
 			// buy more than sell : can pay if client player has enough money
 			return plugin.getEconomy().getBalance(player.getName()) >= -diffAmount;
 		}
@@ -88,6 +101,7 @@ public class TransactionAction
 	//------------------------------------------------------------------------------------------ sell
 	public int sell(Player player, Shop shop, ItemStack itemStack)
 	{
+		plugin.getLog().debug("sell " + RealItemStack.create(itemStack).toString());
 		if (canPay(player, shop, null, itemStack)) {
 			Price price = calculatePrice(shop, itemStack);
 			if (price != null) {

@@ -48,6 +48,12 @@ public class RealItemStack extends ItemType
 		setDamage(durability_variant);
 	}
 
+	//---------------------------------------------------------------------------------------- create
+	public static RealItemStack create(ItemStack itemStack)
+	{
+		return (itemStack == null) ? new RealItemStack(0) : new RealItemStack(itemStack);
+	}
+
 	//------------------------------------------------------------------------------------- getAmount
 	public int getAmount()
 	{

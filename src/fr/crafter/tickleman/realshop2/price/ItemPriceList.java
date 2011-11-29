@@ -234,6 +234,7 @@ public class ItemPriceList
 	{
 		boolean willSave = false;
 		if (fileName.contains("/market.txt") && !FileTools.fileExists(fileName)) {
+			plugin.getLog().debug("extract default file for " + fileName);
 			FileTools.extractDefaultFile(plugin, fileName);
 			willSave = true;
 		}
