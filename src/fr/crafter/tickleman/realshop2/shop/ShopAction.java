@@ -203,7 +203,7 @@ public class ShopAction
 		player.sendMessage(
 			RealColor.message + plugin.tr("Now clients can " + what + " +items")
 			.replace("+items",
-				RealColor.item + "TODO" + RealColor.message
+				RealColor.item + itemTypeList.toString() + RealColor.message
 			)
 		);
 	}
