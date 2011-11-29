@@ -1,5 +1,7 @@
 package fr.crafter.tickleman.realplugin;
 
+import java.lang.reflect.Method;
+
 import net.minecraft.server.Block;
 import net.minecraft.server.Item;
 
@@ -70,30 +72,67 @@ public class ItemType
 		setTypeIdVariant(typeId, variant);
 	}
 
+	//------------------------------------------------------------------------------------- getNameOf
+	private String getNameOf(Object object)
+	{
+		String name = null;
+		if (object != null) {
+			for (Method method : object.getClass().getDeclaredMethods()) {
+				if ((method.getParameterTypes().length == 0)) {
+					if (method.getReturnType().getName().equals("java.lang.String")) {
+						try {
+							name = (String) method.invoke(object);
+							break;
+						} catch (Exception e) {
+						}
+					} else if (
+						method.getName().equals("getParent")
+						&& (method.getParameterTypes().length == 0)
+					) {
+						try {
+							Object object2 = method.invoke(object);
+							name = getNameOf(object2);
+							if ((name != null) && (name.length() > 0)) {
+								break;
+							}
+						} catch (Exception e) {
+						}
+					}
+				}
+			}
+			if ((name == null) || (name.length() == 0)) {
+				name = object.getClass().getName();
+			}
+			while (name.contains(".")) {
+				name = name.substring(name.indexOf(".") + 1);
+			}
+			if (name.length() > 5) {
+				if (name.substring(0, 5).equalsIgnoreCase("block")) {
+					name = name.substring(5);
+				} else if (name.substring(0, 4).equalsIgnoreCase("item")) {
+					name = name.substring(4);
+				}
+			}
+		}
+		return name;
+	}
+
 	//--------------------------------------------------------------------------------------- getName
 	public String getName()
 	{
-		String name;
-		if (typeId < 256) {
-			// block name
-			Block block = Block.byId[typeId];
-			name = (block == null) ? ("#" + typeId) : block.l();
-		} else {
-			// item name
-			Item item = Item.byId[typeId];
-			name = (item == null) ? ("#" + typeId) : item.b();
-		}
-		if ((name == null) || (name.length() == 0)) {
-			// #id for unknown blocks/items
-			name = "#" + typeId;
-		} else if (name.contains(".")) {
-			// remove "*." from "*.name"
-			name = name.substring(name.indexOf(".") + 1);
-		}
-		// change "dyePowder" into "dye powder"
+		Object object = ((typeId < 256) ? Block.byId[typeId] : Item.byId[typeId]);
+		String name = getNameOf(object);
 		for (int i = 0; i < name.length(); i ++) {
 			if ((name.charAt(i) >= 'A') && (name.charAt(i) <= 'Z')) {
-				name = name.substring(0, i) + " " + (char)(name.charAt(i) - 'A' + 'a') + name.substring(i + 1);
+				if (i == 0) {
+					name = (char)(name.charAt(i) - 'A' + 'a') + name.substring(i + 1);
+				} else if (name.charAt(i - 1) == ' ') {
+					name = name.substring(0, i) + (char)(name.charAt(i) - 'A' + 'a')
+						+ name.substring(i + 1);
+				} else {
+					name = name.substring(0, i) + " " + (char)(name.charAt(i) - 'A' + 'a')
+						+ name.substring(i + 1);
+				}
 			}
 		}
 		return name;

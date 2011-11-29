@@ -18,10 +18,11 @@ public class FileTools
 		String fileName = split[split.length - 1];
 		File actual = new File(filePath);
 		if (!actual.exists()) {
-			System.out.println("load default file " + fileName);
 			InputStream input = plugin.getClass().getResourceAsStream("/default/" + fileName);
 			if (input != null) {
-				System.out.println("loading default file " + fileName + " to " + filePath);
+				plugin.getServer().getLogger().log(
+					Level.INFO, "Create default file " + fileName + " for " + filePath
+				);
 				FileOutputStream output = null;
 				try {
 					output = new FileOutputStream(actual);

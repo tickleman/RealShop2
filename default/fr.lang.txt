@@ -105,3 +105,5 @@ log=bois brut
 mushroom=champignon
 record=disque
 torch=torche
+wooden planks = planche
+stick=baton
