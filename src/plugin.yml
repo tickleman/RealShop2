@@ -1,10 +1,10 @@
 name: RealShop2
 main: fr.crafter.tickleman.realshop2.RealShop2Plugin
-version: 2.02
+version: 2.03
 website: http://plugins.crafter.fr/tickleman/RealShop2/
 author: tickleman
 depend: []
-softdepend: [BOSEconomy, iConomy, Permissions, Register, Spout]
+softdepend: [Permissions, Register, Spout]
 commands:
   money:
     aliases: [mny]
