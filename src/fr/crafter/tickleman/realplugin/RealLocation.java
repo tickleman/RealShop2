@@ -37,10 +37,11 @@ public class RealLocation extends Location
 	//----------------------------------------------------------------------------------------- getId
 	public static String getId(Location location)
 	{
-		return location.getWorld() + ";"
+		return 
 		+ Math.round(Math.floor(location.getX())) + ";"
 		+ Math.round(Math.floor(location.getY())) + ";"
-		+ Math.round(Math.floor(location.getZ()));
+		+ Math.round(Math.floor(location.getZ())) + ";"
+		+ location.getWorld();
 	}
 
 	//----------------------------------------------------------------------------------------- getId

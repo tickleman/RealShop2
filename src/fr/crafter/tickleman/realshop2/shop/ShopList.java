@@ -21,7 +21,7 @@ public class ShopList
 
 	private final RealPlugin plugin;
 
-	/** Shops list : "world;x;y;z" => Shop */
+	/** Shops list : "x;y;z;world" => Shop */
 	private HashMap<String, Shop> shops = new HashMap<String, Shop>();
 
 	//-------------------------------------------------------------------------------------- ShopList
@@ -70,7 +70,7 @@ public class ShopList
 			reader = new BufferedReader(new FileReader(fileName));
 			String buffer;
 			while ((buffer = reader.readLine()) != null) {
-				if ((buffer.length() > 0) && (buffer.split(";").length > 4) && (buffer.charAt(0) != '#')) {
+				if ((buffer.length() > 0) && (buffer.charAt(0) != '#') && (buffer.split(";").length > 4)) {
 					Shop shop = Shop.parseShop(plugin.getServer(), buffer);
 					if (shop != null) {
 						plugin.getLog().debug("shop load " + shop.toString());
