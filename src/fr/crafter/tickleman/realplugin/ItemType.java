@@ -73,7 +73,7 @@ public class ItemType
 	}
 
 	//------------------------------------------------------------------------------------- getNameOf
-	private String getNameOf(Object object)
+	private static String getNameOf(Object object)
 	{
 		String name = null;
 		if (object != null) {
@@ -119,6 +119,12 @@ public class ItemType
 
 	//--------------------------------------------------------------------------------------- getName
 	public String getName()
+	{
+		return getName(typeId);
+	}
+
+	//--------------------------------------------------------------------------------------- getName
+	public static String getName(int typeId)
 	{
 		Object object = ((typeId < 256) ? Block.byId[typeId] : Item.byId[typeId]);
 		String name = getNameOf(object);

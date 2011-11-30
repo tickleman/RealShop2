@@ -1,11 +1,15 @@
 package fr.crafter.tickleman.realshop2;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockListener;
+import org.bukkit.event.block.BlockPlaceEvent;
 
 import fr.crafter.tickleman.realplugin.RealChest;
+import fr.crafter.tickleman.realplugin.RealLocation;
 import fr.crafter.tickleman.realshop2.shop.Shop;
 import fr.crafter.tickleman.realshop2.shop.ShopAction;
 
@@ -25,16 +29,18 @@ public class RealShopBlockListener extends BlockListener
 	@Override
 	public void onBlockBreak(BlockBreakEvent event)
 	{
-		if (event.getBlock().getType().equals(Material.CHEST)) {
-			Shop shop = plugin.getShopList().shopAt(event.getBlock());
+		Block block = event.getBlock();
+		Player player = event.getPlayer();
+		if (block.getType().equals(Material.CHEST)) {
+			Shop shop = plugin.getShopList().shopAt(block);
 			if (shop != null) {
-				if (event.getPlayer() != null) {
-					new ShopAction(plugin).selectShop(event.getPlayer(), shop);
+				if (player instanceof Player) {
+					new ShopAction(plugin).selectShop(player, shop);
 				}
 				event.setCancelled(true);
-			} else if (event.getPlayer() != null) {
-				plugin.getPlayerShopList().unselectShop(event.getPlayer());
-				plugin.getPlayerChestList().unselectChest(event.getPlayer());
+			} else if (player instanceof Player) {
+				plugin.getPlayerShopList().unselectShop(player);
+				plugin.getPlayerChestList().unselectChest(player);
 			}
 		}
 	}
@@ -43,16 +49,38 @@ public class RealShopBlockListener extends BlockListener
 	@Override
 	public void onBlockDamage(BlockDamageEvent event)
 	{
-		if (event.getBlock().getType().equals(Material.CHEST)) {
-			Shop shop = plugin.getShopList().shopAt(event.getBlock());
+		Block block = event.getBlock();
+		Player player = event.getPlayer();
+		if (block.getType().equals(Material.CHEST)) {
+			Shop shop = plugin.getShopList().shopAt(block);
 			if (shop != null) {
-				if (event.getPlayer() != null) {
-					new ShopAction(plugin).selectShop(event.getPlayer(), shop);
+				if (player instanceof Player) {
+					new ShopAction(plugin).selectShop(player, shop);
 				}
 				event.setCancelled(true);
 			} else if (event.getPlayer() != null) {
-				plugin.getPlayerShopList().unselectShop(event.getPlayer());
-				plugin.getPlayerChestList().selectChest(event.getPlayer(), new RealChest(event.getBlock()));
+				plugin.getPlayerShopList().unselectShop(player);
+				plugin.getPlayerChestList().selectChest(player, new RealChest(block));
+			}
+		}
+	}
+
+	//---------------------------------------------------------------------------------- onBlockPlace
+	@Override
+	public void onBlockPlace(BlockPlaceEvent event)
+	{
+		Block block = event.getBlock();
+		Player player = event.getPlayer();
+		if (block.getType().equals(Material.CHEST) && (player instanceof Player)) {
+			RealLocation location = new RealLocation(block.getLocation()).neighbor();
+			if (location != null) {
+				Shop shop = plugin.getShopList().shopAt(location);
+				if (shop != null) {
+					shop.setLocation(location);
+					plugin.getShopList().save();
+				} else {
+					plugin.getPlayerChestList().selectChest(player, new RealChest(block));
+				}
 			}
 		}
 	}
