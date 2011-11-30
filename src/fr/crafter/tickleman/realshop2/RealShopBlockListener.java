@@ -34,13 +34,15 @@ public class RealShopBlockListener extends BlockListener
 		if (block.getType().equals(Material.CHEST)) {
 			Shop shop = plugin.getShopList().shopAt(block);
 			if (shop != null) {
+				// break a chest that is a shop : select shop and cancel break
 				if (player instanceof Player) {
 					new ShopAction(plugin).selectShop(player, shop);
 				}
 				event.setCancelled(true);
 			} else if (player instanceof Player) {
-				plugin.getPlayerShopList().unselectShop(player);
+				// break a chest that is not a shop : does nothing, only unselect
 				plugin.getPlayerChestList().unselectChest(player);
+				plugin.getPlayerShopList().unselectShop(player);
 			}
 		}
 	}
@@ -54,11 +56,13 @@ public class RealShopBlockListener extends BlockListener
 		if (block.getType().equals(Material.CHEST)) {
 			Shop shop = plugin.getShopList().shopAt(block);
 			if (shop != null) {
+				// damage a chest that is a shop : select shop and cancel damage
 				if (player instanceof Player) {
 					new ShopAction(plugin).selectShop(player, shop);
 				}
 				event.setCancelled(true);
-			} else if (event.getPlayer() != null) {
+		} else if (player instanceof Player) {
+				// damage a chest that is not a shop : does nothing, only unselect shop and select chest
 				plugin.getPlayerShopList().unselectShop(player);
 				plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 			}
@@ -72,14 +76,24 @@ public class RealShopBlockListener extends BlockListener
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		if (block.getType().equals(Material.CHEST) && (player instanceof Player)) {
-			RealLocation location = new RealLocation(block.getLocation()).neighbor();
-			if (location != null) {
-				Shop shop = plugin.getShopList().shopAt(location);
-				if (shop != null) {
-					shop.setLocation(location);
-					plugin.getShopList().save();
-				} else {
-					plugin.getPlayerChestList().selectChest(player, new RealChest(block));
+			Shop shop = plugin.getShopList().shopAt(block);
+			if (shop != null) {
+				// place chest on a location where it was an old "ghost shop" : delete the shop
+				plugin.getShopList().delete(shop);
+				plugin.getShopList().save();
+			} else {
+				RealLocation location = new RealLocation(block.getLocation()).neighbor();
+				if (location != null) {
+					shop = plugin.getShopList().shopAt(location);
+					if (shop != null) {
+						// place chest near a shop-chest : make the shop bigger
+						shop.setLocation(location);
+						plugin.getShopList().save();
+						plugin.getPlayerShopList().selectShop(player, shop);
+					} else {
+						// auto-select chest
+						plugin.getPlayerChestList().selectChest(player, new RealChest(block));
+					}
 				}
 			}
 		}
