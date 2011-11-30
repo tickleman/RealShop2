@@ -3,7 +3,7 @@ package fr.crafter.tickleman.realplugin;
 import org.bukkit.inventory.ItemStack;
 
 //############################################################################# class RealItemStack
-public class RealItemStack extends ItemType
+public class RealItemStack extends RealItemType
 {
 
 	/**
@@ -73,9 +73,9 @@ public class RealItemStack extends ItemType
 	}
 
 	//----------------------------------------------------------------------------------- getItemType
-	public ItemType getItemType()
+	public RealItemType getItemType()
 	{
-		return new ItemType(getTypeId(), getVariant());
+		return new RealItemType(getTypeId(), getVariant());
 	}
 
 	//------------------------------------------------------------------------------------- setAmount

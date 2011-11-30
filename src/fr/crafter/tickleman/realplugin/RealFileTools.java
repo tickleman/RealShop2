@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //####################################################################################### FileTools
-public class FileTools
+public class RealFileTools
 {
 
 	// --------------------------------------------------------------------------- extractDefaultFile

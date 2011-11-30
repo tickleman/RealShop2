@@ -3,10 +3,10 @@ package fr.crafter.tickleman.realshop2;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealColor;
-import fr.crafter.tickleman.realplugin.VarTools;
+import fr.crafter.tickleman.realplugin.RealVarTools;
 import fr.crafter.tickleman.realshop2.price.MarketPriceAction;
 import fr.crafter.tickleman.realshop2.price.PlayerPriceAction;
 import fr.crafter.tickleman.realshop2.price.PriceAction;
@@ -84,16 +84,16 @@ public class RealShopCommand
 				|| plugin.hasPermission(player, "realshop." + permissionString + "." + params[1])
 			) {
 				if (params[1].equals("info")) {
-					priceAction.info(player, VarTools.parseInt(params[2], 1));
+					priceAction.info(player, RealVarTools.parseInt(params[2], 1));
 				} else if (params[1].equals("del")) {
-					priceAction.del(player, ItemType.parseItemType(params[2]));
+					priceAction.del(player, RealItemType.parseItemType(params[2]));
 				} else if (!params[2].isEmpty()) {
 					priceAction.set(
-						player, ItemType.parseItemType(params[1]),
-						VarTools.parseDouble(params[2], 0.0), VarTools.parseDouble(params[3], null)
+						player, RealItemType.parseItemType(params[1]),
+						RealVarTools.parseDouble(params[2], 0.0), RealVarTools.parseDouble(params[3], null)
 					);
 				} else {
-					priceAction.display(player, ItemType.parseItemType(params[1]));
+					priceAction.display(player, RealItemType.parseItemType(params[1]));
 				}
 			} else {
 				player.sendMessage(
@@ -152,13 +152,13 @@ public class RealShopCommand
 		} else if (params[0].equals("xsell")) {
 			shopAction.sellExclude(player, shop, params[1]);
 		} else if (params[0].equals("infiniteBuy")) {
-			shopAction.setInfiniteBuy(player, shop, VarTools.parseBoolean(params[1]));
+			shopAction.setInfiniteBuy(player, shop, RealVarTools.parseBoolean(params[1]));
 		} else if (params[0].equals("infiniteSell")) {
-			shopAction.setInfiniteSell(player, shop, VarTools.parseBoolean(params[1]));
+			shopAction.setInfiniteSell(player, shop, RealVarTools.parseBoolean(params[1]));
 		} else if (params[0].equals("marketItemsOnly")) {
-			shopAction.setMarketItemsOnly(player, shop, VarTools.parseBoolean(params[1]));
+			shopAction.setMarketItemsOnly(player, shop, RealVarTools.parseBoolean(params[1]));
 		} else if (params[0].equals("damagedItems")) {
-			shopAction.setDamagedItems(player, shop, VarTools.parseBoolean(params[1]));
+			shopAction.setDamagedItems(player, shop, RealVarTools.parseBoolean(params[1]));
 		}
 	}
 

@@ -2,7 +2,7 @@ package fr.crafter.tickleman.realshop2.transaction;
 
 import java.util.HashMap;
 
-import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealLog;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 
@@ -54,7 +54,7 @@ public class DailyLog
 	{
 		log.info("RealShopDailyLog status");
 		for (String typeIdVariant : moves.keySet()) {
-			ItemType itemType = ItemType.parseItemType(typeIdVariant);
+			RealItemType itemType = RealItemType.parseItemType(typeIdVariant);
 			int amount = moves.get(itemType);
 			log.info(
 				"- " + itemType.toString() + "(" + itemType.getName() + ") x" + amount

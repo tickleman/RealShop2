@@ -2,7 +2,7 @@ package fr.crafter.tickleman.realshop2.price;
 
 import org.bukkit.entity.Player;
 
-import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 
@@ -22,7 +22,7 @@ public class PriceAction
 	}
 
 	//------------------------------------------------------------------------------------------- del
-	public void del(Player player, ItemType itemType)
+	public void del(Player player, RealItemType itemType)
 	{
 		getItemPriceList().remove(itemType);
 		getItemPriceList().save();
@@ -34,7 +34,7 @@ public class PriceAction
 	}
 
 	//--------------------------------------------------------------------------------------- display
-	public void display(Player player, ItemType itemType)
+	public void display(Player player, RealItemType itemType)
 	{
 		Price price = getItemPriceList().getPrice(itemType);
 		if (price == null) {
@@ -109,7 +109,7 @@ public class PriceAction
 	}
 
 	//------------------------------------------------------------------------------------------- set
-	public void set(Player player, ItemType itemType, Double buyPrice, Double sellPrice)
+	public void set(Player player, RealItemType itemType, Double buyPrice, Double sellPrice)
 	{
 		try {
 			Price price = new Price(buyPrice, (sellPrice == null) ? buyPrice : sellPrice);

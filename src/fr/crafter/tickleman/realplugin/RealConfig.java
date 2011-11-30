@@ -86,7 +86,7 @@ public class RealConfig
 							String fieldClass = field.getType().getName();
 							try {
 								if ((fieldClass.equals("boolean")) || (fieldClass.equals("java.lang.Boolean"))) {
-									field.set(this, VarTools.parseBoolean(value));
+									field.set(this, RealVarTools.parseBoolean(value));
 								} else if ((fieldClass.equals("double")) || (fieldClass.equals("java.lang.Double"))) {
 									field.set(this, Double.parseDouble(value));
 								} else if ((fieldClass.equals("int")) || (fieldClass.equals("java.lang.Integer"))) {

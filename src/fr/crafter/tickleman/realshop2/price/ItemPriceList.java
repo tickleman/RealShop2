@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.crafter.tickleman.realplugin.FileTools;
-import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealFileTools;
+import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealItemStack;
 import fr.crafter.tickleman.realplugin.RealRecipe;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
@@ -118,7 +118,7 @@ public class ItemPriceList
 	 * - returns null if no price for any component
 	 * - recurse if necessary
 	 */
-	private Price fromRecipe(ItemType itemType, ItemPriceList marketFile)
+	private Price fromRecipe(RealItemType itemType, ItemPriceList marketFile)
 	{
 		if (!recurseItemTypes.contains(itemType.toString())) {
 			Set<RealRecipe> recipes = RealRecipe.getItemRecipes(itemType);
@@ -175,26 +175,26 @@ public class ItemPriceList
 	}
 
 	//-------------------------------------------------------------------------------------- getPrice
-	public Price getPrice(ItemType itemType)
+	public Price getPrice(RealItemType itemType)
 	{
 		return getPrice(itemType, (short)0, null, true);
 	}
 
 	//-------------------------------------------------------------------------------------- getPrice
-	public Price getPrice(ItemType itemType, ItemPriceList marketPrices)
+	public Price getPrice(RealItemType itemType, ItemPriceList marketPrices)
 	{
 		return getPrice(itemType, (short)0, marketPrices, true);
 	}
 
 	//-------------------------------------------------------------------------------------- getPrice
-	public Price getPrice(ItemType itemType, short damage, ItemPriceList marketPrices)
+	public Price getPrice(RealItemType itemType, short damage, ItemPriceList marketPrices)
 	{
 		return getPrice(itemType, damage, marketPrices, true);
 	}
 
 	//-------------------------------------------------------------------------------------- getPrice
 	public Price getPrice(
-		ItemType itemType, short damage, ItemPriceList marketPrices, boolean recipe
+		RealItemType itemType, short damage, ItemPriceList marketPrices, boolean recipe
 	) {
 		Price price = prices.get(itemType.toString());
 		if (price == null) {
@@ -233,9 +233,9 @@ public class ItemPriceList
 	public ItemPriceList load()
 	{
 		boolean willSave = false;
-		if (fileName.contains("/market.txt") && !FileTools.fileExists(fileName)) {
+		if (fileName.contains("/market.txt") && !RealFileTools.fileExists(fileName)) {
 			plugin.getLog().debug("extract default file for " + fileName);
-			FileTools.extractDefaultFile(plugin, fileName);
+			RealFileTools.extractDefaultFile(plugin, fileName);
 			willSave = true;
 		}
 		try {
@@ -272,19 +272,19 @@ public class ItemPriceList
 	//--------------------------------------------------------------------------- playerHasPricesFile
 	public static boolean playerHasPricesFile(RealShop2Plugin plugin, String playerName)
 	{
-		return FileTools.fileExists(
+		return RealFileTools.fileExists(
 			plugin.getDataFolder().getPath() + "/" + playerName + ".prices.txt"
 		);
 	}
 
 	//------------------------------------------------------------------------------------------- put
-	public void put(ItemType itemType, Price price)
+	public void put(RealItemType itemType, Price price)
 	{
 		prices.put(itemType.toString(), price);
 	}
 
 	//------------------------------------------------------------------------------------------- put
-	public void remove(ItemType itemType)
+	public void remove(RealItemType itemType)
 	{
 		prices.remove(itemType.toString());
 	}
@@ -299,7 +299,7 @@ public class ItemPriceList
 			writer.write("#item:dm;buy;sell;name\n");
 			for (String typeIdVariant : prices.keySet()) {
 				Price price = prices.get(typeIdVariant);
-				ItemType itemType = ItemType.parseItemType(typeIdVariant);
+				RealItemType itemType = RealItemType.parseItemType(typeIdVariant);
 				writer.write(
 					typeIdVariant + ";"
 					+ price.getBuyPrice() + ";"

@@ -3,7 +3,7 @@ package fr.crafter.tickleman.realshop2.transaction;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.crafter.tickleman.realplugin.ItemType;
+import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realplugin.RealItemStack;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
@@ -53,7 +53,7 @@ public class TransactionAction
 	//----------------------------------------------------------------------------------------- price
 	public Price calculatePrice(Shop shop, RealItemStack itemStack)
 	{
-		ItemType itemType = itemStack.getItemType();
+		RealItemType itemType = itemStack.getItemType();
 		ItemPriceList prices = new ItemPriceList(plugin, shop.getPlayerName());
 		Price price = prices.getPrice(itemType, itemStack.getDamage(), plugin.getMarketPrices());
 		return price;
@@ -125,7 +125,7 @@ public class TransactionAction
 		double price, double amount,
 		String side, String shopSide
 	) {
-		ItemType itemType = new ItemType(itemStack);
+		RealItemType itemType = new RealItemType(itemStack);
 		player.sendMessage(
 			RealColor.text
 			+ plugin.tr(side + " +item x+quantity (+linePrice)")

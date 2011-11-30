@@ -3,7 +3,7 @@ package fr.crafter.tickleman.realplugin;
 import org.bukkit.World;
 
 //####################################################################################### TimeTools
-public class TimeTools
+public class RealTimeTools
 {
 
 	//--------------------------------------------------------------------------------- worldToMcTime

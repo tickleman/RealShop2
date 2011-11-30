@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import fr.crafter.tickleman.realplugin.ItemType;
-import fr.crafter.tickleman.realplugin.ItemTypeList;
+import fr.crafter.tickleman.realplugin.RealItemType;
+import fr.crafter.tickleman.realplugin.RealItemTypeList;
 import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
@@ -55,7 +55,7 @@ public class ShopAction
 	{
 		Shop shop = new Shop(location, player.getName());
 		shop.setName(shopName);
-		shop.itemSellOnly(new ItemType(0));
+		shop.itemSellOnly(new RealItemType(0));
 		plugin.getShopList().put(shop);
 		plugin.getShopList().save();
 		player.sendMessage(
@@ -197,7 +197,7 @@ public class ShopAction
 
 	//----------------------------------------------------------------------------- itemTypeListChain
 	private void itemTypeListChain(
-		Player player, String chain, ItemTypeList itemTypeList, String what
+		Player player, String chain, RealItemTypeList itemTypeList, String what
 	) {
 		itemTypeList.addRemoveChain(chain);
 		plugin.getShopList().save();
@@ -341,11 +341,11 @@ public class ShopAction
 		plugin.getLog().debug("marketPrice = " + plugin.getMarketPrices().toString());
 		ItemPriceList ownerPrices = new ItemPriceList(plugin, shop.getPlayerName());
 		// sell (may be a very long list)
-		ItemTypeList itemTypeList = new ItemTypeList();
+		RealItemTypeList itemTypeList = new RealItemTypeList();
 		String list = "";
 		int count = 20;
 		for (ItemStack itemStack : player.getInventory().getContents()) if (itemStack != null) {
-			ItemType itemType = new ItemType(itemStack);
+			RealItemType itemType = new RealItemType(itemStack);
 			if ((itemTypeList.get(itemType) == null) && shop.isItemSellAllowed(itemType)) {
 				itemTypeList.put(itemType);
 				Price price = ownerPrices.getPrice(itemType, plugin.getMarketPrices());
@@ -379,7 +379,7 @@ public class ShopAction
 		count = 20;
 		for (Inventory inventory : shop.getChest().getInventories()) {
 			for (ItemStack itemStack : inventory.getContents()) if (itemStack != null ) {
-				ItemType itemType = new ItemType(itemStack);
+				RealItemType itemType = new RealItemType(itemStack);
 				if ((itemTypeList.get(itemType) == null) && shop.isItemBuyAllowed(itemType)) {
 					itemTypeList.put(itemType);
 					Price price = ownerPrices.getPrice(itemType, plugin.getMarketPrices());

@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 import org.bukkit.entity.Player;
 
-import fr.crafter.tickleman.realplugin.FileTools;
+import fr.crafter.tickleman.realplugin.RealFileTools;
 import fr.crafter.tickleman.realplugin.RealColor;
 
 //#################################################################################### RealShopHelp
@@ -25,13 +25,13 @@ public class RealShopHelp
 	{
 		// choose help file
 		String fileName = plugin.getDataFolder() + "/" + plugin.getRealConfig().language + ".help.txt";
-		if (!FileTools.fileExists(fileName)) {
-			FileTools.extractDefaultFile(plugin, fileName);
-			if (!FileTools.fileExists(fileName)) {
+		if (!RealFileTools.fileExists(fileName)) {
+			RealFileTools.extractDefaultFile(plugin, fileName);
+			if (!RealFileTools.fileExists(fileName)) {
 				fileName = plugin.getDataFolder() + "/en.help.txt";
-				if (!FileTools.fileExists(fileName)) {
-					FileTools.extractDefaultFile(plugin, fileName);
-					if (!FileTools.fileExists(fileName)) {
+				if (!RealFileTools.fileExists(fileName)) {
+					RealFileTools.extractDefaultFile(plugin, fileName);
+					if (!RealFileTools.fileExists(fileName)) {
 						plugin.getLog().severe("No help file " + fileName);
 						player.sendMessage(RealColor.cancel + plugin.tr("/rshop HELP is not available"));
 						return;

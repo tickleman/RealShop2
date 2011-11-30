@@ -5,10 +5,10 @@ import org.bukkit.Server;
 import org.bukkit.World;
 
 import fr.crafter.tickleman.realplugin.RealChest;
-import fr.crafter.tickleman.realplugin.ItemType;
-import fr.crafter.tickleman.realplugin.ItemTypeList;
+import fr.crafter.tickleman.realplugin.RealItemType;
+import fr.crafter.tickleman.realplugin.RealItemTypeList;
 import fr.crafter.tickleman.realplugin.RealLocation;
-import fr.crafter.tickleman.realplugin.VarTools;
+import fr.crafter.tickleman.realplugin.RealVarTools;
 
 //############################################################################################ Shop
 public class Shop
@@ -17,12 +17,12 @@ public class Shop
 	/**
 	 * Players will not be able to sell these items into this shop
 	 */
-	private ItemTypeList buyExclude = new ItemTypeList();
+	private RealItemTypeList buyExclude = new RealItemTypeList();
 
 	/**
 	 * Players will be able to buy only these items into this shop
 	 */
-	private ItemTypeList buyOnly = new ItemTypeList();
+	private RealItemTypeList buyOnly = new RealItemTypeList();
 
 	/**
 	 * If true : allow damaged items to be shopped 
@@ -66,10 +66,10 @@ public class Shop
 	private String playerName;
 
 	/** Players will not be able to buy these items into this shop */
-	private ItemTypeList sellExclude = new ItemTypeList();
+	private RealItemTypeList sellExclude = new RealItemTypeList();
 
 	/** Players will be able to sell only these items into this shop */
-	private ItemTypeList sellOnly = new ItemTypeList();
+	private RealItemTypeList sellOnly = new RealItemTypeList();
 
 	//------------------------------------------------------------------------------------------ Shop
 	public Shop(Location location, String playerName)
@@ -85,13 +85,13 @@ public class Shop
 	}
 
 	//-------------------------------------------------------------------------------- getBuyOnlyList
-	public ItemTypeList getBuyOnlyList()
+	public RealItemTypeList getBuyOnlyList()
 	{
 		return buyOnly;
 	}
 
 	//----------------------------------------------------------------------------- getBuyExcludeList
-	public ItemTypeList getBuyExcludeList()
+	public RealItemTypeList getBuyExcludeList()
 	{
 		return buyExclude;
 	}
@@ -187,13 +187,13 @@ public class Shop
 	}
 
 	//------------------------------------------------------------------------------- getSellOnlyList
-	public ItemTypeList getSellOnlyList()
+	public RealItemTypeList getSellOnlyList()
 	{
 		return sellOnly;
 	}
 
 	//------------------------------------------------------------------------------- getSellOnlyList
-	public ItemTypeList getSellExcludeList()
+	public RealItemTypeList getSellExcludeList()
 	{
 		return sellExclude;
 	}
@@ -208,7 +208,7 @@ public class Shop
 	/**
 	 * Returns true if the player can buy an item into this shop
 	 */
-	public boolean isItemBuyAllowed(ItemType itemType)
+	public boolean isItemBuyAllowed(RealItemType itemType)
 	{
 		boolean result = (
 			(buyOnly.isEmpty() || (buyOnly.get(itemType) != null))
@@ -221,7 +221,7 @@ public class Shop
 	/**
 	 * Returns true if the player can sell an item into this shop
 	 */
-	public boolean isItemSellAllowed(ItemType itemType)
+	public boolean isItemSellAllowed(RealItemType itemType)
 	{
 		boolean result = (
 			(sellOnly.isEmpty() || (sellOnly.get(itemType) != null))
@@ -237,25 +237,25 @@ public class Shop
 	}
 
 	//---------------------------------------------------------------------------------- allowItemBuy
-	public void itemBuyExclude(ItemType itemType)
+	public void itemBuyExclude(RealItemType itemType)
 	{
 		buyExclude.put(itemType);
 	}
 
 	//---------------------------------------------------------------------------------- allowItemBuy
-	public void itemBuyOnly(ItemType itemType)
+	public void itemBuyOnly(RealItemType itemType)
 	{
 		buyOnly.put(itemType);
 	}
 
 	//---------------------------------------------------------------------------------- allowItemBuy
-	public void itemSellExclude(ItemType itemType)
+	public void itemSellExclude(RealItemType itemType)
 	{
 		sellExclude.put(itemType);
 	}
 
 	//---------------------------------------------------------------------------------- allowItemBuy
-	public void itemSellOnly(ItemType itemType)
+	public void itemSellOnly(RealItemType itemType)
 	{
 		sellOnly.put(itemType);
 	}
@@ -289,15 +289,15 @@ public class Shop
 				);
 			}
 			shop.setName(line[8]);
-			shop.setBuyOnlyList(ItemTypeList.parseItemTypeList(line[9]));
-			shop.setSellOnlyList(ItemTypeList.parseItemTypeList(line[10]));
-			shop.setBuyExcludeList(ItemTypeList.parseItemTypeList(line[11]));
-			shop.setSellExcludeList(ItemTypeList.parseItemTypeList(line[12]));
-			shop.setOpened(VarTools.parseBoolean(line[13]));
-			shop.setInfiniteBuy(VarTools.parseBoolean(line[14]));
-			shop.setInfiniteSell(VarTools.parseBoolean(line[15]));
-			shop.setMarketItemsOnly(VarTools.parseBoolean(line[16]));
-			shop.setDamagedItems(VarTools.parseBoolean(line[17]));
+			shop.setBuyOnlyList(RealItemTypeList.parseItemTypeList(line[9]));
+			shop.setSellOnlyList(RealItemTypeList.parseItemTypeList(line[10]));
+			shop.setBuyExcludeList(RealItemTypeList.parseItemTypeList(line[11]));
+			shop.setSellExcludeList(RealItemTypeList.parseItemTypeList(line[12]));
+			shop.setOpened(RealVarTools.parseBoolean(line[13]));
+			shop.setInfiniteBuy(RealVarTools.parseBoolean(line[14]));
+			shop.setInfiniteSell(RealVarTools.parseBoolean(line[15]));
+			shop.setMarketItemsOnly(RealVarTools.parseBoolean(line[16]));
+			shop.setDamagedItems(RealVarTools.parseBoolean(line[17]));
 			return shop;
 		} catch (Exception e) {
 			System.out.println("[SEVERE] [RealShop2] parseShop error " + buffer);
@@ -316,13 +316,13 @@ public class Shop
 	}
 
 	//----------------------------------------------------------------------------- setBuyExcludeList
-	public void setBuyExcludeList(ItemTypeList itemTypeSet)
+	public void setBuyExcludeList(RealItemTypeList itemTypeSet)
 	{
 		buyExclude = itemTypeSet;
 	}
 
 	//-------------------------------------------------------------------------------- setBuyOnlyList
-	public void setBuyOnlyList(ItemTypeList itemTypeSet)
+	public void setBuyOnlyList(RealItemTypeList itemTypeSet)
 	{
 		buyOnly = itemTypeSet;
 	}
@@ -384,13 +384,13 @@ public class Shop
 	}
 
 	//-------------------------------------------------------------------------------- setSellExclude
-	public void setSellExcludeList(ItemTypeList itemTypeSet)
+	public void setSellExcludeList(RealItemTypeList itemTypeSet)
 	{
 		sellExclude = itemTypeSet;
 	}
 
 	//----------------------------------------------------------------------------------- setSellOnly
-	public void setSellOnlyList(ItemTypeList itemTypeSet)
+	public void setSellOnlyList(RealItemTypeList itemTypeSet)
 	{
 		sellOnly = itemTypeSet;
 	}
@@ -405,23 +405,23 @@ public class Shop
 	public String toString()
 	{
 		return getLocation().getWorld().getName() + ";"
-		+ VarTools.floor(getLocation().getX()) + ";"
-		+ VarTools.floor(getLocation().getY()) + ";"
-		+ VarTools.floor(getLocation().getZ()) + ";"
-		+ ((getLocation2() == null) ? ";" : VarTools.floor(getLocation2().getX()) + ";")
-		+ ((getLocation2() == null) ? ";" : VarTools.floor(getLocation2().getY()) + ";")
-		+ ((getLocation2() == null) ? ";" : VarTools.floor(getLocation2().getZ()) + ";")
+		+ RealVarTools.floor(getLocation().getX()) + ";"
+		+ RealVarTools.floor(getLocation().getY()) + ";"
+		+ RealVarTools.floor(getLocation().getZ()) + ";"
+		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getX()) + ";")
+		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getY()) + ";")
+		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getZ()) + ";")
 		+ getPlayerName() + ";"
 		+ getName() + ";"
 		+ buyOnly.toString() + ";"
 		+ sellOnly.toString() + ";"
 		+ buyExclude.toString() + ";"
 		+ sellExclude.toString() + ";"
-		+ VarTools.toString(isOpened()) + ";"
-		+ VarTools.toString(getInfiniteBuy()) + ";"
-		+ VarTools.toString(getInfiniteSell()) + ";"
-		+ VarTools.toString(getMarketItemsOnly()) + ";"
-		+ VarTools.toString(getDamagedItems());
+		+ RealVarTools.toString(isOpened()) + ";"
+		+ RealVarTools.toString(getInfiniteBuy()) + ";"
+		+ RealVarTools.toString(getInfiniteSell()) + ";"
+		+ RealVarTools.toString(getMarketItemsOnly()) + ";"
+		+ RealVarTools.toString(getDamagedItems());
 	}
 
 }

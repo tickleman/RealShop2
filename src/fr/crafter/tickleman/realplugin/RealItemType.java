@@ -9,7 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 //#################################################################################### RealItemType
-public class ItemType
+public class RealItemType
 {
 
 	/**
@@ -25,49 +25,49 @@ public class ItemType
 	private short variant;
 
 	//------------------------------------------------------------------------------------- ItemStack
-	public ItemType(ItemStack itemStack)
+	public RealItemType(ItemStack itemStack)
 	{
 		this(itemStack.getTypeId(), itemStack.getDurability());
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(net.minecraft.server.ItemStack itemStack)
+	public RealItemType(net.minecraft.server.ItemStack itemStack)
 	{
 		this(itemStack.id, (short)itemStack.getData());
 	}
 
 	//------------------------------------------------------------------------------------------ Item
-	public ItemType(net.minecraft.server.Item item)
+	public RealItemType(net.minecraft.server.Item item)
 	{
 		this(item.id, (short)0);
 	}
 
 	//------------------------------------------------------------------------------------------ Item
-	public ItemType(net.minecraft.server.Item item, short variant)
+	public RealItemType(net.minecraft.server.Item item, short variant)
 	{
 		this(item.id, variant);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(Material material)
+	public RealItemType(Material material)
 	{
 		this(material.getId(), (short)0);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(Material material, short variant)
+	public RealItemType(Material material, short variant)
 	{
 		this(material.getId(), variant);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(int typeId)
+	public RealItemType(int typeId)
 	{
 		this(typeId, (short)0);
 	}
 
 	//-------------------------------------------------------------------------------------- ItemType
-	public ItemType(int typeId, short variant)
+	public RealItemType(int typeId, short variant)
 	{
 		setTypeIdVariant(typeId, variant);
 	}
@@ -157,13 +157,13 @@ public class ItemType
 	}
 
 	//--------------------------------------------------------------------------------- parseItemType
-	public static ItemType parseItemType(String typeIdVariant)
+	public static RealItemType parseItemType(String typeIdVariant)
 	{
 		if (typeIdVariant.contains(":")) {
 			String[] split = typeIdVariant.split(":");
-			return new ItemType(Integer.parseInt(split[0]), Short.parseShort(split[1]));
+			return new RealItemType(Integer.parseInt(split[0]), Short.parseShort(split[1]));
 		} else {
-			return new ItemType(Integer.parseInt(typeIdVariant));
+			return new RealItemType(Integer.parseInt(typeIdVariant));
 		}
 	}
 
@@ -174,7 +174,7 @@ public class ItemType
 	}
 
 	//------------------------------------------------------------------------------------ isSameItem
-	public boolean isSameItem(ItemType itemType)
+	public boolean isSameItem(RealItemType itemType)
 	{
 		return (itemType.getTypeId() == getTypeId()) && (itemType.getVariant() == getVariant());
 	}

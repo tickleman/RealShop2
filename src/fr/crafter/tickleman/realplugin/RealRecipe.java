@@ -93,7 +93,7 @@ public class RealRecipe
 	{
 		for (int i = 1; i <= 2266; i++) {
 			if (Item.byId[i] != null) {
-				for (RealRecipe recipe : getItemRecipes(new ItemType(Item.byId[i]))) {
+				for (RealRecipe recipe : getItemRecipes(new RealItemType(Item.byId[i]))) {
 					System.out.println("RECIPE " + i + " : " + recipe.toNamedString());
 				}
 			}
@@ -106,7 +106,7 @@ public class RealRecipe
 	/**
 	 * Return a set of possible recipes for given item type
 	 */
-	public static Set<RealRecipe> getItemRecipes(ItemType itemType)
+	public static Set<RealRecipe> getItemRecipes(RealItemType itemType)
 	{
 		Set<RealRecipe> itemRecipes = new HashSet<RealRecipe>();
 		for (Object recipe : CraftingManager.getInstance().b()) {

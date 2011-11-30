@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Set;
 
 //#################################################################################### ItemTypeList
-public class ItemTypeList
+public class RealItemTypeList
 {
 
-	private HashMap<String, ItemType> content = new HashMap<String, ItemType>();
+	private HashMap<String, RealItemType> content = new HashMap<String, RealItemType>();
 
 	//----------------------------------------------------------------------------------------- clear
 	public void clear()
@@ -22,7 +22,7 @@ public class ItemTypeList
 			boolean isPlus = true;
 			for (String elem : subChain.split("\\-")) {
 				if (elem.length() > 0) {
-					ItemType itemType = ItemType.parseItemType(elem);
+					RealItemType itemType = RealItemType.parseItemType(elem);
 					if (isPlus) {
 						put(itemType);
 					} else {
@@ -35,13 +35,13 @@ public class ItemTypeList
 	}
 
 	//------------------------------------------------------------------------------------------- get
-	public ItemType get(ItemType itemType)
+	public RealItemType get(RealItemType itemType)
 	{
 		return content.get(itemType.toString());
 	}
 
 	//------------------------------------------------------------------------------------ getContent
-	public HashMap<String, ItemType> getContent()
+	public HashMap<String, RealItemType> getContent()
 	{
 		return content;
 	}
@@ -53,35 +53,35 @@ public class ItemTypeList
 	}
 
 	//----------------------------------------------------------------------------- parseItemTypeList
-	public static ItemTypeList parseItemTypeList(String list)
+	public static RealItemTypeList parseItemTypeList(String list)
 	{
-		ItemTypeList itemTypeList = new ItemTypeList();
+		RealItemTypeList itemTypeList = new RealItemTypeList();
 		for (String typeIdVariant : list.split(",")) {
 			if (typeIdVariant.length() > 0) {
-				itemTypeList.put(ItemType.parseItemType(typeIdVariant));
+				itemTypeList.put(RealItemType.parseItemType(typeIdVariant));
 			}
 		}
 		return itemTypeList;
 	}
 
 	//----------------------------------------------------------------------------- parseItemTypeList
-	public static ItemTypeList parseItemTypeList(Set<String> list)
+	public static RealItemTypeList parseItemTypeList(Set<String> list)
 	{
-		ItemTypeList itemTypeList = new ItemTypeList();
+		RealItemTypeList itemTypeList = new RealItemTypeList();
 		for (String typeIdVariant : list) {
-			itemTypeList.put(ItemType.parseItemType(typeIdVariant));
+			itemTypeList.put(RealItemType.parseItemType(typeIdVariant));
 		}
 		return itemTypeList;
 	}
 
 	//------------------------------------------------------------------------------------------- put
-	public void put(ItemType itemType)
+	public void put(RealItemType itemType)
 	{
 		content.put(itemType.toString(), itemType);
 	}
 
 	//---------------------------------------------------------------------------------------- remove
-	public void remove(ItemType itemType)
+	public void remove(RealItemType itemType)
 	{
 		content.remove(itemType.toString());
 	}

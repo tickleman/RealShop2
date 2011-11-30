@@ -1,7 +1,7 @@
 package fr.crafter.tickleman.realplugin;
 
 //######################################################################################## VarTools
-public class VarTools
+public class RealVarTools
 {
 
 	//----------------------------------------------------------------------------------------- floor

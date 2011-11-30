@@ -8,7 +8,7 @@ public class RealPlugin extends JavaPlugin
 {
 
 	protected RealConfig      config = null;
-	private   Translation     lang   = null;
+	private   RealTranslation     lang   = null;
 	private   RealLog         log    = null;
 	private   RealPermissions perms  = null;
 
@@ -108,7 +108,7 @@ public class RealPlugin extends JavaPlugin
 		loadConfig();
 		log   = new RealLog(this, getRealConfig().debug, getRealConfig().pluginLog);
 		perms = new RealPermissions(this, getRealConfig().permissionsPlugin);
-		lang  = new Translation(this, getRealConfig().language).load();
+		lang  = new RealTranslation(this, getRealConfig().language).load();
 	}
 
 	//-------------------------------------------------------------------------------------------- tr

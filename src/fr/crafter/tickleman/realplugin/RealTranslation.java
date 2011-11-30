@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import org.bukkit.plugin.java.JavaPlugin;
 
 //##################################################################################### Translation
-public class Translation
+public class RealTranslation
 {
 
 	private final String            fileName;
@@ -16,24 +16,24 @@ public class Translation
 	private HashMap<String, String> translations = new HashMap<String, String>();
 
 	// ---------------------------------------------------------------------------------- Translation
-	public Translation(final JavaPlugin plugin)
+	public RealTranslation(final JavaPlugin plugin)
 	{
 		this(plugin, "en");
 	}
 
 	// ---------------------------------------------------------------------------------- Translation
-	public Translation(final JavaPlugin plugin, final String language)
+	public RealTranslation(final JavaPlugin plugin, final String language)
 	{
 		this.plugin = plugin;
 		this.fileName = plugin.getDataFolder().getPath() + "/" + language + ".lang.txt";
 	}
 
 	// ----------------------------------------------------------------------------------------- load
-	public Translation load()
+	public RealTranslation load()
 	{
 		translations.clear();
-		if (!FileTools.fileExists(fileName)) {
-			FileTools.extractDefaultFile(plugin, fileName);
+		if (!RealFileTools.fileExists(fileName)) {
+			RealFileTools.extractDefaultFile(plugin, fileName);
 		}
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
