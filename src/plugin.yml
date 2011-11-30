@@ -3,7 +3,7 @@ main: fr.crafter.tickleman.realshop2.RealShop2Plugin
 version: 2.03
 website: http://plugins.crafter.fr/tickleman/RealShop2/
 author: tickleman
-depend: []
+depend: [RealPlugin]
 softdepend: [Permissions, Register, Spout]
 commands:
   money:
