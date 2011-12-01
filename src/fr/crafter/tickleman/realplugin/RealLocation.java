@@ -38,10 +38,10 @@ public class RealLocation extends Location
 	public static String getId(Location location)
 	{
 		return 
-		+ Math.round(Math.floor(location.getX())) + ";"
+		Math.round(Math.floor(location.getX())) + ";"
 		+ Math.round(Math.floor(location.getY())) + ";"
 		+ Math.round(Math.floor(location.getZ())) + ";"
-		+ location.getWorld();
+		+ location.getWorld().getName();
 	}
 
 	//----------------------------------------------------------------------------------------- getId
