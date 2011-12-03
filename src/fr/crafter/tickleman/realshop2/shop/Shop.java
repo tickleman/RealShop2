@@ -405,12 +405,12 @@ public class Shop
 	public String toString()
 	{
 		return getLocation().getWorld().getName() + ";"
-		+ RealVarTools.floor(getLocation().getX()) + ";"
-		+ RealVarTools.floor(getLocation().getY()) + ";"
-		+ RealVarTools.floor(getLocation().getZ()) + ";"
-		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getX()) + ";")
-		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getY()) + ";")
-		+ ((getLocation2() == null) ? ";" : RealVarTools.floor(getLocation2().getZ()) + ";")
+		+ getLocation().getBlockX() + ";"
+		+ getLocation().getBlockY() + ";"
+		+ getLocation().getBlockZ() + ";"
+		+ ((getLocation2() == null) ? ";" : getLocation2().getBlockX() + ";")
+		+ ((getLocation2() == null) ? ";" : getLocation2().getBlockY() + ";")
+		+ ((getLocation2() == null) ? ";" : getLocation2().getBlockZ() + ";")
 		+ getPlayerName() + ";"
 		+ getName() + ";"
 		+ buyOnly.toString() + ";"
