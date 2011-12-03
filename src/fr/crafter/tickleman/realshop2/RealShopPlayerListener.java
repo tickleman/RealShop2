@@ -32,7 +32,7 @@ public class RealShopPlayerListener extends PlayerListener
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
 		// check if player right-clicked a chest
-    if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
     	Block block = event.getClickedBlock();
 			if (block.getType().equals(Material.CHEST)) {
 				if (!new ShopAction(plugin).enterChestBlock(event.getPlayer(), block)) {
