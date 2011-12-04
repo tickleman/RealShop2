@@ -21,11 +21,11 @@ import fr.crafter.tickleman.realshop2.shop.ShopList;
 public class RealShop2Plugin extends RealPlugin
 {
 
-	private ItemPriceList   marketPrices;
-	private RealEconomy     economy;
-	private PlayerChestList playerChestList;
-	private PlayerShopList  playerShopList;
-	private ShopList        shopList;
+	private ItemPriceList   marketPrices = null;
+	private RealEconomy     economy = null;
+	private PlayerChestList playerChestList = null;
+	private PlayerShopList  playerShopList = null;
+	private ShopList        shopList = null;
 
 	//------------------------------------------------------------------------------- RealShop2Plugin
 	public RealShop2Plugin()
@@ -100,8 +100,8 @@ public class RealShop2Plugin extends RealPlugin
 	@Override
 	public void onDisable()
 	{
-		marketPrices.clear();
-		shopList.clear();
+		if (marketPrices != null) marketPrices.clear();
+		if (shopList     != null) shopList.clear();
 		super.onDisable();
 	}
 
