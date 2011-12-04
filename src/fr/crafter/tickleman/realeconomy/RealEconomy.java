@@ -1,5 +1,8 @@
 package fr.crafter.tickleman.realeconomy;
 
+import net.milkbowl.vault.economy.Economy;
+
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import com.nijikokun.register.payment.Method;
 
@@ -11,12 +14,15 @@ public class RealEconomy
 
 	private RealAccounts      accounts;
 	private RealEconomyConfig config;
+	private RealPlugin        plugin;
 	private String            economyPlugin;
 	private Method            paymentMethod;
+  private Economy           vaultEconomy = null;
 
 	//----------------------------------------------------------------------------------- RealEconomy
 	public RealEconomy(RealPlugin plugin)
 	{
+		this.plugin = plugin;
 		this.economyPlugin = "RealEconomy";
 		accounts = new RealAccounts(plugin);
 		config = new RealEconomyConfig(plugin);
@@ -44,6 +50,8 @@ public class RealEconomy
 			if (balance == null) {
 				balance = config.initialBalance;
 			}
+		} else if ((vaultEconomy != null) && vaultEconomy.isEnabled()) {
+			balance = vaultEconomy.getBalance(playerName);
 		} else {
 			balance = paymentMethod.getAccount(playerName).balance();
 		}
@@ -70,6 +78,8 @@ public class RealEconomy
 			|| economyPlugin.equals("RealEconomy")
 		) {
 			return (accounts.getBalance(playerName) != null);
+		} else if ((vaultEconomy != null) && vaultEconomy.isEnabled()) {
+			return vaultEconomy.getBalance(playerName) > 0;
 		} else {
 			return paymentMethod.hasAccount(playerName);
 		}
@@ -87,6 +97,22 @@ public class RealEconomy
 		return economyPlugin;
 	}
 
+	//------------------------------------------------------------------------------------- initVault
+	public void initVault()
+	{
+		if ((vaultEconomy == null) && economyPlugin.equals("Vault")) {
+			try {
+				RegisteredServiceProvider<Economy> economyProvider
+					= plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+				if (economyProvider != null) {
+					vaultEconomy = economyProvider.getProvider();
+				}
+			} catch (Exception e) {
+				vaultEconomy = null;
+			}
+		}
+	}
+
 	//------------------------------------------------------------------------------------ setBalance
 	public void setBalance(String playerName, double balance)
 	{
@@ -96,6 +122,12 @@ public class RealEconomy
 			|| economyPlugin.equals("RealEconomy")
 		) {
 			accounts.setBalance(playerName, balance);
+		} else if ((vaultEconomy != null) && vaultEconomy.isEnabled()) {
+			if (balance > vaultEconomy.getBalance(playerName)) {
+				vaultEconomy.depositPlayer(playerName, balance - vaultEconomy.getBalance(playerName));
+			} else {
+				vaultEconomy.withdrawPlayer(playerName, vaultEconomy.getBalance(playerName) - balance);
+			}
 		} else {
 			paymentMethod.getAccount(playerName).set(balance);
 		}

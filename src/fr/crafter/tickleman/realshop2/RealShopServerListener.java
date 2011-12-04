@@ -51,7 +51,9 @@ public class RealShopServerListener extends ServerListener
 				);
 			}
 		}
-		// Add Permissions
+		// Add Vault Economy
+		plugin.getEconomy().initVault();
+    // Add Permissions
 		plugin.getPermissions().initPermissionsHandler();
 	}
 
