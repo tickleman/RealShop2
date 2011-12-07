@@ -36,8 +36,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 		Player player = event.getPlayer();
 		Shop shop = plugin.getPlayerShopList().insideShop(player);
 		if (
-			(shop != null) && (event.getSlot() > -999)
-			&& !shop.getPlayerName().equals(player.getName())
+			(shop != null) && (event.getSlot() > -999) && !shop.getPlayerName().equals(player.getName())
 		) {
 			// do something only if clicked on an inventory slot,
 			// and if the player is into another player's shop
@@ -55,10 +54,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 					plugin.getLog().debug("infinite buy not allowed with shift-click : cancel");
 					event.setCancelled(true);
 				} else if (
-					(
-						shop.getInfiniteBuy()
-						|| shop.getInfiniteBuy()
-					) && (event.getCursor() != null) && (event.getItem() != null)
+					shop.getInfiniteBuy() && (event.getCursor() != null) && (event.getItem() != null)
 				) {
 					// infinite buy : you can't click with something on cursor and item slot (too much complicated to code)
 					plugin.getLog().debug("infinite buy not allowed with cursor + item slots filled : cancel");

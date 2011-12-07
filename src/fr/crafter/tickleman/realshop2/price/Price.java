@@ -57,8 +57,9 @@ public class Price
 			} else {
 				return damagedSell + Math.ceil((double)100 * sell * (double)(quantity - 1)) / (double)100;
 			}
+		} else {
+			return Math.ceil((double)100 * sell * (double)quantity) / (double)100;
 		}
-		return Math.ceil((double)100 * sell * (double)quantity) / (double)100;
 	}
 
 	//----------------------------------------------------------------------------------- setBuyPrice

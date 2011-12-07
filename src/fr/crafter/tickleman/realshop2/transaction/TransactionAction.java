@@ -35,7 +35,7 @@ public class TransactionAction
 				);
 				sendMessage(
 					player, shop, itemStack,
-					price.getSellPrice(), price.getSellPrice(itemStack.getAmount()),
+					price.getBuyPrice(), price.getBuyPrice(itemStack.getAmount()),
 					"Purchased", "purchased"
 				);
 				return itemStack.getAmount();
@@ -85,13 +85,15 @@ public class TransactionAction
 			- ((buyPrice == null) ? 0 : buyPrice.getBuyPrice(buyStack.getAmount()));
 		if (diffAmount > 0) {
 			plugin.getLog().debug(
-				"canPay check if " + plugin.getEconomy().getBalance(shop.getPlayerName()) + " >= " + diffAmount
+				"canPay check if " + plugin.getEconomy().getBalance(shop.getPlayerName())
+				+ " >= " + diffAmount
 			);
 			// sell more than buy : can pay if shop's owner has enough money
 			return plugin.getEconomy().getBalance(shop.getPlayerName()) >= diffAmount;
 		} else {
 			plugin.getLog().debug(
-				"canPay check if " + plugin.getEconomy().getBalance(player.getName()) + " >= " + (-diffAmount)
+				"canPay check if " + plugin.getEconomy().getBalance(player.getName())
+				+ " >= " + (-diffAmount)
 			);
 			// buy more than sell : can pay if client player has enough money
 			return plugin.getEconomy().getBalance(player.getName()) >= -diffAmount;

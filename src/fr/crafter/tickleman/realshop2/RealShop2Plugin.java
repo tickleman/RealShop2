@@ -110,14 +110,18 @@ public class RealShop2Plugin extends RealPlugin
 	public void onEnable()
 	{
 		super.onEnable();
+		// load files
+		marketPrices = new ItemPriceList(this, "market").load();
+		shopList     = new ShopList(this).load();
+		this.economy = new RealEconomy(this);
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);
 		RealShopInventoryListener inventoryListener = new RealShopInventoryListener(this);
 		RealShopPlayerListener    playerListener    = new RealShopPlayerListener(this);
 		RealShopServerListener    serverListener    = new RealShopServerListener(this);
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_BREAK,     blockListener,     Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.BLOCK_DAMAGE,    blockListener,     Event.Priority.Monitor, this);
+		pm.registerEvent(Event.Type.BLOCK_BREAK,     blockListener,     Event.Priority.Highest, this);
+		pm.registerEvent(Event.Type.BLOCK_DAMAGE,    blockListener,     Event.Priority.Highest, this);
 		pm.registerEvent(Event.Type.BLOCK_PLACE,     blockListener,     Event.Priority.Normal,  this);
 		pm.registerEvent(Event.Type.CUSTOM_EVENT,    inventoryListener, Event.Priority.Normal,  this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener,    Priority.Normal,        this);
@@ -125,10 +129,10 @@ public class RealShop2Plugin extends RealPlugin
 		pm.registerEvent(Event.Type.PLAYER_QUIT,     playerListener,    Priority.Normal,        this);
 		pm.registerEvent(Event.Type.PLUGIN_DISABLE,  serverListener,    Priority.Normal,        this);
 		pm.registerEvent(Event.Type.PLUGIN_ENABLE,   serverListener,    Priority.Normal,        this);
-		// load files
-		marketPrices = new ItemPriceList(this, "market").load();
-		shopList     = new ShopList(this).load();
-		this.economy = new RealEconomy(this);
+		// initialize links
+		getEconomy().initRegister();
+		getEconomy().initVault();
+		getPermissions().initPermissionsHandler();
 		// check this out
 		//System.out.println("ALL RECIPES :");
 		//RealRecipe.dumpAllRecipes();
