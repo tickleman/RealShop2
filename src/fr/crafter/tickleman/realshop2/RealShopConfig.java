@@ -14,6 +14,7 @@ public class RealShopConfig extends RealConfig
 	public double  maxItemPrice = 99999.0;
 	public double  minDailyRatio = .05;
 	public double  minItemPrice = .1;
+	public boolean shopProtection = true;
 	public boolean shopDamagedItems = false;
 	public boolean shopMarketItemsOnly = false;
 	public boolean shopOpOnly = false;

@@ -42,7 +42,13 @@ public class RealShopBlockListener extends BlockListener
 				if (player instanceof Player) {
 					new ShopAction(plugin).selectShop(player, shop);
 				}
-				event.setCancelled(true);
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				} else {
+					plugin.getLog().debug("removed shop on block break " + shop.toString());
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				}
 			} else if (player instanceof Player) {
 				// break a chest that is not a shop : does nothing, only unselect
 				plugin.getPlayerChestList().unselectChest(player);
@@ -57,8 +63,15 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
-				event.setCancelled(true);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
+			if (shop != null) {
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				} else {
+					plugin.getLog().debug("removed shop on block burn " + shop.toString());
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				}
 			}
 		}
 	}
@@ -76,7 +89,9 @@ public class RealShopBlockListener extends BlockListener
 				if (player instanceof Player) {
 					new ShopAction(plugin).selectShop(player, shop);
 				}
-				event.setCancelled(true);
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				}
 		} else if (player instanceof Player) {
 				// damage a chest that is not a shop : does nothing, only unselect shop and select chest
 				plugin.getPlayerShopList().unselectShop(player);
@@ -91,8 +106,15 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
-				event.setCancelled(true);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
+			if (shop != null) {
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				} else {
+					plugin.getLog().debug("removed shop on block fade " + shop.toString());
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				}
 			}
 		}
 	}
@@ -103,8 +125,15 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
-				event.setCancelled(true);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
+			if (shop != null) {
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				} else {
+					plugin.getLog().debug("removed shop on block ignite " + shop.toString());
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				}
 			}
 		}
 	}
@@ -155,8 +184,15 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
-				event.setCancelled(true);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
+			if (shop != null) {
+				if (plugin.getRealConfig().shopProtection) {
+					event.setCancelled(true);
+				} else {
+					plugin.getLog().debug("removed shop on block spread " + shop.toString());
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				}
 			}
 		}
 	}

@@ -8,6 +8,8 @@ import org.bukkit.block.Block;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.EntityListener;
 
+import fr.crafter.tickleman.realshop2.shop.Shop;
+
 //########################################################################## RealShopEntityListener
 public class RealShopEntityListener extends EntityListener
 {
@@ -29,8 +31,15 @@ public class RealShopEntityListener extends EntityListener
 		List<Block> dontExplodeBlocks = new ArrayList<Block>();
 		for (Block block : event.blockList()) {
 			if (block.getType().equals(Material.CHEST)) {
-				if (plugin.getShopList().shopAt(block.getLocation()) != null) {
-					dontExplodeBlocks.add(block);
+				Shop shop = plugin.getShopList().shopAt(block.getLocation());
+				if (shop != null) {
+					if (plugin.getRealConfig().shopProtection) {
+						dontExplodeBlocks.add(block);
+					} else {
+						plugin.getLog().debug("removed shop on creeper explosion " + shop.toString());
+						plugin.getShopList().delete(shop);
+						plugin.getShopList().save();
+					}
 				}
 			}
 		}
