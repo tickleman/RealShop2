@@ -5,6 +5,7 @@ import org.bukkit.Server;
 import org.bukkit.World;
 
 import fr.crafter.tickleman.realplugin.RealChest;
+import fr.crafter.tickleman.realplugin.RealItemStack;
 import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealItemTypeList;
 import fr.crafter.tickleman.realplugin.RealLocation;
@@ -76,6 +77,34 @@ public class Shop
 	{
 		setLocation(location);
 		setPlayerName(playerName);
+	}
+
+	//------------------------------------------------------------------------------------ canBuyItem
+	public boolean canBuyItem(RealItemStack itemStack)
+	{
+		if (
+			((itemStack.getDamage() > 0) && !getDamagedItems())
+			|| (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null)
+			|| (getBuyOnlyList().get(itemStack) != null)
+		) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	//----------------------------------------------------------------------------------- canSellItem
+	public boolean canSellItem(RealItemStack itemStack)
+	{
+		if (
+			((itemStack.getDamage() > 0) && !getDamagedItems())
+			|| (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null)
+			|| (getSellOnlyList().get(itemStack) != null)
+		) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	//------------------------------------------------------------------------------------- setOpened

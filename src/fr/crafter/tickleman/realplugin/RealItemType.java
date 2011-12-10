@@ -30,6 +30,12 @@ public class RealItemType
 		this(itemStack.getTypeId(), itemStack.getDurability());
 	}
 
+	//------------------------------------------------------------------------------------- ItemStack
+	public RealItemType(RealItemStack itemStack)
+	{
+		this(itemStack.getTypeId(), itemStack.getDurability());
+	}
+
 	//-------------------------------------------------------------------------------------- ItemType
 	public RealItemType(net.minecraft.server.ItemStack itemStack)
 	{

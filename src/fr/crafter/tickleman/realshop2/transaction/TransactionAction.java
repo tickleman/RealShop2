@@ -65,6 +65,12 @@ public class TransactionAction
 	 */
 	public boolean canPay(Player player, Shop shop, ItemStack buyStack, ItemStack sellStack)
 	{
+		if ((buyStack != null) && !shop.canBuyItem(new RealItemStack(buyStack))) {
+			return false;
+		}
+		if ((sellStack != null) && !shop.canSellItem(new RealItemStack(sellStack))) {
+			return false;
+		}
 		Price buyPrice = (buyStack == null) ? null : calculatePrice(shop, buyStack);
 		Price sellPrice = (sellStack == null) ? null : calculatePrice(shop, sellStack);
 		if (
