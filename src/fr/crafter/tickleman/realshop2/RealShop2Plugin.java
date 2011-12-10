@@ -120,9 +120,13 @@ public class RealShop2Plugin extends RealPlugin
 		RealShopPlayerListener    playerListener    = new RealShopPlayerListener(this);
 		RealShopServerListener    serverListener    = new RealShopServerListener(this);
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_BREAK,     blockListener,     Event.Priority.Highest, this);
-		pm.registerEvent(Event.Type.BLOCK_DAMAGE,    blockListener,     Event.Priority.Highest, this);
+		pm.registerEvent(Event.Type.BLOCK_BREAK,     blockListener,     Event.Priority.Monitor, this);
+		//pm.registerEvent(Event.Type.BLOCK_BURN,      blockListener,     Event.Priority.Monitor, this);
+		pm.registerEvent(Event.Type.BLOCK_DAMAGE,    blockListener,     Event.Priority.Monitor, this);
+		//pm.registerEvent(Event.Type.BLOCK_FADE,      blockListener,     Event.Priority.Monitor, this);
+		//pm.registerEvent(Event.Type.BLOCK_IGNITE,    blockListener,     Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.BLOCK_PLACE,     blockListener,     Event.Priority.Normal,  this);
+		//pm.registerEvent(Event.Type.BLOCK_SPREAD,    blockListener,     Event.Priority.Monitor, this);
 		pm.registerEvent(Event.Type.CUSTOM_EVENT,    inventoryListener, Event.Priority.Normal,  this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener,    Priority.Normal,        this);
 		pm.registerEvent(Event.Type.PLAYER_LOGIN,    playerListener,    Priority.Normal,        this);

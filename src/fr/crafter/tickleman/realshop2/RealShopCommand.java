@@ -56,6 +56,16 @@ public class RealShopCommand
 		} else if (params[0].equals("reload")) {
 			plugin.reload(player);
 			return true;
+		} else if (params[0].equals("loadv0")) {
+			if (plugin.getShopList().loadFromV0()) {
+				plugin.getShopList().save();
+				player.sendMessage(plugin.tr("Loaded shops list from your old version 0"));
+			} else {
+				player.sendMessage(plugin.tr(
+					"Could not load version 0 shops list from your plugins/RealShop/shops.txt file"
+				));
+			}
+			return true;
 		}
 		return false;
 	}

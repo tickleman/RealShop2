@@ -86,6 +86,30 @@ public class ShopList
 		return this;
 	}
 
+	//------------------------------------------------------------------------------------ loadFromV0
+	public boolean loadFromV0()
+	{
+		String fileName = this.fileName.replace("RealShop2/", "RealShop/");
+		plugin.getLog().debug("ShopList.loadFromV0(" + fileName + ")");
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new FileReader(fileName));
+			String buffer;
+			while ((buffer = reader.readLine()) != null) {
+				if ((buffer.length() > 0) && (buffer.charAt(0) != '#') && (buffer.split(";").length > 4)) {
+					Shop shop = Shop.parseShopV0(plugin.getServer(), buffer);
+					if (shop != null) {
+						plugin.getLog().debug("shop load " + shop.toString());
+						put(shop);
+					}
+				}
+			}
+		} catch (Exception e) {
+			plugin.getLog().warning("File read error " + fileName + " (loadFromV0)");
+		}
+		return true;
+	}
+
 	//------------------------------------------------------------------------------------------- put
 	public void put(Shop shop)
 	{

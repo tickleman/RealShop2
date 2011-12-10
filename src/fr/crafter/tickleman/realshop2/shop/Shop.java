@@ -307,6 +307,43 @@ public class Shop
 		}
 	}
 
+	//----------------------------------------------------------------------------------- parseShopV0
+	public static Shop parseShopV0(Server server, String buffer)
+	{
+		try {
+			String[] line = buffer.split(";");
+			Shop shop = new Shop(
+				new Location(
+					server.getWorld(line[0]),
+					Double.parseDouble(line[1]),
+					Double.parseDouble(line[2]),
+					Double.parseDouble(line[3])
+				),
+				line[4]
+			);
+			try {
+				shop.setBuyOnlyList(RealItemTypeList.parseItemTypeList(line[5]));
+				shop.setSellOnlyList(RealItemTypeList.parseItemTypeList(line[6]));
+				shop.setBuyExcludeList(RealItemTypeList.parseItemTypeList(line[7]));
+				shop.setSellExcludeList(RealItemTypeList.parseItemTypeList(line[8]));
+				shop.setName(line[9]);
+				shop.setOpened(RealVarTools.parseBoolean(line[10]));
+				shop.setInfiniteBuy(line[11].indexOf("infiniteBuy") > -1);
+				shop.setInfiniteSell(line[11].indexOf("infiniteSell") > -1);
+				shop.setMarketItemsOnly(line[11].indexOf("marketItemsOnly") > -1);
+				shop.setDamagedItems(line[11].indexOf("damagedItems") > -1);
+			} catch (Exception e) {
+				// "index out of bound" exception is ignored
+			}
+			return shop;
+		} catch (Exception e) {
+			System.out.println("[SEVERE] [RealShop2] parseShopV0 error " + buffer);
+			System.out.println("[SEVERE] [RealShop2] " + e.getMessage());
+			e.printStackTrace(System.out);
+			return null;
+		}
+	}
+
 	//------------------------------------------------------------------------------- revertLocations
 	private void revertLocations()
 	{

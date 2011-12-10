@@ -338,9 +338,10 @@ public class ShopAction
 	//------------------------------------------------------------------------------- shopPricesInfos
 	public void shopPricesInfos(Player player, Shop shop)
 	{
-		plugin.getLog().debug("marketPrice = " + plugin.getMarketPrices().toString());
 		ItemPriceList ownerPrices = new ItemPriceList(plugin, shop.getPlayerName());
-		// sell (may be a very long list)
+		plugin.getLog().debug("marketPrices = " + plugin.getMarketPrices().toString());
+		plugin.getLog().debug("ownerPrices = " + ownerPrices.toString());
+		// sell (may be as long as number of filled slots on player's inventory)
 		RealItemTypeList itemTypeList = new RealItemTypeList();
 		String list = "";
 		int count = 20;
@@ -373,7 +374,7 @@ public class ShopAction
 				.replace("+items", list + RealColor.message)
 			);
 		}
-		// buy (may be as long as the number of filled slots!) 
+		// buy (may be as long as the number of filled slots on the chest's inventory) 
 		itemTypeList.clear();
 		list = "";
 		count = 20;

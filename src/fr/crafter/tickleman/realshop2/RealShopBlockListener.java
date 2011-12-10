@@ -90,10 +90,11 @@ public class RealShopBlockListener extends BlockListener
 						shop.setLocation(location);
 						plugin.getShopList().save();
 						plugin.getPlayerShopList().selectShop(player, shop);
-					} else {
-						// auto-select chest
-						plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 					}
+				}
+				if (shop == null) {
+					// auto-select chest
+					plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 				}
 			}
 		}
