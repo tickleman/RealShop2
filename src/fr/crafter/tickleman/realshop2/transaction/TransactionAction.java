@@ -54,7 +54,7 @@ public class TransactionAction
 	public Price calculatePrice(Shop shop, RealItemStack itemStack)
 	{
 		RealItemType itemType = itemStack.getItemType();
-		ItemPriceList prices = new ItemPriceList(plugin, shop.getPlayerName());
+		ItemPriceList prices = new ItemPriceList(plugin, shop.getPlayerName()).load();
 		Price price = prices.getPrice(itemType, itemStack.getDamage(), plugin.getMarketPrices());
 		return price;
 	}

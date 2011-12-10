@@ -338,7 +338,7 @@ public class ShopAction
 	//------------------------------------------------------------------------------- shopPricesInfos
 	public void shopPricesInfos(Player player, Shop shop)
 	{
-		ItemPriceList ownerPrices = new ItemPriceList(plugin, shop.getPlayerName());
+		ItemPriceList ownerPrices = new ItemPriceList(plugin, shop.getPlayerName()).load();
 		plugin.getLog().debug("marketPrices = " + plugin.getMarketPrices().toString());
 		plugin.getLog().debug("ownerPrices = " + ownerPrices.toString());
 		// sell (may be as long as number of filled slots on player's inventory)
