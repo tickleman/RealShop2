@@ -4,9 +4,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockFadeEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockListener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockSpreadEvent;
 
 import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealLocation;
@@ -47,6 +51,18 @@ public class RealShopBlockListener extends BlockListener
 		}
 	}
 
+	//----------------------------------------------------------------------------------- onBlockBurn
+	@Override
+	public void onBlockBurn(BlockBurnEvent event)
+	{
+		Block block = event.getBlock();
+		if (block.getType().equals(Material.CHEST)) {
+			if (plugin.getShopList().shopAt(block) != null) {
+				event.setCancelled(true);
+			}
+		}
+	}
+
 	//--------------------------------------------------------------------------------- onBlockDamage
 	@Override
 	public void onBlockDamage(BlockDamageEvent event)
@@ -65,6 +81,30 @@ public class RealShopBlockListener extends BlockListener
 				// damage a chest that is not a shop : does nothing, only unselect shop and select chest
 				plugin.getPlayerShopList().unselectShop(player);
 				plugin.getPlayerChestList().selectChest(player, new RealChest(block));
+			}
+		}
+	}
+
+	//----------------------------------------------------------------------------------- onBlockFade
+	@Override
+	public void onBlockFade(BlockFadeEvent event)
+	{
+		Block block = event.getBlock();
+		if (block.getType().equals(Material.CHEST)) {
+			if (plugin.getShopList().shopAt(block) != null) {
+				event.setCancelled(true);
+			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------- onBlockIgnite
+	@Override
+	public void onBlockIgnite(BlockIgniteEvent event)
+	{
+		Block block = event.getBlock();
+		if (block.getType().equals(Material.CHEST)) {
+			if (plugin.getShopList().shopAt(block) != null) {
+				event.setCancelled(true);
 			}
 		}
 	}
@@ -96,6 +136,18 @@ public class RealShopBlockListener extends BlockListener
 					// auto-select chest
 					plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 				}
+			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------- onBlockSpread
+	@Override
+	public void onBlockSpread(BlockSpreadEvent event)
+	{
+		Block block = event.getBlock();
+		if (block.getType().equals(Material.CHEST)) {
+			if (plugin.getShopList().shopAt(block) != null) {
+				event.setCancelled(true);
 			}
 		}
 	}

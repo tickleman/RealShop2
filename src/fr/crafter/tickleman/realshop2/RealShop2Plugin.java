@@ -3,8 +3,8 @@ package fr.crafter.tickleman.realshop2;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
+import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginManager;
 
 import fr.crafter.tickleman.realeconomy.RealEconomy;
@@ -116,23 +116,25 @@ public class RealShop2Plugin extends RealPlugin
 		this.economy = new RealEconomy(this);
 		// register events
 		RealShopBlockListener     blockListener     = new RealShopBlockListener(this);
+		RealShopEntityListener    entityListener    = new RealShopEntityListener(this);
 		RealShopInventoryListener inventoryListener = new RealShopInventoryListener(this);
 		RealShopPlayerListener    playerListener    = new RealShopPlayerListener(this);
 		RealShopServerListener    serverListener    = new RealShopServerListener(this);
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_BREAK,     blockListener,     Event.Priority.Monitor, this);
-		//pm.registerEvent(Event.Type.BLOCK_BURN,      blockListener,     Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.BLOCK_DAMAGE,    blockListener,     Event.Priority.Monitor, this);
-		//pm.registerEvent(Event.Type.BLOCK_FADE,      blockListener,     Event.Priority.Monitor, this);
-		//pm.registerEvent(Event.Type.BLOCK_IGNITE,    blockListener,     Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.BLOCK_PLACE,     blockListener,     Event.Priority.Normal,  this);
-		//pm.registerEvent(Event.Type.BLOCK_SPREAD,    blockListener,     Event.Priority.Monitor, this);
-		pm.registerEvent(Event.Type.CUSTOM_EVENT,    inventoryListener, Event.Priority.Normal,  this);
-		pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener,    Priority.Normal,        this);
-		pm.registerEvent(Event.Type.PLAYER_LOGIN,    playerListener,    Priority.Normal,        this);
-		pm.registerEvent(Event.Type.PLAYER_QUIT,     playerListener,    Priority.Normal,        this);
-		pm.registerEvent(Event.Type.PLUGIN_DISABLE,  serverListener,    Priority.Normal,        this);
-		pm.registerEvent(Event.Type.PLUGIN_ENABLE,   serverListener,    Priority.Normal,        this);
+		pm.registerEvent(Type.BLOCK_BREAK,     blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.BLOCK_BURN,      blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.BLOCK_DAMAGE,    blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.BLOCK_FADE,      blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.BLOCK_IGNITE,    blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.BLOCK_PLACE,     blockListener,     Priority.Normal,  this);
+		pm.registerEvent(Type.BLOCK_SPREAD,    blockListener,     Priority.Monitor, this);
+		pm.registerEvent(Type.CUSTOM_EVENT,    inventoryListener, Priority.Normal,  this);
+		pm.registerEvent(Type.ENTITY_EXPLODE,  entityListener,    Priority.Monitor, this);
+		pm.registerEvent(Type.PLAYER_INTERACT, playerListener,    Priority.Normal,  this);
+		pm.registerEvent(Type.PLAYER_LOGIN,    playerListener,    Priority.Normal,  this);
+		pm.registerEvent(Type.PLAYER_QUIT,     playerListener,    Priority.Normal,  this);
+		pm.registerEvent(Type.PLUGIN_DISABLE,  serverListener,    Priority.Normal,  this);
+		pm.registerEvent(Type.PLUGIN_ENABLE,   serverListener,    Priority.Normal,  this);
 		// initialize links
 		getEconomy().initRegister();
 		getEconomy().initVault();
