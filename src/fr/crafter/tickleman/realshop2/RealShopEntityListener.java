@@ -29,7 +29,7 @@ public class RealShopEntityListener extends EntityListener
 		List<Block> dontExplodeBlocks = new ArrayList<Block>();
 		for (Block block : event.blockList()) {
 			if (block.getType().equals(Material.CHEST)) {
-				if (plugin.getShopList().shopAt(block) != null) {
+				if (plugin.getShopList().shopAt(block.getLocation()) != null) {
 					dontExplodeBlocks.add(block);
 				}
 			}

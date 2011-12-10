@@ -10,7 +10,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 import fr.crafter.tickleman.realplugin.RealPlugin;
-import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealLocation;
 
 //######################################################################################## ShopList
@@ -137,16 +136,20 @@ public class ShopList
 	}
 
 	//---------------------------------------------------------------------------------------- shopAt
-	public Shop shopAt(Block block)
-	{
-		return shopAt(block.getLocation());
-	}
-
-	//---------------------------------------------------------------------------------------- shopAt
+	/**
+	 * Return Shop at location
+	 * If location contains a big chest, both locations will be tested to be sure we get the shop
+	 * even if it is on one of the two chest blocks
+	 */
 	public Shop shopAt(Location location)
 	{
-		location = new RealChest(location).getLocation();
 		Shop shop = shops.get(RealLocation.getId(location));
+		if (shop == null) {
+			location = RealLocation.neighbor(location);
+			if (location != null) {
+				shop = shops.get(RealLocation.getId(location));
+			}
+		}
 		return shop;
 	}
 

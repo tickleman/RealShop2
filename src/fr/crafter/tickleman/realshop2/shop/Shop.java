@@ -113,6 +113,20 @@ public class Shop
 		this.opened = false;
 	}
 
+	//------------------------------------------------------------------------------ containsLocation
+	public boolean containsLocation(Location location)
+	{
+		return location1.equals(location) || (location2 != null && location2.equals(location));
+	}
+
+	//-------------------------------------------------------------------------------- forceLocations
+	public void forceLocations(Location location1, Location location2)
+	{
+		this.location1 = location1;
+		this.location2 = location2;
+		sortLocations();
+	}
+
 	//-------------------------------------------------------------------------------- getBuyOnlyList
 	public RealItemTypeList getBuyOnlyList()
 	{
@@ -416,19 +430,7 @@ public class Shop
 	{
 		location1 = location;
 		location2 = new RealLocation(location).neighbor();
-		if (location2 != null) {
-			if (location2.getX() < location1.getX()) {
-				revertLocations();
-			} else if (location2.getX() == location1.getX()) {
-				if (location2.getZ() < location1.getZ()) {
-					revertLocations();
-				} else if (location2.getZ() == location1.getZ()) {
-					if (location2.getY() < location1.getY()) {
-						revertLocations();
-					}
-				}
-			}
-		}
+		sortLocations();
 	}
 
 	//---------------------------------------------------------------------------- setMarketItemsOnly
@@ -465,6 +467,24 @@ public class Shop
 	public void setPlayerName(String playerName)
 	{
 		this.playerName = playerName;
+	}
+
+	//--------------------------------------------------------------------------------- sortLocations
+	private void sortLocations()
+	{
+		if (location2 != null) {
+			if (location2.getX() < location1.getX()) {
+				revertLocations();
+			} else if (location2.getX() == location1.getX()) {
+				if (location2.getZ() < location1.getZ()) {
+					revertLocations();
+				} else if (location2.getZ() == location1.getZ()) {
+					if (location2.getY() < location1.getY()) {
+						revertLocations();
+					}
+				}
+			}
+		}
 	}
 
 	//-------------------------------------------------------------------------------------- toString

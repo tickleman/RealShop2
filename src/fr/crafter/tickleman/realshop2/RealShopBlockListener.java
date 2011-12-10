@@ -36,7 +36,7 @@ public class RealShopBlockListener extends BlockListener
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		if (block.getType().equals(Material.CHEST)) {
-			Shop shop = plugin.getShopList().shopAt(block);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
 			if (shop != null) {
 				// break a chest that is a shop : select shop and cancel break
 				if (player instanceof Player) {
@@ -57,7 +57,7 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block) != null) {
+			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
 				event.setCancelled(true);
 			}
 		}
@@ -70,7 +70,7 @@ public class RealShopBlockListener extends BlockListener
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		if (block.getType().equals(Material.CHEST)) {
-			Shop shop = plugin.getShopList().shopAt(block);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
 			if (shop != null) {
 				// damage a chest that is a shop : select shop and cancel damage
 				if (player instanceof Player) {
@@ -91,7 +91,7 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block) != null) {
+			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
 				event.setCancelled(true);
 			}
 		}
@@ -103,7 +103,7 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block) != null) {
+			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
 				event.setCancelled(true);
 			}
 		}
@@ -116,26 +116,35 @@ public class RealShopBlockListener extends BlockListener
 		Block block = event.getBlock();
 		Player player = event.getPlayer();
 		if (block.getType().equals(Material.CHEST) && (player instanceof Player)) {
-			Shop shop = plugin.getShopList().shopAt(block);
+			Shop shop = plugin.getShopList().shopAt(block.getLocation());
+			plugin.getLog().debug(
+				"shop at " + new RealLocation(block.getLocation()).toString() + " = "
+				+ (shop == null ? "null" : shop.toString())
+			);
 			if (shop != null) {
-				// place chest on a location where it was an old "ghost shop" : delete the shop
-				plugin.getShopList().delete(shop);
-				plugin.getShopList().save();
+				if (shop.containsLocation(block.getLocation())) {
+					// place chest on a location where it was an old "ghost shop" : delete the shop
+					plugin.getLog().debug(
+						"There is a ghost shop " + shop.toString()
+						+ " at location " + new RealLocation(block.getLocation()).toString()
+					);
+					plugin.getLog().debug("shop will be deleted");
+					plugin.getShopList().delete(shop);
+					plugin.getShopList().save();
+				} else {
+					// place chest near a shop-chest : make the shop bigger
+					plugin.getLog().debug(
+						"There is a shop on the chest block next to "
+						+ new RealLocation(block.getLocation()).toString()
+					);
+					plugin.getLog().debug("Make the shop bigger");
+					shop.forceLocations(shop.getLocation(), block.getLocation());
+					plugin.getShopList().save();
+					plugin.getPlayerShopList().selectShop(player, shop);
+				}
 			} else {
-				RealLocation location = new RealLocation(block.getLocation()).neighbor();
-				if (location != null) {
-					shop = plugin.getShopList().shopAt(location);
-					if (shop != null) {
-						// place chest near a shop-chest : make the shop bigger
-						shop.setLocation(location);
-						plugin.getShopList().save();
-						plugin.getPlayerShopList().selectShop(player, shop);
-					}
-				}
-				if (shop == null) {
-					// auto-select chest
-					plugin.getPlayerChestList().selectChest(player, new RealChest(block));
-				}
+				// auto-select chest
+				plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 			}
 		}
 	}
@@ -146,7 +155,7 @@ public class RealShopBlockListener extends BlockListener
 	{
 		Block block = event.getBlock();
 		if (block.getType().equals(Material.CHEST)) {
-			if (plugin.getShopList().shopAt(block) != null) {
+			if (plugin.getShopList().shopAt(block.getLocation()) != null) {
 				event.setCancelled(true);
 			}
 		}

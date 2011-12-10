@@ -90,7 +90,7 @@ public class ShopAction
 	 */
 	public boolean enterChestBlock(Player player, Block block)
 	{
-		Shop shop = plugin.getShopList().shopAt(block);
+		Shop shop = plugin.getShopList().shopAt(block.getLocation());
 		plugin.getPlayerChestList().selectChest(player, new RealChest(block));
 		if (shop != null) {
 			plugin.getLog().debug("enterShop(" + player.getName() + ")");

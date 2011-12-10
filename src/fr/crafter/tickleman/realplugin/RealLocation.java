@@ -93,4 +93,10 @@ public class RealLocation extends Location
 		return (Location)this;
 	}
 
+	//-------------------------------------------------------------------------------------- toString
+	public String toString()
+	{
+		return getWorld().getName() + ";" + getBlockX() + ";" + getBlockY() + ";" + getBlockZ();
+	}
+
 }
