@@ -35,6 +35,12 @@ public class RealItemTypeList
 	}
 
 	//------------------------------------------------------------------------------------------- get
+	public RealItemType get(RealItemStack itemStack)
+	{
+		return content.get(new RealItemType(itemStack).toString());
+	}
+
+	//------------------------------------------------------------------------------------------- get
 	public RealItemType get(RealItemType itemType)
 	{
 		return content.get(itemType.toString());

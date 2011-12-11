@@ -10,6 +10,7 @@ import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealItemTypeList;
 import fr.crafter.tickleman.realplugin.RealLocation;
 import fr.crafter.tickleman.realplugin.RealVarTools;
+import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 
 //############################################################################################ Shop
 public class Shop
@@ -80,13 +81,22 @@ public class Shop
 	}
 
 	//------------------------------------------------------------------------------------ canBuyItem
-	public boolean canBuyItem(RealItemStack itemStack)
+	public boolean canBuyItem(RealShop2Plugin plugin, RealItemStack itemStack)
 	{
 		if (
 			((itemStack.getDamage() > 0) && !getDamagedItems())
 			|| (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null)
-			|| (getBuyOnlyList().get(itemStack) != null)
+			|| (getBuyExcludeList().get(itemStack) != null)
 		) {
+			if ((itemStack.getDamage() > 0) && !getDamagedItems()) {
+				plugin.getLog().debug("can not buy damaged item");
+			}
+			if (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null) {
+				plugin.getLog().debug("can not buy not in only list item");
+			}
+			if (getBuyExcludeList().get(itemStack) != null) {
+				plugin.getLog().debug("can not buy item in exclude list");
+			}
 			return false;
 		} else {
 			return true;
@@ -94,13 +104,22 @@ public class Shop
 	}
 
 	//----------------------------------------------------------------------------------- canSellItem
-	public boolean canSellItem(RealItemStack itemStack)
+	public boolean canSellItem(RealShop2Plugin plugin, RealItemStack itemStack)
 	{
 		if (
 			((itemStack.getDamage() > 0) && !getDamagedItems())
 			|| (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null)
-			|| (getSellOnlyList().get(itemStack) != null)
+			|| (getSellExcludeList().get(itemStack) != null)
 		) {
+			if ((itemStack.getDamage() > 0) && !getDamagedItems()) {
+				plugin.getLog().debug("can not sell damaged item");
+			}
+			if (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null) {
+				plugin.getLog().debug("can not sell not in only list item");
+			}
+			if (getSellExcludeList().get(itemStack) != null) {
+				plugin.getLog().debug("can not sell item in exclude list");
+			}
 			return false;
 		} else {
 			return true;

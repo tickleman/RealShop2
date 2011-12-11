@@ -65,10 +65,12 @@ public class TransactionAction
 	 */
 	public boolean canPay(Player player, Shop shop, ItemStack buyStack, ItemStack sellStack)
 	{
-		if ((buyStack != null) && !shop.canBuyItem(new RealItemStack(buyStack))) {
+		if ((buyStack != null) && !shop.canBuyItem(plugin, new RealItemStack(buyStack))) {
+			plugin.getLog().debug("can not buy item");
 			return false;
 		}
-		if ((sellStack != null) && !shop.canSellItem(new RealItemStack(sellStack))) {
+		if ((sellStack != null) && !shop.canSellItem(plugin, new RealItemStack(sellStack))) {
+			plugin.getLog().debug("can not sell item");
 			return false;
 		}
 		Price buyPrice = (buyStack == null) ? null : calculatePrice(shop, buyStack);
@@ -83,6 +85,7 @@ public class TransactionAction
 			if ((buyStack != null) && (buyStack.getAmount() > 0) && (buyPrice == null)) {
 				plugin.getLog().debug("canPay sell price not found for sell " + RealItemStack.create(sellStack));
 			}
+			plugin.getLog().debug("Can not pay as an item has a null price");
 			// can't pay if any item has a null price ("price not found")
 			return false;
 		}

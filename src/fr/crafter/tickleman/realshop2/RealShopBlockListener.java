@@ -92,7 +92,7 @@ public class RealShopBlockListener extends BlockListener
 				if (plugin.getRealConfig().shopProtection) {
 					event.setCancelled(true);
 				}
-		} else if (player instanceof Player) {
+			} else if (player instanceof Player) {
 				// damage a chest that is not a shop : does nothing, only unselect shop and select chest
 				plugin.getPlayerShopList().unselectShop(player);
 				plugin.getPlayerChestList().selectChest(player, new RealChest(block));
