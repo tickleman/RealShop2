@@ -212,7 +212,7 @@ public class RealItemType
 	@Override
 	public String toString()
 	{
-		return getTypeId() + ((getVariant() != 0) ? " : " + getVariant() : "");
+		return getTypeId() + ((getVariant() != 0) ? ":" + getVariant() : "");
 	}
 
 	//------------------------------------------------------------------------------- typeIdHasDamage
