@@ -65,7 +65,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 						if (move.getCursor() != null) {
 							if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
 								// infinite sell : empty cursor and nothing changes into inventory slot
-								if (shop.getInfiniteSell()) {
+								if (shop.getInfiniteSell() && event.isLeftClick()) {
 									plugin.getLog().debug("infinite sell action : null cursor");
 									event.setResult(Result.ALLOW);
 									event.setCursor(null);
