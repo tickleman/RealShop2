@@ -1,13 +1,14 @@
 package fr.crafter.tickleman.realplugin;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 //#################################################################################### ItemTypeList
 public class RealItemTypeList
 {
 
-	private HashMap<String, RealItemType> content = new HashMap<String, RealItemType>();
+	private Map<String, RealItemType> content = new HashMap<String, RealItemType>();
 
 	//----------------------------------------------------------------------------------------- clear
 	public void clear()
@@ -47,7 +48,7 @@ public class RealItemTypeList
 	}
 
 	//------------------------------------------------------------------------------------ getContent
-	public HashMap<String, RealItemType> getContent()
+	public Map<String, RealItemType> getContent()
 	{
 		return content;
 	}

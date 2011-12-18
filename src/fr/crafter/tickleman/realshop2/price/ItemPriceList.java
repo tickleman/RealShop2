@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import fr.crafter.tickleman.realplugin.RealFileTools;
@@ -25,13 +26,13 @@ public class ItemPriceList
 	private final RealShop2Plugin plugin;
 
 	/** prices list : ItemType "typeId[:variant]" => Price(buy, sell) */
-	private HashMap<String, Price> prices = new HashMap<String, Price>();
+	private Map<String, Price> prices = new HashMap<String, Price>();
 
 	/** anti-recurse security flag for recipes */
 	private int recurseSecurity = 0;
 
 	/** anti-recurse item type string list */
-	private HashSet<String> recurseItemTypes = new HashSet<String>();
+	private Set<String> recurseItemTypes = new HashSet<String>();
 
 	//--------------------------------------------------------------------------------- ItemPriceList
 	public ItemPriceList(final RealShop2Plugin plugin, final String fileName)

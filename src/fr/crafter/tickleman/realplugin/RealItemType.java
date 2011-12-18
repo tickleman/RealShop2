@@ -120,7 +120,7 @@ public class RealItemType
 				}
 			}
 		}
-		return name;
+		return (name == null) ? "" : name;
 	}
 
 	//--------------------------------------------------------------------------------------- getName
@@ -170,6 +170,16 @@ public class RealItemType
 			return new RealItemType(Integer.parseInt(split[0]), Short.parseShort(split[1]));
 		} else {
 			return new RealItemType(Integer.parseInt(typeIdVariant));
+		}
+	}
+
+	//------------------------------------------------------------------------- parseItemTypeKeywords
+	public static RealItemType parseItemTypeKeywords(String[] keyWords)
+	{
+		try {
+			return RealItemType.parseItemType(keyWords[0]);
+		} catch (Exception e) {
+			return RealItemType.parseItemType("0");
 		}
 	}
 

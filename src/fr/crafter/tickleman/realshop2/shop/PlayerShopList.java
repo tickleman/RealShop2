@@ -1,6 +1,7 @@
 package fr.crafter.tickleman.realshop2.shop;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.entity.Player;
 
@@ -15,12 +16,12 @@ public class PlayerShopList
 	/**
 	 * Selected shop list : Player => Shop
 	 */
-	private HashMap<Player, Shop> selectShop = new HashMap<Player, Shop>();
+	private Map<Player, Shop> selectShop = new HashMap<Player, Shop>();
 
 	/**
 	 * Inside shop players list : Player => Shop
 	 */
-	private HashMap<Player, Shop> insideShop = new HashMap<Player, Shop>();
+	private Map<Player, Shop> insideShop = new HashMap<Player, Shop>();
 
 	//-------------------------------------------------------------------------------- PlayerShopList
 	public PlayerShopList(RealShop2Plugin plugin)

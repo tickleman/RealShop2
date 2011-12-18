@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -21,7 +23,7 @@ public class ShopList
 	private final RealPlugin plugin;
 
 	/** Shops list : "x;y;z;world" => Shop */
-	private HashMap<String, Shop> shops = new HashMap<String, Shop>();
+	private Map<String, Shop> shops = new HashMap<String, Shop>();
 
 	//-------------------------------------------------------------------------------------- ShopList
 	public ShopList(final RealPlugin plugin)
@@ -46,6 +48,22 @@ public class ShopList
 	public void delete(Shop shop)
 	{
 		shops.remove(shop.getId());
+	}
+
+	//--------------------------------------------------------------------------- getSortedByDistance
+	public Map<Double, Shop> getSortedByDistance(Location location)
+	{
+		Map<Double, Shop> sortedShops = new TreeMap<Double, Shop>();
+		for (Shop shop : shops.values()) {
+			if (location.getWorld().equals(shop.getLocation().getWorld())) {
+				double distance = Math.sqrt(
+					Math.pow(Math.abs(shop.getLocation().getX() - location.getX()), 2)
+					+ Math.pow(Math.abs(shop.getLocation().getZ() - location.getZ()), 2)
+				);
+				sortedShops.put(distance, shop);
+			}
+		}
+		return sortedShops;
 	}
 
 	//---------------------------------------------------------------------------------------- isShop

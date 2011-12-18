@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import fr.crafter.tickleman.realplugin.RealPlugin;
 
@@ -13,7 +14,7 @@ public class RealAccounts
 {
 
 	/** Accounts list : "playerName" => (double)balance */
-	private HashMap<String, Double> accounts = new HashMap<String, Double>();
+	private Map<String, Double> accounts = new HashMap<String, Double>();
 
 	private final String fileName;
 

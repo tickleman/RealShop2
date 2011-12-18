@@ -99,4 +99,11 @@ public class RealLocation extends Location
 		return getWorld().getName() + ";" + getBlockX() + ";" + getBlockY() + ";" + getBlockZ();
 	}
 
+	//-------------------------------------------------------------------------------------- toString
+	public static String toString(Location location)
+	{
+		return location.getWorld().getName() + ";"
+			+ location.getBlockX() + ";" + location.getBlockY() + ";" + location.getBlockZ();
+	}
+
 }

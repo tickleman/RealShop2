@@ -1,6 +1,7 @@
 package fr.crafter.tickleman.realplugin;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
@@ -16,7 +17,7 @@ public class RealInventoryListener extends InventoryListener
 {
 
 	/** Which inventory object has clicked the player ? himself, a chest, a furnace, ... ? */
-	private HashMap <Player, Inventory> playerInventory = new HashMap <Player, Inventory>();
+	private Map <Player, Inventory> playerInventory = new HashMap <Player, Inventory>();
 
 	//--------------------------------------------------------------------------------- availableRoom
 	/**

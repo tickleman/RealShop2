@@ -1,8 +1,11 @@
 package fr.crafter.tickleman.realshop2.shop;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealItemStack;
@@ -130,6 +133,21 @@ public class Shop
 	public void close()
 	{
 		this.opened = false;
+	}
+
+	//-------------------------------------------------------------------------------------- contains
+	public int contains(RealItemStack itemStack)
+	{
+		int amount = 0;
+		if (getLocation().getBlock().getType().equals(Material.CHEST)) {
+			RealChest chest = new RealChest(getLocation());
+			for (Inventory inventory : chest.getInventories()) {
+				for (ItemStack stack : inventory.all(itemStack.getTypeId()).values()) {
+					amount += stack.getAmount();
+				}
+			}
+		}
+		return amount;
 	}
 
 	//------------------------------------------------------------------------------ containsLocation

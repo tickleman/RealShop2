@@ -1,6 +1,7 @@
 package fr.crafter.tickleman.realshop2.transaction;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealLog;
@@ -10,7 +11,7 @@ import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 public class DailyLog
 {
 
-	private HashMap<String, Integer> moves = new HashMap<String, Integer>();
+	private Map<String, Integer> moves = new HashMap<String, Integer>();
 
 	@SuppressWarnings("unused")
 	private final RealShop2Plugin plugin;

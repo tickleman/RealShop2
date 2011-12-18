@@ -12,6 +12,7 @@ import fr.crafter.tickleman.realshop2.price.PlayerPriceAction;
 import fr.crafter.tickleman.realshop2.price.PriceAction;
 import fr.crafter.tickleman.realshop2.shop.Shop;
 import fr.crafter.tickleman.realshop2.shop.ShopAction;
+import fr.crafter.tickleman.realshop2.shop.ShopListAction;
 
 //################################################################################# RealShopCommand
 public class RealShopCommand
@@ -65,6 +66,10 @@ public class RealShopCommand
 					"Could not load version 0 shops list from your plugins/RealShop/shops.txt file"
 				));
 			}
+			return true;
+		} else if (params[0].equals("search") && (params.length > 1)) {
+			ShopListAction shopListAction = new ShopListAction(plugin);
+			shopListAction.searchItem(params[1], player);
 			return true;
 		}
 		return false;
@@ -198,6 +203,7 @@ public class RealShopCommand
 		if (param.equals("sim")) return "simul";
 		if (param.equals("xb"))  return "xbuy";
 		if (param.equals("xs"))  return "xsell";
+		if (param.equals("yp"))  return "search";
 		return param;
 	}
 

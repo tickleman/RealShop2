@@ -3,6 +3,7 @@ package fr.crafter.tickleman.realplugin;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,7 +14,7 @@ public class RealTranslation
 
 	private final String            fileName;
 	private final JavaPlugin        plugin;
-	private HashMap<String, String> translations = new HashMap<String, String>();
+	private Map<String, String> translations = new HashMap<String, String>();
 
 	// ---------------------------------------------------------------------------------- Translation
 	public RealTranslation(final JavaPlugin plugin)
