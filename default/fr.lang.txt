@@ -27,8 +27,10 @@ sell not allowed=vente interdite
 Stolen +item x+quantity item duplicated !=Vol +item x+quantity article duplique !
 
 # SHOP OWNER : TRANSACTION
-[shop +name] +client purchased +item x+quantity (+linePrice)=[magasin +name] +client vous a achete +item x+quantity (+linePrice)
-[shop +name] +client sold +item x+quantity (+linePrice)=[magasin +name] +client vous a vendu +item x+quantity (+linePrice)
+[shop +name] +client purchased +item x+quantity (+linePrice) to you=[magasin +name] +client vous a achete +item x+quantity (+linePrice)
+[shop +name] +client sold +item x+quantity (+linePrice) to you=[magasin +name] +client vous a vendu +item x+quantity (+linePrice)
+[shop +name] +client purchased +item x+quantity (+linePrice) to +owner=[magasin +name] +client a achete +item x+quantity (+linePrice) a +owner
+[shop +name] +client sold +item x+quantity (+linePrice) to +owner=[magasin +name] +client a vendu +item x+quantity (+linePrice) a +owner
 
 # SHOP OWNER
 Now clients can buy +items=Les clients peuvent acheter +items

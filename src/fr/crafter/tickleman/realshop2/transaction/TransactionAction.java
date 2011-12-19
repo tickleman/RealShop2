@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realshop2.transaction;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -44,7 +45,31 @@ public class TransactionAction
 		return 0;
 	}
 
-	//----------------------------------------------------------------------------------------- price
+	//--------------------------------------------------------------------- broadcastPlayersBuyOrSell
+	private void broadcastNearbyPlayersBuyOrSell(
+			ItemStack itemStack, RealItemType itemType, Player player, Shop shop, String side,
+			double amount, double price
+	) {
+		for (Entity entity : player.getNearbyEntities(5.0d, 5.0d, 5.0d)) {
+			if (entity instanceof Player) {
+				Player nearbyPlayer = (Player)entity;
+				nearbyPlayer.sendMessage(
+					RealColor.text
+					+ plugin.tr("[shop +name] +client " + side + " +item x+quantity (+linePrice) to +owner")
+					.replace("+client", RealColor.player + player.getName() + RealColor.text)
+					.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
+					.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
+					.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
+					.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
+					.replace("+price", "" + RealColor.price + price + RealColor.text)
+					.replace("+quantity", "" + RealColor.quantity + itemStack.getAmount() + RealColor.text)
+					.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
+				);
+			}
+		}
+	}
+
+  //----------------------------------------------------------------------------------------- price
 	public Price calculatePrice(Shop shop, ItemStack itemStack)
 	{
 		return calculatePrice(shop, new RealItemStack(itemStack));
@@ -153,7 +178,7 @@ public class TransactionAction
 		if (shopPlayer != null) {
 			shopPlayer.sendMessage(
 				RealColor.text
-				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice)")
+				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice) to you")
 				.replace("+client", RealColor.player + player.getName() + RealColor.text)
 				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
 				.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
@@ -164,6 +189,7 @@ public class TransactionAction
 				.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
 			);
 		}
+		broadcastNearbyPlayersBuyOrSell(itemStack, itemType, player, shop, shopSide, amount, price);
 	}
 
 }
