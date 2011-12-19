@@ -244,6 +244,7 @@ public class RealItemType
 			|| (typeId == Material.STEP.getId())
 			|| (typeId == Material.COAL.getId())
 			|| (typeId == Item.INK_SACK.id)
+			|| (typeId == Item.POTION.id)
 		;
 	}
 

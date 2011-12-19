@@ -70,6 +70,7 @@
  369     ;   15 ;   12 ; blaze rod
  370     ;  500 ;  450 ; ghast tear
  372     ;   14 ;   12 ; nether wart
+ 373     ;  100 ;  100 ; potion
  375     ;    5 ;    4 ; spider eye
 2256     ; 1000 ;  900 ; 13 disc
 2257     ; 1000 ;  900 ; cat disc
