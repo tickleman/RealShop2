@@ -1,5 +1,9 @@
 package fr.crafter.tickleman.realplugin;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 //############################################################################# class RealItemStack
@@ -18,19 +22,35 @@ public class RealItemStack extends RealItemType
 	 */
 	private short damage;
 
+	private Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
+
 	//######################################################################################## PUBLIC
 
 	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(ItemStack itemStack)
 	{
-		this(itemStack.getTypeId(), itemStack.getAmount(), itemStack.getDurability());
+		this(
+			itemStack.getTypeId(), itemStack.getAmount(),
+			itemStack.getDurability(), itemStack.getEnchantments()
+		);
 	}
 
 	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(net.minecraft.server.ItemStack itemStack)
 	{
 		// patch : replace 9 with 1 (when take blocks from recipe it gives me 9x9 instead of 9x1 !!!)
-		this(itemStack.id, itemStack.count == 9 ? 1 : itemStack.count, (short)itemStack.getData());
+		this(
+			itemStack.id, itemStack.count == 9 ? 1 : itemStack.count,
+			(short)itemStack.getData()
+		);
+		// TODO : get enchantments from itemStack (good luck friend)
+		/*
+		if (itemStack.getEnchantments() != null) {
+			for (int i = 0 ; i < itemStack.getEnchantments().size(); i ++) {
+				this.enchantments.put(itemStack.getEnchantments().get(i).)
+			}
+		}
+		*/
 	}
 
 	//--------------------------------------------------------------------------------- RealItemStack
@@ -43,9 +63,21 @@ public class RealItemStack extends RealItemType
 	//--------------------------------------------------------------------------------- RealItemStack
 	public RealItemStack(int typeId, int amount, short durability_variant)
 	{
+		this(typeId, amount, durability_variant, null);
+	}
+
+	//--------------------------------------------------------------------------------- RealItemStack
+	public RealItemStack(
+		int typeId, int amount, short durability_variant, Map<Enchantment, Integer> enchantments
+	) {
 		super(typeId, durability_variant);
 		setAmount(amount);
 		setDamage(durability_variant);
+		if (enchantments != null) {
+			for (Enchantment enchantment : enchantments.keySet()) {
+				this.enchantments.put(enchantment, enchantments.get(enchantment));
+			}
+		}
 	}
 
 	//---------------------------------------------------------------------------------------- create

@@ -5,13 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.Material;
-
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.CraftingRecipe;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.Item;
-import net.minecraft.server.ItemPotion;
 import net.minecraft.server.ItemStack;
 
 //##################################################################################### RealRecipes

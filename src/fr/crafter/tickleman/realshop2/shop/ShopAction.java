@@ -279,7 +279,7 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Infinite buy flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getInfiniteBuy() ? "on" : "off")
+			+ plugin.tr(shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy) ? "on" : "off")
 		);
 	}
 
@@ -292,7 +292,7 @@ public class ShopAction
 			RealColor.message
 			+ plugin.tr("Infinite sell flag is")
 			+ " " + RealColor.command
-			+ plugin.tr(shop.getInfiniteSell() ? "on" : "off")
+			+ plugin.tr(shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell) ? "on" : "off")
 		);
 	}
 

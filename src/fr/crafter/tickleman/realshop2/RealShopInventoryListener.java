@@ -49,12 +49,13 @@ public class RealShopInventoryListener extends RealInventoryListener
 			boolean clickIntoChest = event.getInventory().getName().toLowerCase().contains("chest");
 			TransactionAction transactionAction = new TransactionAction(plugin);
 			if (clickIntoChest) {
-				if (event.isShiftClick() && shop.getInfiniteBuy()) {
+				if (event.isShiftClick() && shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)) {
 					// infinite buy : you can't shift-click that sorry (too much complicated to code)
 					plugin.getLog().debug("infinite buy not allowed with shift-click : cancel");
 					event.setCancelled(true);
 				} else if (
-					shop.getInfiniteBuy() && (event.getCursor() != null) && (event.getItem() != null)
+					shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)
+					&& (event.getCursor() != null) && (event.getItem() != null)
 				) {
 					// infinite buy : you can't click with something on cursor and item slot (too much complicated to code)
 					plugin.getLog().debug("infinite buy not allowed with cursor + item slots filled : cancel");
@@ -65,7 +66,10 @@ public class RealShopInventoryListener extends RealInventoryListener
 						if (move.getCursor() != null) {
 							if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
 								// infinite sell : empty cursor and nothing changes into inventory slot
-								if (shop.getInfiniteSell() && event.isLeftClick()) {
+								if (
+									shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)
+									&& event.isLeftClick()
+								) {
 									plugin.getLog().debug("infinite sell action : null cursor");
 									event.setResult(Result.ALLOW);
 									event.setCursor(null);
@@ -75,7 +79,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 						if (move.getItem() != null) {
 							if (transactionAction.buy(player, shop, move.getItem()) > 0) {
 								// infinite buy : put inventory slot into cursor and does not empty inventory slot
-								if (shop.getInfiniteBuy()) {
+								if (shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)) {
 									plugin.getLog().debug("infinite buy action : clone item and cancel");
 									event.setResult(Result.ALLOW);
 									event.setCursor(move.getItem().clone());
@@ -90,7 +94,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 					}
 				}
 			} else if (event.isShiftClick() && (move.getItem() != null)) {
-				if (shop.getInfiniteSell()) {
+				if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
 					// infinite sell : you can't shift-click sorry (too much complicated to code)
 					plugin.getLog().debug("infinite-sell is not allowed with shift-click : cancel");
 					event.setCancelled(true);

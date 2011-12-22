@@ -16,6 +16,8 @@ public class RealShopConfig extends RealConfig
 	public double  minItemPrice = .1;
 	public boolean shopProtection = true;
 	public boolean shopDamagedItems = false;
+	public boolean shopInfiniteBuy = false;
+	public boolean shopInfiniteSell = false;
 	public boolean shopMarketItemsOnly = false;
 	public boolean shopOpOnly = false;
 	public double  workForceRatio = 1.1;

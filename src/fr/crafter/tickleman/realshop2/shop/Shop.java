@@ -87,11 +87,11 @@ public class Shop
 	public boolean canBuyItem(RealShop2Plugin plugin, RealItemStack itemStack)
 	{
 		if (
-			((itemStack.getDamage() > 0) && !getDamagedItems())
+			((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems))
 			|| (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null)
 			|| (getBuyExcludeList().get(itemStack) != null)
 		) {
-			if ((itemStack.getDamage() > 0) && !getDamagedItems()) {
+			if ((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems)) {
 				plugin.getLog().debug("can not buy damaged item");
 			}
 			if (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null) {
@@ -110,11 +110,11 @@ public class Shop
 	public boolean canSellItem(RealShop2Plugin plugin, RealItemStack itemStack)
 	{
 		if (
-			((itemStack.getDamage() > 0) && !getDamagedItems())
+			((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems))
 			|| (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null)
 			|| (getSellExcludeList().get(itemStack) != null)
 		) {
-			if ((itemStack.getDamage() > 0) && !getDamagedItems()) {
+			if ((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems)) {
 				plugin.getLog().debug("can not sell damaged item");
 			}
 			if (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null) {
