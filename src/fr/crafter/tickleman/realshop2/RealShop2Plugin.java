@@ -142,6 +142,7 @@ public class RealShop2Plugin extends RealPlugin
 		// check this out
 		//System.out.println("ALL RECIPES :");
 		//RealRecipe.dumpAllRecipes();
+		//RealRecipe.getItemRecipes(new RealItemType(Material.POTION, (short)16));
 		RealStats.call(this, "use");
 	}
 

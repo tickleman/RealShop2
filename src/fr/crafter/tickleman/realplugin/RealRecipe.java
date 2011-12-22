@@ -5,10 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Material;
+
 import net.minecraft.server.CraftingManager;
 import net.minecraft.server.CraftingRecipe;
 import net.minecraft.server.FurnaceRecipes;
 import net.minecraft.server.Item;
+import net.minecraft.server.ItemPotion;
 import net.minecraft.server.ItemStack;
 
 //##################################################################################### RealRecipes
@@ -106,12 +109,12 @@ public class RealRecipe
 	/**
 	 * Return a set of possible recipes for given item type
 	 */
-	public static Set<RealRecipe> getItemRecipes(RealItemType itemType)
+	public static Set<RealRecipe> getItemRecipes(RealItemType realItemType)
 	{
 		Set<RealRecipe> itemRecipes = new HashSet<RealRecipe>();
 		for (Object recipe : CraftingManager.getInstance().b()) {
 			RealItemStack resultItemStack = new RealItemStack(((CraftingRecipe)recipe).b());
-			if (itemType.isSameItem(resultItemStack)) {
+			if (realItemType.isSameItem(resultItemStack)) {
 				itemRecipes.add(new RealRecipe((CraftingRecipe)recipe, resultItemStack));
 			}
 		}
@@ -120,10 +123,24 @@ public class RealRecipe
 			RealItemStack resultItemStack = new RealItemStack(
 				(ItemStack)FurnaceRecipes.getInstance().b().get(itemTypeId)
 			);
-			if (itemType.isSameItem(resultItemStack)) {
+			if (realItemType.isSameItem(resultItemStack)) {
 				itemRecipes.add(new RealRecipe(recipeItemStack, resultItemStack));
 			}
 		}
+		// TODO : here potions recipes here (must find a way)
+		/*
+		if (itemRecipes.isEmpty() && (realItemType.getTypeId() == Material.POTION.getId())) {
+			ItemPotion itemPotion = (ItemPotion)Item.byId[Material.POTION.getId()];
+			if (itemPotion == null) System.out.println("POTION IS NULL");
+			else {
+				System.out.println("POTION IS " + realItemType.toString());
+				for (Object objectPotion : itemPotion.b(realItemType.getVariant())) {
+					ItemStack itemStack = (ItemStack)objectPotion;
+					System.out.println(new RealItemStack(itemStack).toString());
+				}
+			}
+		}
+		*/
 		return itemRecipes;
 	}
 

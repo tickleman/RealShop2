@@ -69,7 +69,7 @@ public class RealShopCommand
 			return true;
 		} else if (params[0].equals("search") && (params.length > 1)) {
 			ShopListAction shopListAction = new ShopListAction(plugin);
-			shopListAction.searchItem(params[1], player);
+			shopListAction.searchItem(params[1], player, (params.length >= 3) ? params[2] : "");
 			return true;
 		}
 		return false;
