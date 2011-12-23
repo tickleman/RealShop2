@@ -29,16 +29,29 @@ public class RealItemTypeList
 				boolean isPlus = true;
 				for (String elem : subChain.split("\\-")) {
 					if (elem.length() > 0) {
-						RealItemType itemType = RealItemType.parseItemType(elem);
-						if (isPlus) {
-							put(itemType);
+						if (elem.contains(":*")) {
+							elem = elem.replace(":*", "");
+							for (short variant : RealItemType.typeIdVariants(RealItemType.parseItemType(elem))) {
+								addRemoveItem(elem + ":" + variant, isPlus);
+							}
 						} else {
-							remove(itemType);
+							addRemoveItem(elem, isPlus);
 						}
 					}
 					isPlus = false;
 				}
 			}
+		}
+	}
+
+	//--------------------------------------------------------------------------------- addRemoveItem
+	private void addRemoveItem(String elem, boolean isPlus)
+	{
+		RealItemType itemType = RealItemType.parseItemType(elem);
+		if (isPlus) {
+			put(itemType);
+		} else {
+			remove(itemType);
 		}
 	}
 

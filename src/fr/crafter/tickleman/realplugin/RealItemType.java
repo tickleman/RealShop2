@@ -238,6 +238,7 @@ public class RealItemType
 			// those codes have variant : durability is an item variant instead of damage
 			(typeId == Material.LOG.getId())
 			|| (typeId == Material.LEAVES.getId())
+			|| (typeId == Material.SAPLING.getId())
 			|| (typeId == Material.MONSTER_EGGS.getId())
 			|| (typeId == Material.WOOL.getId())
 			|| (typeId == Material.DOUBLE_STEP.getId())
@@ -260,6 +261,45 @@ public class RealItemType
 			return (short)Block.byId[typeId].c();
 		} else {
 			return (short)Item.byId[typeId].getMaxDurability();
+		}
+	}
+
+	//-------------------------------------------------------------------------------- typeIdVariants
+	public static short[] typeIdVariants(RealItemType parseItemType)
+	{
+		if (
+			parseItemType.typeId == Material.LOG.getId()
+			|| parseItemType.typeId == Material.LEAVES.getId()
+			|| parseItemType.typeId == Material.SAPLING.getId()
+		) {
+			short[] variants = {0, 1, 2};
+			return variants;
+		} else if (
+			parseItemType.typeId == Material.DOUBLE_STEP.getId()
+			|| parseItemType.typeId == Material.STEP.getId()
+		) {
+			short[] variants = {0, 1, 2, 3, 4, 5, 6};
+			return variants;
+		} else if (
+			parseItemType.typeId == Material.WOOL.getId()
+			|| parseItemType.typeId == Material.INK_SACK.getId()
+		) {
+			short[] variants = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+			return variants;
+		} else if (parseItemType.typeId == Material.COAL.getId()) {
+			short[] variants = {0, 1};
+			return variants;
+		} else if (parseItemType.typeId == Material.POTION.getId()) {
+			short[] variants = {
+				0, 16, 32, 64, 8192, 8193, 8257, 8225, 8194, 8258, 8226, 8195, 8259, 8197, 8229, 8201, 8265,
+				8233, 8196, 8260, 8228, 8200, 8264, 8202, 8266, 8204, 8236, 16384, 16385, 16449, 16417,
+				16386, 16450, 16418, 16387, 16451, 16389, 16421, 16393, 16457, 16425, 16388, 16452, 16420,
+				16392, 16456, 16394, 16458, 16396, 16428
+			};
+			return variants;
+		} else {
+			short[] variants = {};
+			return variants;
 		}
 	}
 
