@@ -254,6 +254,9 @@ public class RealItemType
 		if (typeIdHasVariant(typeId)) {
 			return 0;
 		} else if (typeId < 256) {
+			// this could be easily broken on craftbukkit's next updates,
+			// but I mean that blocks are never traded with a damage value, as they are
+			// damaged only when you hit them, and are never damaged when in inventories
 			return (short)Block.byId[typeId].c();
 		} else {
 			return (short)Item.byId[typeId].getMaxDurability();

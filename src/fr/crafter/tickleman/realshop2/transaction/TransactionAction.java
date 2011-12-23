@@ -1,9 +1,11 @@
 package fr.crafter.tickleman.realshop2.transaction;
 
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import fr.crafter.tickleman.realplugin.RealEnchantment;
 import fr.crafter.tickleman.realplugin.RealItemType;
 import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realplugin.RealItemStack;
@@ -47,8 +49,8 @@ public class TransactionAction
 
 	//--------------------------------------------------------------------- broadcastPlayersBuyOrSell
 	private void broadcastNearbyPlayersBuyOrSell(
-			ItemStack itemStack, RealItemType itemType, Player player, Shop shop, String side,
-			double amount, double price
+		ItemStack itemStack, RealItemType itemType, Player player, Shop shop, String side,
+		double amount, double price
 	) {
 		for (Entity entity : player.getNearbyEntities(5.0d, 5.0d, 5.0d)) {
 			if (entity instanceof Player) {
@@ -81,6 +83,18 @@ public class TransactionAction
 		RealItemType itemType = itemStack.getItemType();
 		ItemPriceList prices = new ItemPriceList(plugin, shop.getPlayerName()).load();
 		Price price = prices.getPrice(itemType, itemStack.getDamage(), plugin.getMarketPrices());
+		if (price != null) {
+			for (Enchantment enchantment : itemStack.getEnchantments()) {
+				price.applyRatio(Math.pow(
+					plugin.getRealConfig().enchantmentLevelRatio,
+					itemStack.getEnchantmentLevel(enchantment)
+				));
+				price.applyRatio(Math.pow(
+					plugin.getRealConfig().enchantmentRandomWeightRatio,
+					10 / RealEnchantment.getEnchantmentWeight(enchantment)
+				));
+			}
+		}
 		return price;
 	}
 

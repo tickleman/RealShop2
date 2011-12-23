@@ -10,6 +10,8 @@ public class RealShopConfig extends RealConfig
 	public double  amountRatio = 5000.0;
 	public double  buySellRatio = .95;
 	public boolean dailyPricesCalculation = false;
+	public double  enchantmentLevelRatio  = 1.1;
+	public double  enchantmentRandomWeightRatio = 1.1;
 	public double  maxDailyRatio = 1.95;
 	public double  maxItemPrice = 99999.0;
 	public double  minDailyRatio = .05;

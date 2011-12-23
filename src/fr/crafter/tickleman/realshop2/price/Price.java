@@ -21,6 +21,15 @@ public class Price
 		this.sell = sell;
 	}
 
+	//------------------------------------------------------------------------------------ applyRatio
+	public void applyRatio(double ratio)
+	{
+		buy  *= ratio;
+		sell *= ratio;
+		if (damagedBuy != null)  damagedBuy  *= ratio;
+		if (damagedSell != null) damagedSell *= ratio;
+	}
+
 	//----------------------------------------------------------------------------------- getBuyPrice
 	public double getBuyPrice()
 	{

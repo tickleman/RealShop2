@@ -2,6 +2,7 @@ package fr.crafter.tickleman.realplugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -102,6 +103,18 @@ public class RealItemStack extends RealItemType
 	public short getDurability()
 	{
 		return typeIdHasDamage(getTypeId()) ? getDamage() : getVariant();
+	}
+
+	//--------------------------------------------------------------------------- getEnchantmentLevel
+	public Integer getEnchantmentLevel(Enchantment enchantment)
+	{
+		return enchantments.get(enchantment);
+	}
+
+	//------------------------------------------------------------------------------- getEnchantments
+	public Set<Enchantment> getEnchantments()
+	{
+		return enchantments.keySet();
 	}
 
 	//----------------------------------------------------------------------------------- getItemType
