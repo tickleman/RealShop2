@@ -55,18 +55,23 @@ public class TransactionAction
 		for (Entity entity : player.getNearbyEntities(5.0d, 5.0d, 5.0d)) {
 			if (entity instanceof Player) {
 				Player nearbyPlayer = (Player)entity;
-				nearbyPlayer.sendMessage(
-					RealColor.text
-					+ plugin.tr("[shop +name] +client " + side + " +item x+quantity (+linePrice) to +owner")
-					.replace("+client", RealColor.player + player.getName() + RealColor.text)
-					.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
-					.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
-					.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
-					.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
-					.replace("+price", "" + RealColor.price + price + RealColor.text)
-					.replace("+quantity", "" + RealColor.quantity + itemStack.getAmount() + RealColor.text)
-					.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
-				);
+				if (
+					!shop.getPlayerName().equalsIgnoreCase(nearbyPlayer.getName())
+					&& !player.getName().equalsIgnoreCase(nearbyPlayer.getName())
+				) {
+					nearbyPlayer.sendMessage(
+						RealColor.text
+						+ plugin.tr("[shop +name] +client " + side + " +item x+quantity (+linePrice) to +owner")
+						.replace("+client", RealColor.player + player.getName() + RealColor.text)
+						.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
+						.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
+						.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
+						.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
+						.replace("+price", "" + RealColor.price + price + RealColor.text)
+						.replace("+quantity", "" + RealColor.quantity + itemStack.getAmount() + RealColor.text)
+						.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
+					);
+				}
 			}
 		}
 	}
