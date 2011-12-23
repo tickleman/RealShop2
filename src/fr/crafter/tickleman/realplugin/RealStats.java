@@ -26,7 +26,6 @@ public class RealStats
 			}
 			input.close();
 		} catch (Exception e) {
-			e.printStackTrace(System.out);
 		}
 	}
 
