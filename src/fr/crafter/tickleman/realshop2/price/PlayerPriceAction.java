@@ -11,7 +11,7 @@ public class PlayerPriceAction extends PriceAction
 	//--------------------------------------------------------------------------- PlayerPricesActions
 	public PlayerPriceAction(RealShop2Plugin plugin, Player player)
 	{
-		super(plugin, new ItemPriceList(plugin, player.getName()).load());
+		super(plugin, new ItemPriceList(plugin, player.getName().toLowerCase()).load());
 	}
 
 	//---------------------------------------------------------------------------------- getPriceType

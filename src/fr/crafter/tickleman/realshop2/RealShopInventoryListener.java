@@ -36,7 +36,9 @@ public class RealShopInventoryListener extends RealInventoryListener
 		Player player = event.getPlayer();
 		Shop shop = plugin.getPlayerShopList().insideShop(player);
 		if (
-			(shop != null) && (event.getSlot() > -999) && !shop.getPlayerName().equals(player.getName())
+			(shop != null) && (event.getSlot() > -999)
+			&& !shop.getPlayerName().equalsIgnoreCase(player.getName())
+			&& !shop.playerIsAnAssistant(player.getName())
 		) {
 			// do something only if clicked on an inventory slot,
 			// and if the player is into another player's shop

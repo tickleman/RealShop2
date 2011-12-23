@@ -140,7 +140,8 @@ public class RealShopCommand
 				RealColor.cancel + plugin.tr("The chest you selected is not a shop")
 			);
 		} else if (
-			!player.getName().equals(shop.getPlayerName()) && !plugin.hasPermission(player, "realshop.op")
+			!player.getName().equalsIgnoreCase(shop.getPlayerName())
+			&& !plugin.hasPermission(player, "realshop.op")
 		) {
 			player.sendMessage(
 				RealColor.cancel
@@ -166,39 +167,46 @@ public class RealShopCommand
 			shopAction.buyExclude(player, shop, params[1]);
 		} else if (params[0].equals("xsell")) {
 			shopAction.sellExclude(player, shop, params[1]);
-		} else if (params[0].equals("infiniteBuy")) {
+		} else if (params[0].equals("infinitebuy")) {
 			shopAction.setInfiniteBuy(player, shop, RealVarTools.parseBoolean(params[1]));
-		} else if (params[0].equals("infiniteSell")) {
+		} else if (params[0].equals("infinitesell")) {
 			shopAction.setInfiniteSell(player, shop, RealVarTools.parseBoolean(params[1]));
-		} else if (params[0].equals("marketItemsOnly")) {
+		} else if (params[0].equals("marketitemsonly")) {
 			shopAction.setMarketItemsOnly(player, shop, RealVarTools.parseBoolean(params[1]));
-		} else if (params[0].equals("damagedItems")) {
+		} else if (params[0].equals("damageditems")) {
 			shopAction.setDamagedItems(player, shop, RealVarTools.parseBoolean(params[1]));
+		} else if (params[0].equals("addassistant")) {
+			shopAction.addAssistant(player, shop, params[1]);
+		} else if (params[0].equals("removeassistant")) {
+			shopAction.removeAssistant(player, shop, params[1]);
 		}
 	}
 
 	//----------------------------------------------------------------------------------- solveAlias1
 	private String solveAlias1(String param)
 	{
+		param = param.toLowerCase();
 		if (param.equals(""))    return "info";
 		if (param.equals("?"))   return "help";
+		if (param.equals("aa"))  return "addassistant";
 		if (param.equals("b"))   return "buy";
 		if (param.equals("c"))   return "create";
 		if (param.equals("chk")) return "check";
 		if (param.equals("cl"))  return "close";
 		if (param.equals("day")) return "daily";
 		if (param.equals("del")) return "delete";
-		if (param.equals("di"))  return "damagedItems";
+		if (param.equals("di"))  return "damageditems";
 		if (param.equals("g"))   return "give";
 		if (param.equals("h"))   return "help";
 		if (param.equals("i"))   return "info";
-		if (param.equals("ib"))  return "infiniteBuy";
-		if (param.equals("is"))  return "infiniteSell";
+		if (param.equals("ib"))  return "infinitebuy";
+		if (param.equals("is"))  return "infinitesell";
 		if (param.equals("m"))   return "market";
-		if (param.equals("mi"))  return "marketItemsOnly";
+		if (param.equals("mi"))  return "marketitemsonly";
 		if (param.equals("op"))  return "open";
 		if (param.equals("p"))   return "price";
 		if (param.equals("r"))   return "reload";
+		if (param.equals("ra"))  return "removeassistant";
 		if (param.equals("s"))   return "sell";
 		if (param.equals("sim")) return "simul";
 		if (param.equals("xb"))  return "xbuy";
@@ -210,6 +218,7 @@ public class RealShopCommand
 	//----------------------------------------------------------------------------------- solveAlias2
 	private String solveAlias2(String param)
 	{
+		param = param.toLowerCase();
 		if (param.equals("a")) return "add";
 		if (param.equals("d")) return "del";
 		if (param.equals("i")) return "info";

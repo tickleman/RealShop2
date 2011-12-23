@@ -1,5 +1,8 @@
 package fr.crafter.tickleman.realshop2.shop;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
@@ -18,6 +21,11 @@ import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 //############################################################################################ Shop
 public class Shop
 {
+
+	/**
+	 * Shop assistant player names
+	 */
+	private Set<String> assistantPlayerNames = new HashSet<String>();
 
 	/**
 	 * Players will not be able to sell these items into this shop
@@ -81,6 +89,12 @@ public class Shop
 	{
 		setLocation(location);
 		setPlayerName(playerName);
+	}
+
+	//------------------------------------------------------------------------ addAssistantPlayerName
+	public void addAssistantPlayerName(String playerName)
+	{
+		assistantPlayerNames.add(playerName.toLowerCase());
 	}
 
 	//------------------------------------------------------------------------------------ canBuyItem
@@ -162,6 +176,19 @@ public class Shop
 		this.location1 = location1;
 		this.location2 = location2;
 		sortLocations();
+	}
+
+	//--------------------------------------------------------------------------- getAssistantsString
+	public String getAssistantsString()
+	{
+		String assistants = "";
+		for (String assistant : assistantPlayerNames) {
+			assistants += "," + assistant;
+		}
+		if (!assistants.isEmpty()) {
+			assistants = assistants.substring(1);
+		}
+		return assistants;
 	}
 
 	//-------------------------------------------------------------------------------- getBuyOnlyList
@@ -368,16 +395,20 @@ public class Shop
 					Double.parseDouble(line[6])
 				);
 			}
-			shop.setName(line[8]);
-			shop.setBuyOnlyList(RealItemTypeList.parseItemTypeList(line[9]));
-			shop.setSellOnlyList(RealItemTypeList.parseItemTypeList(line[10]));
-			shop.setBuyExcludeList(RealItemTypeList.parseItemTypeList(line[11]));
-			shop.setSellExcludeList(RealItemTypeList.parseItemTypeList(line[12]));
-			shop.setOpened(RealVarTools.parseBoolean(line[13]));
-			shop.setInfiniteBuy(RealVarTools.parseBoolean(line[14]));
-			shop.setInfiniteSell(RealVarTools.parseBoolean(line[15]));
-			shop.setMarketItemsOnly(RealVarTools.parseBoolean(line[16]));
-			shop.setDamagedItems(RealVarTools.parseBoolean(line[17]));
+			try {
+				shop.setName(line[8]);
+				shop.setBuyOnlyList(RealItemTypeList.parseItemTypeList(line[9]));
+				shop.setSellOnlyList(RealItemTypeList.parseItemTypeList(line[10]));
+				shop.setBuyExcludeList(RealItemTypeList.parseItemTypeList(line[11]));
+				shop.setSellExcludeList(RealItemTypeList.parseItemTypeList(line[12]));
+				shop.setOpened(RealVarTools.parseBoolean(line[13]));
+				shop.setInfiniteBuy(RealVarTools.parseBoolean(line[14]));
+				shop.setInfiniteSell(RealVarTools.parseBoolean(line[15]));
+				shop.setMarketItemsOnly(RealVarTools.parseBoolean(line[16]));
+				shop.setDamagedItems(RealVarTools.parseBoolean(line[17]));
+				shop.setAssistants(line[18]);
+			} catch (Exception e) {
+			}
 			return shop;
 		} catch (Exception e) {
 			System.out.println("[SEVERE] [RealShop2] parseShop error " + buffer);
@@ -424,12 +455,32 @@ public class Shop
 		}
 	}
 
+	//--------------------------------------------------------------------------- playerIsAnAssistant
+	public boolean playerIsAnAssistant(String playerName)
+	{
+		return assistantPlayerNames.contains(playerName.toLowerCase());
+	}
+
+	//--------------------------------------------------------------------- removeAssistantPlayerName
+	public void removeAssistantPlayerName(String playerName)
+	{
+		assistantPlayerNames.remove(playerName.toLowerCase());
+	}
+
 	//------------------------------------------------------------------------------- revertLocations
 	private void revertLocations()
 	{
 		Location location = location2;
 		location2 = location1;
 		location1 = location;
+	}
+
+	//--------------------------------------------------------------------------------- setAssistants
+	public void setAssistants(String assistants)
+	{
+		for (String assistant : assistants.split(",")) {
+			addAssistantPlayerName(assistant);
+		}
 	}
 
 	//----------------------------------------------------------------------------- setBuyExcludeList
@@ -503,7 +554,7 @@ public class Shop
 	//--------------------------------------------------------------------------------- setPlayerName
 	public void setPlayerName(String playerName)
 	{
-		this.playerName = playerName;
+		this.playerName = playerName.toLowerCase();
 	}
 
 	//--------------------------------------------------------------------------------- sortLocations
@@ -544,7 +595,8 @@ public class Shop
 		+ RealVarTools.toString(getInfiniteBuy()) + ";"
 		+ RealVarTools.toString(getInfiniteSell()) + ";"
 		+ RealVarTools.toString(getMarketItemsOnly()) + ";"
-		+ RealVarTools.toString(getDamagedItems());
+		+ RealVarTools.toString(getDamagedItems()) + ";"
+		+ getAssistantsString();
 	}
 
 }

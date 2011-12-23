@@ -141,7 +141,7 @@ public class ShopList
 			writer = new BufferedWriter(new FileWriter(fileName));
 			writer.write(
 				"#world;x;y;z;x2;y2;z2;owner;name;buyOnly;sellOnly;buyExclude;sellExclude;opened;"
-				+ "infiniteBuy;infiniteSell;marketItemsOnly;damagedItems\n"
+				+ "infiniteBuy;infiniteSell;marketItemsOnly;damagedItems;assistants\n"
 			);
 			for (Shop shop : shops.values()) {
 				writer.write(shop.toString() + "\n");

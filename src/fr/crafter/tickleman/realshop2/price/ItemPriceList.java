@@ -38,7 +38,7 @@ public class ItemPriceList
 	public ItemPriceList(final RealShop2Plugin plugin, final String fileName)
 	{
 		this.plugin = plugin;
-		this.fileName = plugin.getDataFolder().getPath() + "/" + fileName + ".txt";
+		this.fileName = plugin.getDataFolder().getPath() + "/" + fileName + ".prices.txt";
 	}
 
 	//----------------------------------------------------------------------------------------- clear
@@ -234,7 +234,13 @@ public class ItemPriceList
 	public ItemPriceList load()
 	{
 		boolean willSave = false;
-		if (fileName.contains("/market.txt") && !RealFileTools.fileExists(fileName)) {
+		if (
+			RealFileTools.fileExists(fileName.replace(".prices.txt", ".txt"))
+			&& !RealFileTools.fileExists(fileName)
+		) {
+			RealFileTools.renameFile(fileName.replace(".prices.txt", ".txt"), fileName);
+		}
+		if (fileName.contains("/market.prices.txt") && !RealFileTools.fileExists(fileName)) {
 			plugin.getLog().debug("extract default file for " + fileName);
 			RealFileTools.extractDefaultFile(plugin, fileName);
 			willSave = true;
@@ -260,7 +266,7 @@ public class ItemPriceList
 			}
 			reader.close();
 		} catch (Exception e) {
-			if (fileName.contains("/market.txt")) {
+			if (fileName.contains("/market.prices.txt")) {
 				plugin.getLog().severe("Missing file " + fileName);
 			}
 		}
@@ -317,7 +323,7 @@ public class ItemPriceList
 		try { writer.close(); } catch (Exception e) {}
 		// Save all current values (including calculated prices) into currentValues.txt
 		/*
-		if (fileName.contains("/market.txt")) {
+		if (fileName.contains("/market.prices.txt")) {
 			try {
 				writer = new BufferedWriter(
 					new FileWriter(plugin.getDataFolder().getPath() + "/currentValues.txt")

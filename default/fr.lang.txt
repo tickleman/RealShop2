@@ -59,6 +59,7 @@ true=desactive
 false=active
 null=valeur globale
 Trade market items only flag is=Flag articles du marge seulement est
+Your shop now has assistants +assistants=Le magasin a pour assistants +assistants
 
 # SHOP OWNER : PRICES SETTINGS
 Calculated price (from market/recipes) for +item : buy +buy, sell +sell=Prix calcule (marche/recettes) pour +item : achat +buy, vente +sell

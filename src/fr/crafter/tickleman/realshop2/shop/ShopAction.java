@@ -26,6 +26,18 @@ public class ShopAction
 		this.plugin = plugin;
 	}
 
+	//---------------------------------------------------------------------------------- addAssistant
+	public void addAssistant(Player player, Shop shop, String playerName)
+	{
+		shop.addAssistantPlayerName(playerName);
+		plugin.getShopList().save();
+		player.sendMessage(
+			RealColor.message
+			+ plugin.tr("Your shop now has assistants +assistants")
+			.replace("+assistants", RealColor.player + shop.getAssistantsString().replace(",", ", ") + RealColor.message)
+		);
+	}
+
 	//------------------------------------------------------------------------------------ buyExclude
 	public void buyExclude(Player player, Shop shop, String chain)
 	{
@@ -113,7 +125,7 @@ public class ShopAction
 			);
 			return false;
 		} else {
-			if (!player.getName().equals(shop.getPlayerName()) && !shop.isOpened()) {
+			if (!player.getName().equalsIgnoreCase(shop.getPlayerName()) && !shop.isOpened()) {
 				// shop is owned by someone else, and is closed
 				player.sendMessage(
 					RealColor.cancel
@@ -126,7 +138,7 @@ public class ShopAction
 				if (shop != plugin.getPlayerShopList().insideShop(player)) {
 					// player enters the shop
 					plugin.getPlayerShopList().enterShop(player, shop);
-					if (player.getName().equals(shop.getPlayerName())) {
+					if (player.getName().equalsIgnoreCase(shop.getPlayerName())) {
 						// player enters its own shop
 						player.sendMessage(
 							RealColor.message
@@ -154,7 +166,7 @@ public class ShopAction
 	{
 		Shop shop = plugin.getPlayerShopList().insideShop(player);
 		if (shop != null) {
-			if (player.getName().equals(shop.getPlayerName())) {
+			if (player.getName().equalsIgnoreCase(shop.getPlayerName())) {
 				// player exits its own shop
 				player.sendMessage(
 					RealColor.message
@@ -221,11 +233,23 @@ public class ShopAction
 		);
 	}
 
+	//------------------------------------------------------------------------------- removeAssistant
+	public void removeAssistant(Player player, Shop shop, String playerName)
+	{
+		shop.removeAssistantPlayerName(playerName);
+		plugin.getShopList().save();
+		player.sendMessage(
+			RealColor.message
+			+ plugin.tr("Your shop now has assistants +assistants")
+			.replace("+assistants", RealColor.player + shop.getAssistantsString().replace(",", ", ") + RealColor.message)
+		);
+	}
+
 	//------------------------------------------------------------------------------------ selectShop
 	public boolean selectShop(Player player, Shop shop)
 	{
 		plugin.getPlayerShopList().selectShop(player, shop);
-		if (player.getName().equals(shop.getPlayerName())) {
+		if (player.getName().equalsIgnoreCase(shop.getPlayerName())) {
 			// player enters its own shop
 			player.sendMessage(
 				RealColor.message
