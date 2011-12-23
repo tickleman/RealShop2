@@ -19,18 +19,25 @@ public class RealItemTypeList
 	//-------------------------------------------------------------------------------- addRemoveChain
 	public void addRemoveChain(String chain)
 	{
-		for (String subChain : chain.split("\\+")) {
-			boolean isPlus = true;
-			for (String elem : subChain.split("\\-")) {
-				if (elem.length() > 0) {
-					RealItemType itemType = RealItemType.parseItemType(elem);
-					if (isPlus) {
-						put(itemType);
-					} else {
-						remove(itemType);
+		if (chain.equals("all")) {
+			clear();
+		} else if (chain.equals("none") || chain.equals("no")) {
+			clear();
+			put(RealItemType.parseItemType("0"));
+		} else {
+			for (String subChain : chain.split("\\+")) {
+				boolean isPlus = true;
+				for (String elem : subChain.split("\\-")) {
+					if (elem.length() > 0) {
+						RealItemType itemType = RealItemType.parseItemType(elem);
+						if (isPlus) {
+							put(itemType);
+						} else {
+							remove(itemType);
+						}
 					}
+					isPlus = false;
 				}
-				isPlus = false;
 			}
 		}
 	}
