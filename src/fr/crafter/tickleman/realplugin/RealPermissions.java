@@ -30,24 +30,32 @@ public class RealPermissions
 	//--------------------------------------------------------------------------------- hasPermission
 	public boolean hasPermission(Player player, String permissionString)
 	{
+		boolean result;
 		if (permissionsPluginName.equals("none")) {
 			if (permissionString.contains(".")) {
 				permissionString = permissionString.replace(
 					plugin.getDescription().getName().toLowerCase() + ".", ""
 				);
 			}
-			return player.isOp()
+			result = player.isOp()
 				? plugin.opHasPermission(permissionString)
 				: plugin.playerHasPermission(permissionString);
 		} else if (permissionsPluginName.equals("bukkit")) {
-			boolean perm = player.hasPermission(permissionString);
-			return perm;
+			result = player.hasPermission(permissionString);
 		} else if (permissionsPluginName.equals("permissions")) {
-			boolean perm = permissionsHandler.has(player, permissionString);
-			return perm;
+			result = permissionsHandler.has(player, permissionString);
 		} else {
-			return false;
+			result = false;
 		}
+		// permission universal .* manager
+		if (!result && !permissionString.contains(".*")) {
+			result = hasPermission(player, permissionString + ".*");
+			while (!result && permissionString.contains(".")) {
+				permissionString = permissionString.substring(0, permissionString.lastIndexOf("."));
+				result = hasPermission(player, permissionString + ".*");
+			}
+		}
+		return result;
 	}
 
 	//------------------------------------------------------------------------ initPermissionsHandler

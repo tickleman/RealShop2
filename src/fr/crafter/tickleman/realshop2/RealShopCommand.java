@@ -97,14 +97,14 @@ public class RealShopCommand
 		String priceType, PriceAction priceAction
 	) {
 		if (params[0].equals(permissionString)) {
-			if (params[1].equals("")) params[1] = "info";
-			if (
-				params[1].equals("info") || params[1].equals("del")
-				|| plugin.hasPermission(player, "realshop." + permissionString + "." + params[1])
-			) {
+			String action = params[1].toLowerCase();
+			if (!action.equals("del") && !action.equals("info")) {
+				action = (params.length == 2) ? "info" : "set";
+			}
+			if (plugin.hasPermission(player, "realshop." + permissionString + "." + action)) {
 				if (params[1].equals("info")) {
 					priceAction.info(player, RealVarTools.parseInt(params[2], 1));
-				} else if (params[1].equals("del")) {
+				} else if (action.equals("del")) {
 					priceAction.del(player, RealItemType.parseItemType(params[2]));
 				} else if (!params[2].isEmpty()) {
 					priceAction.set(
