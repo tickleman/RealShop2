@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realshop2.shop;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import fr.crafter.tickleman.realplugin.RealColor;
@@ -19,6 +20,45 @@ public class ShopListAction
 	public ShopListAction(RealShop2Plugin plugin)
 	{
 		this.plugin = plugin;
+	}
+
+	//---------------------------------------------------------------------------------- cleanupShops
+	public void cleanupShops(Player player)
+	{
+		player.sendMessage(RealColor.message + plugin.tr("Cleanup shops list in action..."));
+		Integer removed = 0;
+		Integer resized = 0;
+		for (Object shopObject : plugin.getShopList().getShops().toArray()) {
+			Shop shop = (Shop)shopObject;
+			boolean chest1 = Material.CHEST.equals(shop.getLocation1().getBlock().getType());
+			boolean chest2 = (shop.getLocation2() == null) ? chest1
+				: Material.CHEST.equals(shop.getLocation2().getBlock().getType());
+			if (!chest1 || !chest2) {
+				if (!chest1 && !chest2) {
+					plugin.getShopList().remove(shop);
+					removed ++;
+				} else if (!chest1 && chest2) {
+					shop.setLocation(shop.getLocation2());
+					plugin.getShopList().remove(shop);
+					plugin.getShopList().put(shop);
+					resized ++;
+				} else if (chest1 && !chest2) {
+					shop.setLocation(shop.getLocation1());
+					resized ++;
+				}
+			}
+		}
+		if (removed > 0 || resized > 0) {
+			plugin.getShopList().save();
+		}
+		player.sendMessage(
+			RealColor.message + plugin.tr("- +removed shops removed")
+			.replace("+removed", removed.toString())
+		);
+		player.sendMessage(
+			RealColor.message + plugin.tr("- +resized shops resized")
+			.replace("+resized", removed.toString())
+		);
 	}
 
 	//------------------------------------------------------------------------------------ searchItem

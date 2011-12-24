@@ -195,6 +195,8 @@ public class RealShop2Plugin extends RealPlugin
 				|| permissionString.equals("realshop.xsell")
 				|| permissionString.equals("realshop.marketitemsonly")
 				|| permissionString.equals("realshop.damageditems")
+				|| permissionString.equals("realshop.addassistant")
+				|| permissionString.equals("realshop.removeassistant")
 				|| permissionString.equals("realshop.price")
 				|| permissionString.equals("realshop.price.info")
 				|| permissionString.equals("realshop.price.display")

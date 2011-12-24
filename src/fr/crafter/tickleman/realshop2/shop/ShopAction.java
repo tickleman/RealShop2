@@ -83,7 +83,7 @@ public class ShopAction
 	{
 		plugin.getPlayerShopList().exitShop(player);
 		plugin.getPlayerShopList().unselectShop(player);
-		plugin.getShopList().delete(shop);
+		plugin.getShopList().remove(shop);
 		plugin.getShopList().save();
 		player.sendMessage(
 			RealColor.message + plugin.tr("The shop +name has been deleted")

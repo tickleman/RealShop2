@@ -71,6 +71,10 @@ public class RealShopCommand
 			ShopListAction shopListAction = new ShopListAction(plugin);
 			shopListAction.searchItem(params[1], player, (params.length >= 3) ? params[2] : "");
 			return true;
+		} else if (params[0].equals("cleanup")) {
+			ShopListAction shopListAction = new ShopListAction(plugin);
+			shopListAction.cleanupShops(player);
+			return true;
 		}
 		return false;
 	}

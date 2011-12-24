@@ -3,6 +3,8 @@
 /rshop delete : supprime un magasin
 /rshop close : fermeture temporaire
 /rshop open : reouverture
+/rshop addAssistant <player> : ajoute un assistant
+/rshop removeAssistant <player> : retire un assistant
 /rshop : informations magasin
 
 [2|buysell|bs : restrictions ventes/achats]
@@ -13,10 +15,10 @@ Utilisez ces commandes sans id pour avoir un statut
 /rshop xsell [+<id>][-<id>][...] : ajout/suppr ventes interdites
 
 [3|flags|f : options des magasins]
+/rshop damagedItems on|off : achat/vente produits endommages (def: on)
 /rshop infiniteBuy on|off : achat illimite : auto-reremplissage (def: off)
 /rshop infiniteSell on|off : vente illimite : auto-vide (def: off)
 /rshop marketItemsOnly on|off : achat/vente produits du marche seulement (def: off)
-/rshop damagedItems on|off : achat/vente produits endommages (def: on)
 
 [4|prices|p|4 : gestion de votre tarif]
 /rshop price <idItem> <achat> [<vente>] : defini le prix d'un produit
@@ -36,3 +38,5 @@ Utilisez ces commandes sans id pour avoir un statut
 /rshop log : log des mouvements du jour
 /rshop simul : simulation recalcul du prix (realshop.log)
 /rshop daily : force recalcul du prix
+/rshop cleanup : supprime les magasins fantomes
+

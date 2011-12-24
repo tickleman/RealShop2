@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -44,10 +45,10 @@ public class ShopList
 		shops.clear();
 	}
 
-	//---------------------------------------------------------------------------------------- delete
-	public void delete(Shop shop)
+	//-------------------------------------------------------------------------------------- getShops
+	public Collection<Shop> getShops()
 	{
-		shops.remove(shop.getId());
+		return shops.values();
 	}
 
 	//--------------------------------------------------------------------------- getSortedByDistance
@@ -131,6 +132,12 @@ public class ShopList
 	public void put(Shop shop)
 	{
 		shops.put(shop.getId(), shop);
+	}
+
+	//---------------------------------------------------------------------------------------- remove
+	public void remove(Shop shop)
+	{
+		shops.remove(shop.getId());
 	}
 
 	//------------------------------------------------------------------------------------------ save

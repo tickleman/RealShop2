@@ -3,6 +3,8 @@
 /rshop delete : delete a shop
 /rshop close : temporarily close the shop
 /rshop open : open the shop (if closed)
+/rshop addAssistant <player> : add un assistant
+/rshop removeAssistant <player> : remove un assistant
 /rshop : shop full informations
 
 [buysell|bs|2 : shop buy-sell restrict. help]
@@ -13,10 +15,10 @@ Use these commands without ids to get current status
 /rshop xsell [+<id>][-<id>][...] : add/remove \"dont-sell\" items
 
 [flags|f|3 : shop flags settings help]
+/rshop damagedItems on|off : buy/sell damaged items (default: on)
 /rshop infiniteBuy on|off : buy infinite : auto-refill chest (default: off)
 /rshop infiniteSell on|off : sell infinite : items disapear (default: off)
 /rshop marketItemsOnly on|off : buy/sell market-items only (default: off)
-/rshop damagedItems on|off : buy/sell damaged items (default: on)
 
 [prices|p|4|price : player's prices settings help]
 /rshop price <itemId> <buyPrice> [<SellPrice>] : set an item's price
@@ -30,9 +32,11 @@ Use these commands without ids to get current status
 /rshop market <itemId> : output an item's price
 /rshop market : output all market prices
 
-[admin|a|6 : sdmin commands help]
+[admin|a|6 : admin commands help]
 /rshop reload : reload configuration files
 /rshop check : global shops check infos
 /rshop log : display daily movements log
 /rshop simul : price calc simul (realshop.log)
 /rshop daily : force price calculation
+/rshop cleanup : cleanup ghost shops
+

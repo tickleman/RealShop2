@@ -46,7 +46,7 @@ public class RealShopBlockListener extends BlockListener
 					event.setCancelled(true);
 				} else {
 					plugin.getLog().debug("removed shop on block break " + shop.toString());
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				}
 			} else if (player instanceof Player) {
@@ -69,7 +69,7 @@ public class RealShopBlockListener extends BlockListener
 					event.setCancelled(true);
 				} else {
 					plugin.getLog().debug("removed shop on block burn " + shop.toString());
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				}
 			}
@@ -112,7 +112,7 @@ public class RealShopBlockListener extends BlockListener
 					event.setCancelled(true);
 				} else {
 					plugin.getLog().debug("removed shop on block fade " + shop.toString());
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				}
 			}
@@ -131,7 +131,7 @@ public class RealShopBlockListener extends BlockListener
 					event.setCancelled(true);
 				} else {
 					plugin.getLog().debug("removed shop on block ignite " + shop.toString());
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				}
 			}
@@ -158,7 +158,7 @@ public class RealShopBlockListener extends BlockListener
 						+ " at location " + new RealLocation(block.getLocation()).toString()
 					);
 					plugin.getLog().debug("shop will be deleted");
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				} else {
 					// place chest near a shop-chest : make the shop bigger
@@ -190,7 +190,7 @@ public class RealShopBlockListener extends BlockListener
 					event.setCancelled(true);
 				} else {
 					plugin.getLog().debug("removed shop on block spread " + shop.toString());
-					plugin.getShopList().delete(shop);
+					plugin.getShopList().remove(shop);
 					plugin.getShopList().save();
 				}
 			}

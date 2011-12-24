@@ -37,7 +37,7 @@ public class RealShopEntityListener extends EntityListener
 						dontExplodeBlocks.add(block);
 					} else {
 						plugin.getLog().debug("removed shop on creeper explosion " + shop.toString());
-						plugin.getShopList().delete(shop);
+						plugin.getShopList().remove(shop);
 						plugin.getShopList().save();
 					}
 				}
