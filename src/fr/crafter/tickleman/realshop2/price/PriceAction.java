@@ -29,7 +29,7 @@ public class PriceAction
 		player.sendMessage(
 			RealColor.message
 			+ plugin.tr(getPriceType() + " price deleted for +item")
-			.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
+			.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.message)
 		);
 	}
 
@@ -41,20 +41,20 @@ public class PriceAction
 			player.sendMessage(
 				RealColor.cancel
 				+ plugin.tr("No " + getPriceType().toLowerCase() + " price for +item")
-				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.cancel)
+				.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.cancel)
 			);
 			price = getItemPriceList().getPrice(itemType, plugin.getMarketPrices());
 			if (price == null) {
 				player.sendMessage(
 					RealColor.cancel
 					+ plugin.tr("Price can't be calculated from recipes for +item")
-					.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.cancel)
+					.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.cancel)
 				);
 			} else {
 				player.sendMessage(
 					RealColor.message
 					+ plugin.tr("Calculated price (from market/recipes) for +item : buy +buy, sell +sell")
-					.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
+					.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.message)
 					.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
 					.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 				);
@@ -63,7 +63,7 @@ public class PriceAction
 			player.sendMessage(
 				RealColor.message
 				+ plugin.tr(getPriceType() + " price for +item : buy +buy, sell +sell")
-				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
+				.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.message)
 				.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
 				.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 			);
@@ -118,7 +118,7 @@ public class PriceAction
 			player.sendMessage(
 				RealColor.message
 				+ plugin.tr(getPriceType() + " price for +item : buy +buy, sell +sell")
-				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.message)
+				.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.message)
 				.replace("+buy", RealColor.price + price.getBuyPrice() + RealColor.message)
 				.replace("+sell", RealColor.price + price.getSellPrice() + RealColor.message)
 			);
@@ -126,7 +126,7 @@ public class PriceAction
 			player.sendMessage(
 				RealColor.cancel
 				+ plugin.tr("Error while setting " + getPriceType().toLowerCase() + " price for +item")
-				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.cancel)
+				.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.cancel)
 			);
 			player.sendMessage(
 				RealColor.message

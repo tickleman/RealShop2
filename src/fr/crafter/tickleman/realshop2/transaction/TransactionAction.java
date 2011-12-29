@@ -63,7 +63,7 @@ public class TransactionAction
 						RealColor.text
 						+ plugin.tr("[shop +name] +client " + side + " +item x+quantity (+linePrice) to +owner")
 						.replace("+client", RealColor.player + player.getName() + RealColor.text)
-						.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
+						.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.text)
 						.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
 						.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 						.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
@@ -185,7 +185,7 @@ public class TransactionAction
 			RealColor.text
 			+ plugin.tr(side + " +item x+quantity (+linePrice)")
 			.replace("+client", RealColor.player + player.getName() + RealColor.text)
-			.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
+			.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.text)
 			.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
 			.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 			.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
@@ -199,7 +199,7 @@ public class TransactionAction
 				RealColor.text
 				+ plugin.tr("[shop +name] +client " + shopSide + " +item x+quantity (+linePrice) to you")
 				.replace("+client", RealColor.player + player.getName() + RealColor.text)
-				.replace("+item", RealColor.item + plugin.tr(itemType.getName()) + RealColor.text)
+				.replace("+item", RealColor.item + plugin.trItemName(itemType) + RealColor.text)
 				.replace("+linePrice", "" + RealColor.price + amount + RealColor.text)
 				.replace("+name", RealColor.shop + shop.getName() + RealColor.text)
 				.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.text)
