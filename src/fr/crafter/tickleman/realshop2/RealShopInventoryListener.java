@@ -62,19 +62,29 @@ public class RealShopInventoryListener extends RealInventoryListener
 					// infinite buy : you can't click with something on cursor and item slot (too much complicated to code)
 					plugin.getLog().debug("infinite buy not allowed with cursor + item slots filled : cancel");
 					event.setCancelled(true);
+				} else if (
+					(
+						shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)
+						|| shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)
+					) && (event.getCursor() != null) && (event.getItem() != null)
+					&& !event.getCursor().getType().equals(event.getItem().getType())
+				) {
+					// infinite buy or infinite sell shop : can't exchange items (too much complicated)
+					plugin.getLog().debug("shop is infinite buy or infinite sell : can't do that");
+					event.setCancelled(true);
 				} else {
 					// click into chest : sell moved cursor stack, buy moved item stack
 					if (transactionAction.canPay(player, shop, move.getItem(), move.getCursor())) {
 						if (move.getCursor() != null) {
 							if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
 								// infinite sell : empty cursor and nothing changes into inventory slot
-								if (
-									shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)
-									&& event.isLeftClick()
-								) {
-									plugin.getLog().debug("infinite sell action : null cursor");
+								if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
+									plugin.getLog().debug("infinite sell action : null item");
 									event.setResult(Result.ALLOW);
-									event.setCursor(null);
+									event.getCursor().setAmount(
+										event.getCursor().getAmount() - move.getCursor().getAmount()
+									);
+									event.setCancelled(true);
 								}
 							}
 						}
