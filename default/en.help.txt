@@ -39,4 +39,3 @@ Use these commands without ids to get current status
 /rshop simul : price calc simul (realshop.log)
 /rshop daily : force price calculation
 /rshop cleanup : cleanup ghost shops
-

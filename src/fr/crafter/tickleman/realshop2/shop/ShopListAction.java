@@ -77,7 +77,7 @@ public class ShopListAction
 		short count = 0;
 		for (Shop shop : plugin.getShopList().getSortedByDistance(player.getLocation()).values()) {
 			int amount = shop.contains(itemStack);
-			if ((amount > 0) && shop.canBuyItem(plugin, itemStack)) {
+			if ((amount > 0) && shop.isOpened() && shop.canBuyItem(plugin, itemStack)) {
 				count ++;
 				player.sendMessage(
 					((count == gpsCall) ? RealColor.price : RealColor.message)
