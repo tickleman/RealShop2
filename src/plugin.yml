@@ -1,12 +1,11 @@
 name: RealShop2
 main: fr.crafter.tickleman.realshop2.RealShop2Plugin
-version: 2.21
+version: 2.22
 website: http://plugins.crafter.fr/tickleman/RealShop2/
 author: tickleman
 depend: [RealPlugin,Spout]
 commands:
-  money:
-    aliases: [mny]
+  mny:
     description: RealEconomy money commands
     usage: Use /mny help to list available commands
   realshop:
