@@ -365,8 +365,9 @@ public class ShopAction
 		plugin.getLog().debug("ownerPrices = " + ownerPrices.toString());
 		// sell (may be as long as number of filled slots on player's inventory)
 		RealItemTypeList itemTypeList = new RealItemTypeList();
-		String list = "";
+		StringBuffer list = new StringBuffer();
 		int count = 20;
+		boolean already = false;
 		for (ItemStack itemStack : player.getInventory().getContents()) if (itemStack != null) {
 			RealItemType itemType = new RealItemType(itemStack);
 			if ((itemTypeList.get(itemType) == null) && shop.isItemSellAllowed(itemType)) {
@@ -374,21 +375,24 @@ public class ShopAction
 				Price price = ownerPrices.getPrice(itemType, plugin.getMarketPrices());
 				if (price != null) {
 					plugin.getLog().debug("price of " + itemType.toString() + " = " + price.toString());
-					if (!list.equals("")) {
-						list += RealColor.message + ", ";
+					if (already) {
+						list.append(RealColor.message).append(", ");
+					} else {
+						already = true;
 					}
-					list += RealColor.item + plugin.trItemName(itemType)
-						+ RealColor.message + ": " + RealColor.price + price.getSellPrice();
+					list.append(RealColor.item).append(plugin.trItemName(itemType))
+						.append(RealColor.message).append(": ").append(RealColor.price)
+						.append(price.getSellPrice());
 					if (count-- < 0) {
-						if (!list.equals("")) {
-							list += RealColor.message + ", ...";
+						if (already) {
+							list.append(RealColor.message).append(", ...");
 						}
 						break;
 					}
 				}
 			}
 		}
-		if (list.equals("")) {
+		if (!already) {
 			player.sendMessage(RealColor.cancel + plugin.tr("Nothing can be sold here"));
 		} else {
 			player.sendMessage(
@@ -398,24 +402,29 @@ public class ShopAction
 		}
 		// buy (may be as long as the number of filled slots on the chest's inventory) 
 		itemTypeList.clear();
-		list = "";
+		list = new StringBuffer();
 		count = 20;
+		already = false;
 		for (Inventory inventory : shop.getChest().getInventories()) {
 			for (ItemStack itemStack : inventory.getContents()) if (itemStack != null ) {
 				RealItemType itemType = new RealItemType(itemStack);
+				
 				if ((itemTypeList.get(itemType) == null) && shop.isItemBuyAllowed(itemType)) {
 					itemTypeList.put(itemType);
 					Price price = ownerPrices.getPrice(itemType, plugin.getMarketPrices());
 					if (price != null) {
 						plugin.getLog().debug("price of " + itemType.toString() + " = " + price.toString());
-						if (!list.equals("")) {
-							list += RealColor.message + ", ";
+						if (already) {
+							list.append(RealColor.message).append(", ");
+						} else {
+							already = true;
 						}
-						list += RealColor.item + plugin.trItemName(itemType)
-							+ RealColor.message + ": " + RealColor.price + price.getBuyPrice();
+						list.append(RealColor.item).append(plugin.trItemName(itemType))
+							.append(RealColor.message).append(": ").append(RealColor.price)
+							.append(price.getBuyPrice());
 						if (count-- < 0) {
-							if (!list.equals("")) {
-								list += RealColor.message +", ...";
+							if (already) {
+								list.append(RealColor.message).append(", ...");
 							}
 							break;
 						}
@@ -426,7 +435,7 @@ public class ShopAction
 				break;
 			}
 		}
-		if (list.equals("")) {
+		if (!already) {
 			player.sendMessage(RealColor.cancel + plugin.tr("Nothing to buy here"));
 		} else {
 			player.sendMessage(

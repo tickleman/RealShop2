@@ -18,6 +18,11 @@
   18     ;   30 ;   27 ; leaves
   18:1   ;   30 ;   27 ; redwood tree leaves
   18:2   ;   30 ;   27 ; birch tree leaves
+  18:3   ;   30 ;   27 ; jungle leaves
+  18:4   ;   30 ;   27 ; leaves
+  18:5   ;   30 ;   27 ; redwood tree leaves
+  18:6   ;   30 ;   27 ; birch tree leaves
+  18:7   ;   30 ;   27 ; jungle leaves
   19     ;   30 ;   27 ; sponge
   30     ;    1 ;    1 ; spider web
   35     ;   10 ;    9 ; wool
@@ -35,6 +40,12 @@
   87     ;  500 ;  450 ; netherrack
   88     ;  500 ;  450 ; soul sand
  103     ;   10 ;    9 ; melon
+ 106     ;    1 ;    1 ; vines
+ 110     ;    2 ;    2 ; mycelium
+ 111     ;    1 ;    1 ; lily pad
+ 112     ;   10 ;    9 ; nether brick
+ 121     ;    5 ;    4 ; end stone
+ 122     ; 5000 ; 4500 ; dragon egg
  260     ;  500 ;  450 ; red apple
  263     ;   15 ;   14 ; coal
  263:1   ;   15 ;   14 ; charcoal
@@ -72,6 +83,30 @@
  372     ;   14 ;   12 ; nether wart
  373     ;  100 ;  100 ; potion
  375     ;    5 ;    4 ; spider eye
+ 383:50  ; 1000 ;  900 ; egg of creeper
+ 383:51  ; 1000 ;  900 ; egg of skeleton
+ 383:52  ; 1000 ;  900 ; egg of spider
+ 383:53  ; 1000 ;  900 ; egg of giant
+ 383:54  ; 1000 ;  900 ; egg of zombie
+ 383:55  ; 1000 ;  900 ; egg of slime
+ 383:56  ; 1000 ;  900 ; egg of ghast
+ 383:57  ; 1000 ;  900 ; egg of zombie pigman
+ 383:58  ; 1000 ;  900 ; egg of enderman
+ 383:59  ; 1000 ;  900 ; egg of cave spider
+ 383:60  ; 1000 ;  900 ; egg of silverfish
+ 383:61  ; 1000 ;  900 ; egg of blaze
+ 383:62  ; 1000 ;  900 ; egg of magma cube
+ 383:63  ; 1000 ;  900 ; egg of enderdragon
+ 383:90  ; 1000 ;  900 ; egg of pig
+ 383:91  ; 1000 ;  900 ; egg of sheep
+ 383:92  ; 1000 ;  900 ; egg of cow
+ 383:93  ; 1000 ;  900 ; egg of chicken
+ 383:94  ; 1000 ;  900 ; egg of squid
+ 383:95  ; 1000 ;  900 ; egg of wolf
+ 383:96  ; 1000 ;  900 ; egg of mooshroom
+ 383:97  ; 1000 ;  900 ; egg of snow golem
+ 383:98  ; 1000 ;  900 ; egg of ocelot
+ 383:120 ; 1000 ;  900 ; egg of villager
 2256     ; 1000 ;  900 ; 13 disc
 2257     ; 1000 ;  900 ; cat disc
 2258     ; 1000 ;  900 ; blocks disc
