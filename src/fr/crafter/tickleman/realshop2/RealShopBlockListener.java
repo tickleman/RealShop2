@@ -8,7 +8,8 @@ import org.bukkit.event.block.BlockBurnEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockIgniteEvent;
-import org.bukkit.event.block.BlockListener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 
@@ -18,7 +19,7 @@ import fr.crafter.tickleman.realshop2.shop.Shop;
 import fr.crafter.tickleman.realshop2.shop.ShopAction;
 
 //########################################################################### RealShopBlockListener
-public class RealShopBlockListener extends BlockListener
+public class RealShopBlockListener implements Listener
 {
 
 	private final RealShop2Plugin plugin;
@@ -30,7 +31,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//---------------------------------------------------------------------------------- onBlockBreak
-	@Override
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event)
 	{
 		Block block = event.getBlock();
@@ -58,7 +59,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//----------------------------------------------------------------------------------- onBlockBurn
-	@Override
+	@EventHandler
 	public void onBlockBurn(BlockBurnEvent event)
 	{
 		Block block = event.getBlock();
@@ -77,7 +78,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//--------------------------------------------------------------------------------- onBlockDamage
-	@Override
+	@EventHandler
 	public void onBlockDamage(BlockDamageEvent event)
 	{
 		Block block = event.getBlock();
@@ -101,7 +102,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//----------------------------------------------------------------------------------- onBlockFade
-	@Override
+	@EventHandler
 	public void onBlockFade(BlockFadeEvent event)
 	{
 		Block block = event.getBlock();
@@ -120,7 +121,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//--------------------------------------------------------------------------------- onBlockIgnite
-	@Override
+	@EventHandler
 	public void onBlockIgnite(BlockIgniteEvent event)
 	{
 		Block block = event.getBlock();
@@ -139,7 +140,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//---------------------------------------------------------------------------------- onBlockPlace
-	@Override
+	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event)
 	{
 		Block block = event.getBlock();
@@ -179,7 +180,7 @@ public class RealShopBlockListener extends BlockListener
 	}
 
 	//--------------------------------------------------------------------------------- onBlockSpread
-	@Override
+	@EventHandler
 	public void onBlockSpread(BlockSpreadEvent event)
 	{
 		Block block = event.getBlock();
