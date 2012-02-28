@@ -4,7 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -15,7 +16,7 @@ import fr.crafter.tickleman.realshop2.shop.ShopAction;
  * Handle events for all Player related events
  * @author tickleman
  */
-public class RealShopPlayerListener extends PlayerListener
+public class RealShopPlayerListener implements Listener
 {
 
 	private final RealShop2Plugin plugin;
@@ -28,7 +29,7 @@ public class RealShopPlayerListener extends PlayerListener
 	}
 
 	//------------------------------------------------------------------------------ onPlayerInteract
-	@Override
+	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
 		// check if player right-clicked a chest
@@ -43,7 +44,7 @@ public class RealShopPlayerListener extends PlayerListener
 	}
 
 	//--------------------------------------------------------------------------------- onPlayerLogin
-	@Override
+	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event)
 	{
 		plugin.getPlayerChestList().unselectChest(event.getPlayer());
@@ -51,7 +52,7 @@ public class RealShopPlayerListener extends PlayerListener
 	}
 
 	//---------------------------------------------------------------------------------- onPlayerQuit
-	@Override
+	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
 		plugin.getPlayerChestList().unselectChest(event.getPlayer());

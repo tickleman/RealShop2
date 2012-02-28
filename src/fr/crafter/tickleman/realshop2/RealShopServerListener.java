@@ -2,12 +2,13 @@ package fr.crafter.tickleman.realshop2;
 
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
-import org.bukkit.event.server.ServerListener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
 import com.nijikokun.register.payment.Methods;
 
 //########################################################################## RealShopServerListener
-public class RealShopServerListener extends ServerListener
+public class RealShopServerListener implements Listener
 {
 
 	private RealShop2Plugin	plugin;
@@ -19,7 +20,7 @@ public class RealShopServerListener extends ServerListener
 	}
 
 	// ------------------------------------------------------------------------------ OnPluginDisable
-	@Override
+	@EventHandler
 	public void onPluginDisable(PluginDisableEvent event)
 	{
 		if (plugin.getEconomy().getEconomyPlugin().equalsIgnoreCase("Register")) {
@@ -41,7 +42,7 @@ public class RealShopServerListener extends ServerListener
 	}
 
 	//-------------------------------------------------------------------------------- onPluginEnable
-	@Override
+	@EventHandler
 	public void onPluginEnable(PluginEnableEvent event)
 	{
 		plugin.getEconomy().initRegister();
