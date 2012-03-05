@@ -3,8 +3,6 @@ package fr.crafter.tickleman.realshop2;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginManager;
 
 import fr.crafter.tickleman.realeconomy.RealEconomy;
@@ -16,6 +14,7 @@ import fr.crafter.tickleman.realshop2.price.ItemPriceList;
 import fr.crafter.tickleman.realshop2.shop.PlayerChestList;
 import fr.crafter.tickleman.realshop2.shop.PlayerShopList;
 import fr.crafter.tickleman.realshop2.shop.ShopList;
+import fr.crafter.tickleman.realshop2.transaction.TransactionAction;
 
 //########################################################################### class RealShop2Plugin
 public class RealShop2Plugin extends RealPlugin
@@ -102,6 +101,7 @@ public class RealShop2Plugin extends RealPlugin
 	{
 		if (marketPrices != null) marketPrices.clear();
 		if (shopList     != null) shopList.clear();
+		TransactionAction.dispose();
 		super.onDisable();
 	}
 
@@ -121,6 +121,12 @@ public class RealShop2Plugin extends RealPlugin
 		RealShopPlayerListener    playerListener    = new RealShopPlayerListener(this);
 		RealShopServerListener    serverListener    = new RealShopServerListener(this);
 		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvents(blockListener, this);
+		pm.registerEvents(inventoryListener, this);
+		pm.registerEvents(entityListener, this);
+		pm.registerEvents(playerListener, this);
+		pm.registerEvents(serverListener, this);
+		/*
 		pm.registerEvent(Type.BLOCK_BREAK,     blockListener,     Priority.Monitor, this);
 		pm.registerEvent(Type.BLOCK_BURN,      blockListener,     Priority.Monitor, this);
 		pm.registerEvent(Type.BLOCK_DAMAGE,    blockListener,     Priority.Monitor, this);
@@ -135,6 +141,7 @@ public class RealShop2Plugin extends RealPlugin
 		pm.registerEvent(Type.PLAYER_QUIT,     playerListener,    Priority.Normal,  this);
 		pm.registerEvent(Type.PLUGIN_DISABLE,  serverListener,    Priority.Normal,  this);
 		pm.registerEvent(Type.PLUGIN_ENABLE,   serverListener,    Priority.Normal,  this);
+		*/
 		// initialize links
 		getEconomy().initRegister();
 		getEconomy().initVault();

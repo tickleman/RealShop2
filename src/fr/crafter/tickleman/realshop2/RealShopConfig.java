@@ -8,10 +8,12 @@ public class RealShopConfig extends RealConfig
 
 	/** Default configuration values (if not in file) */
 	public double  amountRatio = 5000.0;
+	public double  broadcastNearbyPlayersRadius = 5.0d;
 	public double  buySellRatio = .95;
 	public boolean dailyPricesCalculation = false;
 	public double  enchantmentLevelRatio  = 1.1;
 	public double  enchantmentRandomWeightRatio = 1.1;
+	public boolean logTransactions = false;
 	public double  maxDailyRatio = 1.95;
 	public double  maxItemPrice = 99999.0;
 	public double  minDailyRatio = .05;

@@ -1,5 +1,9 @@
 package fr.crafter.tickleman.realshop2.transaction;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -18,12 +22,17 @@ import fr.crafter.tickleman.realshop2.shop.Shop;
 public class TransactionAction
 {
 
+	private static String fileName;
+
+	private static BufferedWriter transactionsLogFile;
+
 	private RealShop2Plugin plugin;
 
 	//----------------------------------------------------------------------------- TransactionAction
 	public TransactionAction(RealShop2Plugin plugin)
 	{
 		this.plugin = plugin;
+		fileName = plugin.getDataFolder().getPath() + "/transactions.log";
 	}
 
 	//------------------------------------------------------------------------------------------- buy
@@ -52,7 +61,8 @@ public class TransactionAction
 		ItemStack itemStack, RealItemType itemType, Player player, Shop shop, String side,
 		double amount, double price
 	) {
-		for (Entity entity : player.getNearbyEntities(5.0d, 5.0d, 5.0d)) {
+		double radius = plugin.getRealConfig().broadcastNearbyPlayersRadius;
+		for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
 			if (entity instanceof Player) {
 				Player nearbyPlayer = (Player)entity;
 				if (
@@ -153,6 +163,49 @@ public class TransactionAction
 		}
 	}
 
+	//--------------------------------------------------------------------------------------- dispose
+	public static void dispose()
+	{
+		if (transactionsLogFile != null) {
+			try {
+				transactionsLogFile.close();
+			} catch (IOException e) {
+			}
+			transactionsLogFile = null;
+		}
+	}
+
+	//-------------------------------------------------------------------------------- logTransaction
+	private void logTransaction(
+		ItemStack itemStack, RealItemType itemType, Player player, Shop shop, String side,
+		double amount, double price
+	) {
+		try {
+			if (transactionsLogFile == null) {
+				transactionsLogFile = new BufferedWriter(new FileWriter(fileName));
+				transactionsLogFile.append("#player:side;shopName;X;Y;Z;shopOwner;typeId;variant;price;quantity;amount\n");
+			}
+			transactionsLogFile.append(
+				player.getName() + ";"
+				+ side + ";"
+				+ shop.getName() + ";"
+				+ shop.getLocation().getBlockX() + ";"
+				+ shop.getLocation().getBlockY() + ";"
+				+ shop.getLocation().getBlockZ() + ";"
+				+ shop.getPlayerName() + ";"
+				+ itemType.getTypeId() + ";"
+				+ itemType.getVariant() + ";"
+				+ price + ";"
+				+ itemStack.getAmount() + ";"
+				+ amount
+			);
+			transactionsLogFile.flush();
+		} catch (Exception e) {
+			plugin.getLog().severe("Error writting " + fileName);
+			e.printStackTrace();
+		}
+	}
+
 	//------------------------------------------------------------------------------------------ sell
 	public int sell(Player player, Shop shop, ItemStack itemStack)
 	{
@@ -208,7 +261,12 @@ public class TransactionAction
 				.replace("  ", " ").replace(" ]", "]").replace("[ ", "[")
 			);
 		}
-		broadcastNearbyPlayersBuyOrSell(itemStack, itemType, player, shop, shopSide, amount, price);
+		if (plugin.getRealConfig().broadcastNearbyPlayersRadius > 0d) {
+			broadcastNearbyPlayersBuyOrSell(itemStack, itemType, player, shop, shopSide, amount, price);
+		}
+		if (plugin.getRealConfig().logTransactions) {
+			logTransaction(itemStack, itemType, player, shop, shopSide, amount, price);
+		}
 	}
 
 }

@@ -5,13 +5,15 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntityListener;
 
 import fr.crafter.tickleman.realshop2.shop.Shop;
 
 //########################################################################## RealShopEntityListener
-public class RealShopEntityListener extends EntityListener
+public class RealShopEntityListener implements Listener
 {
 
 	private RealShop2Plugin plugin;
@@ -25,7 +27,7 @@ public class RealShopEntityListener extends EntityListener
 	}
 
 	//------------------------------------------------------------------------------- onEntityExplode
-	@Override
+	@EventHandler(priority = EventPriority.MONITOR)
 	public void onEntityExplode(EntityExplodeEvent event)
 	{
 		List<Block> dontExplodeBlocks = new ArrayList<Block>();
