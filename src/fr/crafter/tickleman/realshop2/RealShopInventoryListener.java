@@ -1,5 +1,6 @@
 package fr.crafter.tickleman.realshop2;
 
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
@@ -7,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.ItemStack;
 
 import fr.crafter.tickleman.realplugin.RealInventoryListener;
 import fr.crafter.tickleman.realplugin.RealInventoryMove;
@@ -33,8 +35,8 @@ public class RealShopInventoryListener extends RealInventoryListener
 	{
 		plugin.getLog().debug(
 			"onInventoryClick = "
-			+ " cursor [ "+ RealItemStack.create(event.getCursor()) + "]"
-			+ " item [ "+ RealItemStack.create(event.getCurrentItem()) + "]"
+			+ " cursor [ "+ RealItemStack.create(event.getCursor()).toString() + "]"
+			+ " item [ "+ RealItemStack.create(event.getCurrentItem()).toString() + "]"
 		);
 		HumanEntity humanEntity = event.getWhoClicked();
 		if (humanEntity instanceof Player) {
@@ -63,7 +65,8 @@ public class RealShopInventoryListener extends RealInventoryListener
 						event.setCancelled(true);
 					} else if (
 						shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)
-						&& (event.getCursor() != null) && (event.getCurrentItem() != null)
+						&& !event.getCursor().getType().equals(Material.AIR)
+						&& !event.getCurrentItem().getType().equals(Material.AIR)
 					) {
 						// infinite buy : you can't click with something on cursor and item slot (too much complicated to code)
 						plugin.getLog().debug("infinite buy not allowed with cursor + item slots filled : cancel");
@@ -72,7 +75,9 @@ public class RealShopInventoryListener extends RealInventoryListener
 						(
 							shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)
 							|| shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)
-						) && (event.getCursor() != null) && (event.getCurrentItem() != null)
+						)
+						&& !event.getCursor().getType().equals(Material.AIR)
+						&& !event.getCurrentItem().getType().equals(Material.AIR)
 						&& !event.getCursor().getType().equals(event.getCurrentItem().getType())
 					) {
 						// infinite buy or infinite sell shop : can't exchange items (too much complicated)
@@ -81,20 +86,25 @@ public class RealShopInventoryListener extends RealInventoryListener
 					} else {
 						// click into chest : sell moved cursor stack, buy moved item stack
 						if (transactionAction.canPay(player, shop, move.getItem(), move.getCursor())) {
-							if (move.getCursor() != null) {
+							if (!move.getCursor().getType().equals(Material.AIR)) {
 								if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
 									// infinite sell : empty cursor and nothing changes into inventory slot
 									if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
 										plugin.getLog().debug("infinite sell action : null item");
 										event.setResult(Result.ALLOW);
-										event.getCursor().setAmount(
-											event.getCursor().getAmount() - move.getCursor().getAmount()
-										);
+										if ((event.getCursor().getAmount() - move.getCursor().getAmount()) == 0) {
+											event.setCursor(new ItemStack(Material.COBBLESTONE, 0)); // buggy but may work
+											//event.setCursor(new ItemStack(Material.AIR, 0, (short)-1)); // crash
+										} else {
+											event.getCursor().setAmount(
+												event.getCursor().getAmount() - move.getCursor().getAmount()
+											);
+										}
 										event.setCancelled(true);
 									}
 								}
 							}
-							if (move.getItem() != null) {
+							if (!move.getItem().getType().equals(Material.AIR)) {
 								if (transactionAction.buy(player, shop, move.getItem()) > 0) {
 									// infinite buy : put inventory slot into cursor and does not empty inventory slot
 									if (shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)) {
@@ -111,7 +121,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 							event.setCancelled(true);
 						}
 					}
-				} else if (event.isShiftClick() && (move.getItem() != null)) {
+				} else if (event.isShiftClick() && !move.getItem().getType().equals(Material.AIR)) {
 					if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
 						// infinite sell : you can't shift-click sorry (too much complicated to code)
 						plugin.getLog().debug("infinite-sell is not allowed with shift-click : cancel");
