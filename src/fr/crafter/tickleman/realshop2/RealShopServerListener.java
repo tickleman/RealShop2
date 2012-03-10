@@ -23,13 +23,16 @@ public class RealShopServerListener implements Listener
 	@EventHandler
 	public void onPluginDisable(PluginDisableEvent event)
 	{
+		if (plugin.getPermissions().getPermissionsPluginName().equals(event.getPlugin().getName())) {
+			plugin.getPermissions().disablePermissionsHandler();
+		}
 		if (plugin.getEconomy().getEconomyPlugin().equalsIgnoreCase("Register")) {
 			// remove payment method
 			try {
 				if (Methods.hasMethod()) {
 					Boolean check = Methods.checkDisabled(event.getPlugin());
 					if (check) {
-						plugin.getEconomy().setPaymentMethod(null);
+						plugin.getEconomy().disableRegister();
 						plugin.getLog().info(
 							"Payment method was disabled. No longer accepting payments"
 						);
@@ -38,6 +41,9 @@ public class RealShopServerListener implements Listener
 			} catch (Exception e) {
 				plugin.getLog().info("Could not link to Register");
 			}
+		}
+		if (event.getPlugin().getName().equalsIgnoreCase("Vault")) {
+			plugin.getEconomy().disableVault();
 		}
 	}
 
