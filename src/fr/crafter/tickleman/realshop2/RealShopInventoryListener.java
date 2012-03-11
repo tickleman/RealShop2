@@ -93,8 +93,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 										plugin.getLog().debug("infinite sell action : null item");
 										event.setResult(Result.ALLOW);
 										if ((event.getCursor().getAmount() - move.getCursor().getAmount()) == 0) {
-											event.setCursor(new ItemStack(Material.COBBLESTONE, 0)); // buggy but may work
-											//event.setCursor(new ItemStack(Material.AIR, 0, (short)-1)); // crash
+											event.setCursor(new ItemStack(Material.AIR, 0, (short)-1));
 										} else {
 											event.getCursor().setAmount(
 												event.getCursor().getAmount() - move.getCursor().getAmount()
