@@ -57,7 +57,7 @@ public class ShopListAction
 		);
 		player.sendMessage(
 			RealColor.message + plugin.tr("- +resized shops resized")
-			.replace("+resized", removed.toString())
+			.replace("+resized", resized.toString())
 		);
 	}
 
