@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
 
+import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realplugin.RealInventoryListener;
 import fr.crafter.tickleman.realplugin.RealInventoryMove;
 import fr.crafter.tickleman.realplugin.RealItemStack;
@@ -121,14 +122,24 @@ public class RealShopInventoryListener extends RealInventoryListener
 						}
 					}
 				} else if (event.isShiftClick() && !move.getItem().getType().equals(Material.AIR)) {
-					if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
-						// infinite sell : you can't shift-click sorry (too much complicated to code)
-						plugin.getLog().debug("infinite-sell is not allowed with shift-click : cancel");
+					if (availableRoom(event.getInventory(), move.getItem()) < move.getItem().getAmount()) {
+						player.sendMessage(
+							RealColor.cancel
+							+ plugin.tr("Not enough room for +quantity1  (+quantity2 available)")
+							.replace("+quantity1", RealColor.quantity + new Integer(move.getItem().getAmount()).toString() + RealColor.cancel)
+							.replace("+quantity2", RealColor.quantity + new Integer(availableRoom(event.getInventory(), move.getItem())).toString() + RealColor.cancel)
+						);
 						event.setCancelled(true);
-					} else if (transactionAction.sell(player, shop, move.getItem()) == 0) {
-						// shift-click into player's slot : sell moved item stack
-						plugin.getLog().debug("shift-click on player's slot is not allowed : cancel");
-						event.setCancelled(true);
+					} else {
+						if (shop.getInfiniteSell(plugin.getRealConfig().shopInfiniteSell)) {
+							// infinite sell : you can't shift-click sorry (too much complicated to code)
+							plugin.getLog().debug("infinite-sell is not allowed with shift-click : cancel");
+							event.setCancelled(true);
+						} else if (transactionAction.sell(player, shop, move.getItem()) == 0) {
+							// shift-click into player's slot : sell moved item stack
+							plugin.getLog().debug("shift-click on player's slot is not allowed : cancel");
+							event.setCancelled(true);
+						}
 					}
 				}
 			}
