@@ -346,6 +346,13 @@ public class ShopAction
 			.replace("+opened", plugin.tr(shop.isOpened() ? "opened" : "closed"))
 			.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.message)
 		);
+		if (!shop.getAssistantsString().isEmpty()) {
+			player.sendMessage(
+				RealColor.message
+				+ plugin.tr("assistants : +assistants")
+				.replace("+assistants", RealColor.player + shop.getAssistantsString().replace(",", ", ") + RealColor.message)
+			);
+		}
 		player.sendMessage(
 			RealColor.message
 			+ (shop.getInfiniteBuy() ? "+" : "-") + plugin.tr("infinite buy") + " "
