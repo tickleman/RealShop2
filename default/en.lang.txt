@@ -49,8 +49,8 @@ Welcome into your shop +name=Welcome into your shop +name
 You must select a chest-shop before typing any /rshop command=You must select a chest-shop before typing any /rshop command
 You selected +owner's shop +name=You selected +owner's shop +name
 You selected your shop +name=You selected your shop +name
-You leaved your shop +name=You left your shop +name
-You leaved +owner's shop +name. Have a nice day=You left +owner's shop +name. Have a nice day
+You left your shop +name=You left your shop +name
+You left +owner's shop +name. Have a nice day=You left +owner's shop +name. Have a nice day
 
 # SHOP OWNER : FLAGS SETTINGS
 Damaged item buy/sell flag is=damagedItems buy/sell flag is

@@ -49,8 +49,8 @@ Welcome into your shop +name=Bienvenue dans votre magasin +name
 You must select a chest-shop before typing any /rshop command=Vous devez selectionner un coffre-magasin avant de taper une commande /rshop
 You selected +owner's shop +name=Vous avez selectionne le magasin +name de +owner
 You selected your shop +name=Vous avez selectionne votre magasin +name
-You leaved your shop +name=Vous quittez votre magasin +name
-You leaved +owner's shop +name. Have a nice day=Vous quittez le magasin +name de +owner. Bonne journee
+You left your shop +name=Vous quittez votre magasin +name
+You left +owner's shop +name. Have a nice day=Vous quittez le magasin +name de +owner. Bonne journee
 
 # SHOP OWNER : FLAGS SETTINGS
 Damaged item buy/sell flag is=Flag accepte endommages est 

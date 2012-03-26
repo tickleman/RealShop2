@@ -170,14 +170,14 @@ public class ShopAction
 				// player exits its own shop
 				player.sendMessage(
 					RealColor.message
-					+ plugin.tr("You leaved your shop +name")
+					+ plugin.tr("You left your shop +name")
 					.replace("+name", RealColor.shop + shop.getName() + RealColor.message)
 				);
 			} else {
 				// player enters another player's shop
 				player.sendMessage(
 					RealColor.message
-					+ plugin.tr("You leaved +owner's shop +name. Have a nice day")
+					+ plugin.tr("You left +owner's shop +name. Have a nice day")
 					.replace("+name", RealColor.shop + shop.getName() + RealColor.message)
 					.replace("+owner", RealColor.player + shop.getPlayerName() + RealColor.message)
 				);
