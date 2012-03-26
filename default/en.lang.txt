@@ -15,6 +15,7 @@ Cancelled purchase +item x+quantity (+linePrice) +comment=Cancelled purchase +it
 Cancelled sale +item x+quantity (+linePrice) +comment=Cancelled sale +item x+quantity (+linePrice) +comment
 Cancelled transaction=Cancelled transaction
 No transaction=No transaction
+Not enough room for +quantity1 (+quantity2 available)=Not enough room for +quantity1 (+quantity2 available)
 Purchased +item x+quantity (+linePrice)=Purchased +item x+quantity (+linePrice)
 Sold +item x+quantity (+linePrice)=Sold +item x+quantity (+linePrice)
 
@@ -62,12 +63,17 @@ Trade market items only flag is=Trade market items only flag is
 Your shop now has assistants +assistants=Your shop now has assistants +assistants
 
 # SHOP OWNER : PRICES SETTINGS
+Buy price and sell price separated with space, or buy price alone=Buy and sell separated with space, or buy alone
+buy price is the price your clients will buy it=buy price is the price your clients will buy it
 Calculated price (from market/recipes) for +item : buy +buy, sell +sell=Calculated price (from market/recipes) for +item : buy +buy, sell +sell
 Error while setting player's price for +item=Error while setting player's price for +item
 No player's price for +item=No player's price for +item
 Player's price deleted for +item=Player's price deleted for +item
 Player's price for +item : buy +buy, sell +sell=Player's price for +item : buy +buy, sell +sell
+Please enter your new price for +item in chat=Please enter your new price for +item in chat
+Price change cancelled=Price change cancelled
 You did not set any price=You did not set any price
+Your price for +item : buy +buy, sell +sell=Your price for +item : buy +buy, sell +sell
 Your prices list=Your prices list
 
 # OPERATORS

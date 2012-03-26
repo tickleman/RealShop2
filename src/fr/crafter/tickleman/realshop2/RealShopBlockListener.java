@@ -16,6 +16,7 @@ import org.bukkit.event.block.BlockSpreadEvent;
 
 import fr.crafter.tickleman.realplugin.RealChest;
 import fr.crafter.tickleman.realplugin.RealLocation;
+import fr.crafter.tickleman.realshop2.price.PlayerPriceAction;
 import fr.crafter.tickleman.realshop2.shop.Shop;
 import fr.crafter.tickleman.realshop2.shop.ShopAction;
 
@@ -90,6 +91,9 @@ public class RealShopBlockListener implements Listener
 				// damage a chest that is a shop : select shop and cancel damage
 				if (player instanceof Player) {
 					new ShopAction(plugin).selectShop(player, shop);
+					if (shop.isOwner(player)) {
+						new PlayerPriceAction(plugin, player).chatChangePriceClick(player);
+					}
 				}
 				if (plugin.getRealConfig().shopProtection) {
 					event.setCancelled(true);

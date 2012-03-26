@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -341,6 +342,18 @@ public class Shop
 	public boolean isOpened()
 	{
 		return opened;
+	}
+
+	//--------------------------------------------------------------------------------------- isOwner
+	public boolean isOwner(Player player)
+	{
+		return player.getName().equalsIgnoreCase(getPlayerName());
+	}
+
+	//--------------------------------------------------------------------------------------- isOwner
+	public boolean isOwner(String playerName)
+	{
+		return playerName.equalsIgnoreCase(getPlayerName());
 	}
 
 	//---------------------------------------------------------------------------------- allowItemBuy

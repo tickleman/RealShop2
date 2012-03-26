@@ -2,13 +2,16 @@ package fr.crafter.tickleman.realshop2;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import fr.crafter.tickleman.realshop2.price.PlayerPriceAction;
 import fr.crafter.tickleman.realshop2.shop.ShopAction;
 
 //########################################################################## RealShopPlayerListener
@@ -26,6 +29,20 @@ public class RealShopPlayerListener implements Listener
 	{
 		super();
 		plugin = instance;
+	}
+
+	//---------------------------------------------------------------------------------- onPlayerChat
+	@EventHandler
+	public void onPlayerChat(PlayerChatEvent event)
+	{
+		Player player = event.getPlayer();
+		if (PlayerPriceAction.isChangingPrice(player)) {
+			if (new PlayerPriceAction(plugin, player).chatChangePriceChat(
+				event.getPlayer(), event.getMessage()
+			)) {
+				event.setCancelled(true);
+			}
+		}
 	}
 
 	//------------------------------------------------------------------------------ onPlayerInteract

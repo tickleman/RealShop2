@@ -7,10 +7,10 @@ import fr.crafter.tickleman.realplugin.RealColor;
 import fr.crafter.tickleman.realshop2.RealShop2Plugin;
 
 //################################################################################### PricesActions
-public class PriceAction
+public abstract class PriceAction
 {
 
-	private RealShop2Plugin plugin;
+	protected RealShop2Plugin plugin;
 
 	private ItemPriceList itemPriceList;
 
@@ -77,10 +77,7 @@ public class PriceAction
 	}
 
 	//---------------------------------------------------------------------------------- getPriceType
-	public String getPriceType()
-	{
-		return "";
-	}
+	public abstract String getPriceType();
 
 	//------------------------------------------------------------------------------------------ info
 	public void info(Player player, int page)

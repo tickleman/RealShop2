@@ -125,7 +125,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 					if (availableRoom(event.getInventory(), move.getItem()) < move.getItem().getAmount()) {
 						player.sendMessage(
 							RealColor.cancel
-							+ plugin.tr("Not enough room for +quantity1  (+quantity2 available)")
+							+ plugin.tr("Not enough room for +quantity1 (+quantity2 available)")
 							.replace("+quantity1", RealColor.quantity + new Integer(move.getItem().getAmount()).toString() + RealColor.cancel)
 							.replace("+quantity2", RealColor.quantity + new Integer(availableRoom(event.getInventory(), move.getItem())).toString() + RealColor.cancel)
 						);

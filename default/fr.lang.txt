@@ -15,6 +15,7 @@ Cancelled purchase +item x+quantity (+linePrice) +comment=Achat annule +item x+q
 Cancelled sale +item x+quantity (+linePrice) +comment=Vente annulee +item x+quantity (+linePrice) +comment
 Cancelled transaction=Transaction annulee
 No transaction=Aucune transaction
+Not enough room for +quantity1 (+quantity2 available)=Pas assez de place pour +quantity1 (dispo +quantity2)
 Purchased +item x+quantity (+linePrice)=Achat +item x+quantity (+linePrice)
 Sold +item x+quantity (+linePrice)=Vente +item x+quantity (+linePrice)
 
@@ -62,16 +63,21 @@ Trade market items only flag is=Flag articles du marge seulement est
 Your shop now has assistants +assistants=Le magasin a pour assistants +assistants
 
 # SHOP OWNER : PRICES SETTINGS
+Buy price and sell price separated with space, or buy price alone=Achat et vente separes par espace, ou vente seul
 Calculated price (from market/recipes) for +item : buy +buy, sell +sell=Prix calcule (marche/recettes) pour +item : achat +buy, vente +sell
 Error while setting player's price for +item=Erreur dans votre prix du joueur pour +item
 No player's price for +item=Pas de prix du joueur pour +item
 Player's price deleted for +item=Prix du joueur supprime pour +item
 Player's price for +item : buy +buy, sell +sell=Prix du joueur pour +item : achat +buy, vente +sell
+Please enter your new price for +item in chat=Merci de saisir votre nouveau prix pour +item dans le chat
+Price change cancelled=Modification de prix annulee
 You did not set any price=Vous n'avez defini aucun prix
+Your price for +item : buy +buy, sell +sell=Votre prix pour +item : achat +buy, vente +sell
 Your prices list=Vos prix
 
 # OPERATORS
 Calculated price (from recipes) for +item : buy +buy, sell +sell=Prix calcule (recettes) pour +item : achat +buy, vente +sell
+buy price is the price your clients will buy it=prix d'achat du point de vue du client
 Daily log was dumped into the realshop.log file=Daily log was dumped into the realshop.log file
 Daily prices calculation simulation is into the realshop.log file=Daily prices calculation simulation is into the realshop.log file
 Error while setting market price for +item=Erreur dans votre prix du marche pour +item
