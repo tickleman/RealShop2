@@ -30,6 +30,27 @@ public class RealShopInventoryListener extends RealInventoryListener
 		this.plugin = plugin;
 	}
 
+	//------------------------------------------------------------------------------ anotherWayToMove
+	private void anotherWayToMove(RealInventoryMove move, InventoryClickEvent event)
+	{
+		if (event.isRightClick() && !plugin.getRealConfig().rightClickBuyMode.equals("chest")) {
+			if (plugin.getRealConfig().rightClickBuyMode.equals("one")) {
+				if (
+					(move.getCursor().getAmount() == 0)
+					&& (event.getCursor().getAmount() == 0)
+					&& (move.getItem().getAmount() > 1)
+					&& (event.getCurrentItem().getAmount() > 1)
+				) {
+					event.setResult(Result.ALLOW);
+					event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - 1);
+					event.setCursor(event.getCurrentItem().clone());
+					event.getCursor().setAmount(1);
+					move.getItem().setAmount(1);
+				}
+			}
+		}
+	}
+
 	//------------------------------------------------------------------------------ onInventoryClick
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event)
@@ -60,6 +81,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 				boolean clickIntoChest = clickedInventory(event).equals(event.getInventory());
 				TransactionAction transactionAction = new TransactionAction(plugin);
 				if (clickIntoChest) {
+					anotherWayToMove(move, event);
 					if (event.isShiftClick() && shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)) {
 						// infinite buy : you can't shift-click that sorry (too much complicated to code)
 						plugin.getLog().debug("infinite buy not allowed with shift-click : cancel");

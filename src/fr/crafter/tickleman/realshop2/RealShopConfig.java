@@ -25,6 +25,7 @@ public class RealShopConfig extends RealConfig
 	public boolean shopMarketItemsOnly = false;
 	public boolean shopOpOnly = false;
 	public double  workForceRatio = 1.1;
+	public String rightClickBuyMode = "chest";
 
 	//-------------------------------------------------------------------------------- RealShopConfig
 	public RealShopConfig(final RealShop2Plugin plugin)
