@@ -211,7 +211,10 @@ public class ShopAction
 	private void itemTypeListChain(
 		Player player, String chain, RealItemTypeList itemTypeList, String what
 	) {
-		itemTypeList.addRemoveChain(chain);
+		try {
+			itemTypeList.addRemoveChain(chain);
+		} catch (NumberFormatException e) {
+		}
 		plugin.getShopList().save();
 		player.sendMessage(
 			RealColor.message + plugin.tr("Now clients can " + what + " +items")

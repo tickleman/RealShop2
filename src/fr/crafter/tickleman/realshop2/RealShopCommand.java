@@ -111,8 +111,11 @@ public class RealShopCommand
 						player, RealItemType.parseItemType(params[1]),
 						RealVarTools.parseDouble(params[2], 0.0), RealVarTools.parseDouble(params[3], null)
 					);
-				} else {
-					priceAction.display(player, RealItemType.parseItemType(params[1]));
+				} else if (!params[1].isEmpty()) {
+					try {
+						priceAction.display(player, RealItemType.parseItemType(params[1]));
+					} catch (NumberFormatException e) {
+					}
 				}
 			} else {
 				player.sendMessage(
