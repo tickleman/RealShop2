@@ -183,9 +183,9 @@ public class TransactionAction
 		try {
 			if (transactionsLogFile == null) {
 				transactionsLogFile = new BufferedWriter(new FileWriter(fileName));
-				transactionsLogFile.append("#player:side;shopName;X;Y;Z;shopOwner;typeId;variant;price;quantity;amount\n");
+				transactionsLogFile.write("#player:side;shopName;X;Y;Z;shopOwner;typeId;variant;price;quantity;amount\n");
 			}
-			transactionsLogFile.append(
+			transactionsLogFile.write(
 				player.getName() + ";"
 				+ side + ";"
 				+ shop.getName() + ";"
