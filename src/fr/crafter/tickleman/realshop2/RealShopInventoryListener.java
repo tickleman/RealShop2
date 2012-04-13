@@ -30,8 +30,22 @@ public class RealShopInventoryListener extends RealInventoryListener
 		this.plugin = plugin;
 	}
 
+	//---------------------------------------------------------------------------- anotherCancelEvent
+	public void anotherCancelEvent(InventoryClickEvent event, RealInventoryMove originItems)
+	{
+		if (originItems != null) {
+			plugin.getLog().debug(
+				"anotherCancelEvent : back to "
+				+ originItems.getItem().getAmount() + ", " + originItems.getCursor().getAmount()
+			);
+			event.setCurrentItem(originItems.getItem());
+			event.setCursor(originItems.getCursor());
+		}
+		event.setCancelled(true);
+	}
+
 	//------------------------------------------------------------------------------ anotherWayToMove
-	private void anotherWayToMove(RealInventoryMove move, InventoryClickEvent event)
+	private RealInventoryMove anotherWayToMove(RealInventoryMove move, InventoryClickEvent event)
 	{
 		if (event.isRightClick() && !plugin.getRealConfig().rightClickBuyMode.equals("chest")) {
 			if (plugin.getRealConfig().rightClickBuyMode.equals("one")) {
@@ -41,14 +55,21 @@ public class RealShopInventoryListener extends RealInventoryListener
 					&& (move.getItem().getAmount() > 1)
 					&& (event.getCurrentItem().getAmount() > 1)
 				) {
+					RealInventoryMove originItems = new RealInventoryMove(
+						RealItemStack.cloneItem(event.getCursor()),
+						RealItemStack.cloneItem(event.getCurrentItem())
+					);
 					event.setResult(Result.ALLOW);
 					event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - 1);
 					event.setCursor(event.getCurrentItem().clone());
 					event.getCursor().setAmount(1);
 					move.getItem().setAmount(1);
+					plugin.getLog().debug("anotherWayToMove => 1");
+					return originItems;
 				}
 			}
 		}
+		return null;
 	}
 
 	//------------------------------------------------------------------------------ onInventoryClick
@@ -81,7 +102,6 @@ public class RealShopInventoryListener extends RealInventoryListener
 				boolean clickIntoChest = clickedInventory(event).equals(event.getInventory());
 				TransactionAction transactionAction = new TransactionAction(plugin);
 				if (clickIntoChest) {
-					anotherWayToMove(move, event);
 					if (event.isShiftClick() && shop.getInfiniteBuy(plugin.getRealConfig().shopInfiniteBuy)) {
 						// infinite buy : you can't shift-click that sorry (too much complicated to code)
 						plugin.getLog().debug("infinite buy not allowed with shift-click : cancel");
@@ -108,6 +128,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 						event.setCancelled(true);
 					} else {
 						// click into chest : sell moved cursor stack, buy moved item stack
+						RealInventoryMove originItems = anotherWayToMove(move, event);
 						if (transactionAction.canPay(player, shop, move.getItem(), move.getCursor())) {
 							if (!move.getCursor().getType().equals(Material.AIR)) {
 								if (transactionAction.sell(player, shop, move.getCursor()) > 0) {
@@ -122,7 +143,7 @@ public class RealShopInventoryListener extends RealInventoryListener
 												event.getCursor().getAmount() - move.getCursor().getAmount()
 											);
 										}
-										event.setCancelled(true);
+										anotherCancelEvent(event, originItems);
 									}
 								}
 							}
@@ -133,14 +154,14 @@ public class RealShopInventoryListener extends RealInventoryListener
 										plugin.getLog().debug("infinite buy action : clone item and cancel");
 										event.setResult(Result.ALLOW);
 										event.setCursor(move.getItem().clone());
-										event.setCancelled(true);
+										anotherCancelEvent(event, originItems);
 									}
 								}
 							}
 						} else {
 							// can't pay (can't sell + buy)
 							plugin.getLog().debug("Can't pay : cancel");
-							event.setCancelled(true);
+							anotherCancelEvent(event, originItems);
 						}
 					}
 				} else if (event.isShiftClick() && !move.getItem().getType().equals(Material.AIR)) {
