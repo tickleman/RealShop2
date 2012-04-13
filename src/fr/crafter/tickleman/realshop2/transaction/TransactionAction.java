@@ -198,6 +198,7 @@ public class TransactionAction
 				+ price + ";"
 				+ itemStack.getAmount() + ";"
 				+ amount
+				+ "\n"
 			);
 			transactionsLogFile.flush();
 		} catch (Exception e) {
