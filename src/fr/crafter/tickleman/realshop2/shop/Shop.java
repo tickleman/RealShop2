@@ -107,13 +107,19 @@ public class Shop
 			|| (getBuyExcludeList().get(itemStack) != null)
 		) {
 			if ((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems)) {
-				plugin.getLog().debug("can not buy damaged item");
+				plugin.getLog().debug("can not buy damaged item " + itemStack.getTypeId());
 			}
 			if (!getBuyOnlyList().isEmpty() && getBuyOnlyList().get(itemStack) == null) {
-				plugin.getLog().debug("can not buy not in only list item");
+				plugin.getLog().debug(
+					"can not buy " + itemStack.getTypeId() + " not in only list item "
+					+ getBuyOnlyList().toString()
+				);
 			}
 			if (getBuyExcludeList().get(itemStack) != null) {
-				plugin.getLog().debug("can not buy item in exclude list");
+				plugin.getLog().debug(
+					"can not buy " + itemStack.getTypeId() + " item in exclude list "
+					+ getBuyExcludeList().toString()
+				);
 			}
 			return false;
 		} else {
@@ -130,13 +136,19 @@ public class Shop
 			|| (getSellExcludeList().get(itemStack) != null)
 		) {
 			if ((itemStack.getDamage() > 0) && !getDamagedItems(plugin.getRealConfig().shopDamagedItems)) {
-				plugin.getLog().debug("can not sell damaged item");
+				plugin.getLog().debug("can not sell damaged item " + itemStack.getTypeId());
 			}
 			if (!getSellOnlyList().isEmpty() && getSellOnlyList().get(itemStack) == null) {
-				plugin.getLog().debug("can not sell not in only list item");
+				plugin.getLog().debug(
+					"can not sell " + itemStack.getTypeId() + " not in only list item"
+					+ getSellOnlyList().toString()
+				);
 			}
 			if (getSellExcludeList().get(itemStack) != null) {
-				plugin.getLog().debug("can not sell item in exclude list");
+				plugin.getLog().debug(
+					"can not sell item " + itemStack.getTypeId() + " in exclude list "
+					+ getSellExcludeList().toString()
+				);
 			}
 			return false;
 		} else {

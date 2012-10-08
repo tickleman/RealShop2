@@ -119,6 +119,12 @@ public class TransactionAction
 	 */
 	public boolean canPay(Player player, Shop shop, ItemStack buyStack, ItemStack sellStack)
 	{
+		if ((buyStack != null) && (buyStack.getTypeId() == 0)) {
+			buyStack = null;
+		}
+		if ((sellStack != null) && (sellStack.getTypeId() == 0)) {
+			sellStack = null;
+		}
 		if ((buyStack != null) && !shop.canBuyItem(plugin, new RealItemStack(buyStack))) {
 			plugin.getLog().debug("can not buy item");
 			return false;
